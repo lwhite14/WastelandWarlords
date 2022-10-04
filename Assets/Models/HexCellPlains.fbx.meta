@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 081963607ace55248a13f9f7382b83db
+guid: d86fee06aecc68649bc152927bba4499
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Foliege
+    second: {fileID: 2100000, guid: b1b28280333fc324b9398821a4eb230b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: HexCell
     second: {fileID: 2100000, guid: 9c5b008a21d377a49b480b6e90d30c6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plains
+    second: {fileID: 2100000, guid: a174adb23ce0ee54e889f5f740e768da, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

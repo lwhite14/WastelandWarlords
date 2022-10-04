@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 081963607ace55248a13f9f7382b83db
+guid: 60316527919b4634cb5d0fe200dbc297
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark
+    second: {fileID: 2100000, guid: 0771aa1926435b744b5d6b850356ca3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkGrass
+    second: {fileID: 2100000, guid: d3b9c39383d2a144b957a1e6fbbb564b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Foliege
+    second: {fileID: 2100000, guid: b1b28280333fc324b9398821a4eb230b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

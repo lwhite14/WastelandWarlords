@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 081963607ace55248a13f9f7382b83db
+guid: 5f79d842ab72dc94292fcbf9a666db2d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: HexCell
     second: {fileID: 2100000, guid: 9c5b008a21d377a49b480b6e90d30c6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Water
+    second: {fileID: 2100000, guid: a21b1b231a66ce14baf7b98819261045, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

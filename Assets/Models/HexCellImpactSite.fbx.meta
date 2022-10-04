@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 081963607ace55248a13f9f7382b83db
+guid: c3db0fbea750b854c856f43c926cdae4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -9,6 +9,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: HexCell
     second: {fileID: 2100000, guid: 9c5b008a21d377a49b480b6e90d30c6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ImpactProper
+    second: {fileID: 2100000, guid: f4f24354d4d74394e9b31f2d6c1808c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ImpactSite
+    second: {fileID: 2100000, guid: 9a3e8fbf1b51291488fc7d9bf4d43e3a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
