@@ -31,19 +31,19 @@ public class HexGrid : MonoBehaviour
     {
         hexCells = new HexCell[width * height];
         int i = 0;
-        foreach (HexCoordinates coords in EnglishChannelMap.waterCoords) 
+        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetWaterCoords())
         {
             CreateCell(coords, i++, HexTypes.GetWater());
         }
-        foreach (HexCoordinates coords in EnglishChannelMap.plainsCoords)
+        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetPlainsCoords())
         {
             CreateCell(coords, i++, HexTypes.GetPlains());
         }
-        foreach (HexCoordinates coords in EnglishChannelMap.forestCoords)
+        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetForestCoords())
         {
             CreateCell(coords, i++, HexTypes.GetForest());
         }
-        foreach (HexCoordinates coords in EnglishChannelMap.impactSiteCoords)
+        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetInpactSiteCoords())
         {
             CreateCell(coords, i++, HexTypes.GetImpactSite());
         }

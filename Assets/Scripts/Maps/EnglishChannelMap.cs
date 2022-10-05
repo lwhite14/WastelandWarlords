@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public static class EnglishChannelMap 
+public class EnglishChannelMap : Map
 {
-    public static HexCoordinates[] waterCoords =
+    public HexCoordinates[] waterCoords =
     {
         new HexCoordinates(0, 3),
         new HexCoordinates(1, 3),
@@ -217,7 +217,7 @@ public static class EnglishChannelMap
         new HexCoordinates(5, 27)
     };
 
-    public static HexCoordinates[] plainsCoords =
+    public HexCoordinates[] plainsCoords =
     {
         new HexCoordinates(0, 0),
         new HexCoordinates(1, 0),
@@ -497,7 +497,7 @@ public static class EnglishChannelMap
         new HexCoordinates(-12, 27)
     };
 
-    public static HexCoordinates[] forestCoords = 
+    public HexCoordinates[] forestCoords = 
     {
         new HexCoordinates(7, 0),
         new HexCoordinates(8, 0),
@@ -636,8 +636,13 @@ public static class EnglishChannelMap
         new HexCoordinates(-13, 27),
     };
 
-    public static HexCoordinates[] impactSiteCoords =
+    public HexCoordinates[] impactSiteCoords =
     {
         new HexCoordinates(8, 10),
     };
+
+    public HexCoordinates[] GetWaterCoords() { return waterCoords; }
+    public HexCoordinates[] GetPlainsCoords() { return plainsCoords; }
+    public HexCoordinates[] GetForestCoords() { return forestCoords; }
+    public HexCoordinates[] GetInpactSiteCoords() { return impactSiteCoords; }
 }
