@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e43fc57dfc66d4c8a18ac221cb72c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: Water
   coordinates:
     x: 0
     z: 0
