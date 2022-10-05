@@ -8,21 +8,26 @@ public class CameraControls : MonoBehaviour
 
     void Update()
     {
+        float xPos = transform.position.x;
+        float zPos = transform.position.z;
         if (Input.GetKey(KeyCode.W)) 
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed * Time.deltaTime);
+            zPos = transform.position.z + speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S)) 
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - speed * Time.deltaTime);
+            zPos = transform.position.z - speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A)) 
         {
-            transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
+            xPos = transform.position.x - speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) 
         {
-            transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
+            xPos = transform.position.x + speed * Time.deltaTime;
         }
+        xPos = Mathf.Clamp(xPos, -20.0f, (HexMetrics.outerRadius * HexGrid.instance.width * 2) - 20.0f);
+        zPos = Mathf.Clamp(zPos, -20.0f, (HexMetrics.innerRadius * HexGrid.instance.height * 2) - 40.0f);
+        transform.position = new Vector3(xPos, transform.position.y, zPos);
     }
 }

@@ -7,10 +7,25 @@ using UnityEngine.Rendering;
 
 public class HexGrid : MonoBehaviour
 {
+    public static HexGrid instance = null;
+
     public int width = 10;
     public int height = 10;
 
     HexCell[] hexCells;
+    HexCell selectedCell = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -24,6 +39,14 @@ public class HexGrid : MonoBehaviour
         {
             CreateCell(coords, i++, HexTypes.GetPlains());
         }
+        foreach (HexCoordinates coords in EnglishChannelMap.forestCoords)
+        {
+            CreateCell(coords, i++, HexTypes.GetForest());
+        }
+        foreach (HexCoordinates coords in EnglishChannelMap.impactSiteCoords)
+        {
+            CreateCell(coords, i++, HexTypes.GetImpactSite());
+        }
     }
 
     void Update()
@@ -36,7 +59,15 @@ public class HexGrid : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
                 {
-                    Debug.Log(hit.transform.gameObject.GetComponentInParent<HexCell>().coordinates);
+                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != selectedCell) 
+                    {
+                        if (selectedCell != null)
+                        {
+                            selectedCell.Unselect();
+                        }
+                        selectedCell = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                        selectedCell.Select();
+                    }
                 }
             }
         }
