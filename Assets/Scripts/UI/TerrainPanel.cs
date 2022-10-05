@@ -25,7 +25,7 @@ public class TerrainPanel : MonoBehaviour
 
     public void UpdateTerrainPanel(HexCell selectedCell)
     {
-        text.text = selectedCell.type;
+        text.text = selectedCell.type + ": " + selectedCell.coordinates.ToString();
         if (selectedCell.type == "Forest") { image.sprite = forestSprite; }
         if (selectedCell.type == "Plains") { image.sprite = plainsSprite; }
         if (selectedCell.type == "Impact Site") { image.sprite = impactSiteSprite; }

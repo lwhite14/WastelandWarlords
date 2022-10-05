@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using System.IO;
 
 public class HexGrid : MonoBehaviour
 {
     public static HexGrid instance = null;
 
-    public int width = 10;
-    public int height = 10;
+    public int width;
+    public int height;
 
-    HexCell[] hexCells;
+    HexCell[,] hexCells;
     HexCell selectedCell = null;
 
     private void Awake()
@@ -29,23 +30,13 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
-        hexCells = new HexCell[width * height];
-        int i = 0;
-        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetWaterCoords())
+        hexCells = new HexCell[width, height];
+        foreach (HexCellAbstract cell in CurrentMap.instance.currentMap.GetCells())
         {
-            CreateCell(coords, i++, HexTypes.GetWater());
-        }
-        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetPlainsCoords())
-        {
-            CreateCell(coords, i++, HexTypes.GetPlains());
-        }
-        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetForestCoords())
-        {
-            CreateCell(coords, i++, HexTypes.GetForest());
-        }
-        foreach (HexCoordinates coords in CurrentMap.instance.currentMap.GetInpactSiteCoords())
-        {
-            CreateCell(coords, i++, HexTypes.GetImpactSite());
+            if (cell.type == "Water") { CreateCell(cell.coordinates, HexTypes.GetWater()); }
+            if (cell.type == "Plains") { CreateCell(cell.coordinates, HexTypes.GetPlains()); }
+            if (cell.type == "Forest") { CreateCell(cell.coordinates, HexTypes.GetForest()); }
+            if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, HexTypes.GetImpactSite()); }
         }
     }
 
@@ -73,14 +64,15 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    void CreateCell(HexCoordinates coords, int i, HexCell celltype)
+    void CreateCell(HexCoordinates coords, HexCell celltype)
     {
         Vector3 position;
+        //position.x = coords.X * (HexMetrics.innerRadius * 2f);
         position.x = coords.X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * coords.Z);
         position.y = 0f;
         position.z = coords.Z * (HexMetrics.outerRadius * 1.5f);
 
-        HexCell cell = hexCells[i] = Instantiate<HexCell>(celltype);
+        HexCell cell = hexCells[coords.X, coords.Z] = Instantiate<HexCell>(celltype);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = coords;
