@@ -27,7 +27,7 @@ public class CameraControls : MonoBehaviour
             xPos = transform.position.x + speed * Time.deltaTime;
         }
         xPos = Mathf.Clamp(xPos, -20.0f, (HexMetrics.outerRadius * HexGrid.instance.width * 2) - 20.0f);
-        zPos = Mathf.Clamp(zPos, -20.0f, (HexMetrics.innerRadius * HexGrid.instance.height * 2) - 40.0f);
+        zPos = Mathf.Clamp(zPos, -20.0f, (HexMetrics.outerRadius * HexGrid.instance.height * 2) - 160.0f);
         transform.position = new Vector3(xPos, transform.position.y, zPos);
     }
 }
