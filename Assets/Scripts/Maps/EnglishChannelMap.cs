@@ -553,4 +553,9 @@ public class EnglishChannelMap : Map
     };
 
     public HexCellAbstract[] GetCells() { return allCells; }
+
+    public HexCoordinates GetBottomLeftCoords() { return new HexCoordinates(13, 0); }
+    public HexCoordinates GetBottomRightCoords() { return new HexCoordinates(32, 0); }
+    public HexCoordinates GetTopLeftCoords() { return new HexCoordinates(0, 27); }
+    public HexCoordinates GetTopRightCoords() { return new HexCoordinates(18, 27); }
 }

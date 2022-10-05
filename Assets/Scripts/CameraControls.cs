@@ -1,10 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraControls : MonoBehaviour
 {
+    public static CameraControls instance = null;
+
     public float speed = 10.0f;
+    public float minCameraX { private get; set; }
+    public float maxCameraX { private get; set; }
+    public float minCameraZ { private get; set; }
+    public float maxCameraZ { private get; set; }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
+        minCameraX = CurrentMap.instance.currentMap.GetBottomLeftCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.instance.currentMap.GetBottomLeftCoords().Z); 
+        maxCameraX = CurrentMap.instance.currentMap.GetBottomRightCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.instance.currentMap.GetBottomRightCoords().Z);
+        minCameraZ = CurrentMap.instance.currentMap.GetBottomLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
+        maxCameraZ = CurrentMap.instance.currentMap.GetTopLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
+        transform.position = new Vector3(minCameraX + ((maxCameraX - minCameraX) / 2), transform.position.y, minCameraZ + ((maxCameraZ - minCameraZ) / 2));
+    }
 
     void Update()
     {
@@ -26,8 +54,8 @@ public class CameraControls : MonoBehaviour
         {
             xPos = transform.position.x + speed * Time.deltaTime;
         }
-        //xPos = Mathf.Clamp(xPos, -20.0f, (HexMetrics.outerRadius * HexGrid.instance.width * 2) - 20.0f);
-        //zPos = Mathf.Clamp(zPos, -20.0f, (HexMetrics.outerRadius * HexGrid.instance.height * 2) - 160.0f);
+        xPos = Mathf.Clamp(xPos, minCameraX, maxCameraX);
+        zPos = Mathf.Clamp(zPos, minCameraZ, maxCameraZ);
         transform.position = new Vector3(xPos, transform.position.y, zPos);
     }
 }

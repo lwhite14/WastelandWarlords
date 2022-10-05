@@ -16,6 +16,8 @@ public class HexGrid : MonoBehaviour
     HexCell[,] hexCells;
     HexCell selectedCell = null;
 
+    public Unit unit;
+
     private void Awake()
     {
         if (instance == null)
@@ -38,6 +40,9 @@ public class HexGrid : MonoBehaviour
             if (cell.type == "Forest") { CreateCell(cell.coordinates, HexTypes.GetForest()); }
             if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, HexTypes.GetImpactSite()); }
         }
+
+        unit = Instantiate<Unit>(unit);
+        unit.SetCell(hexCells[18, 9]);
     }
 
     void Update()
