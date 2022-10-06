@@ -12,8 +12,8 @@ namespace HexCalc
 
 	inline static ImVec2 CalcHexPos(ImVec2 roughPos)
 	{
-		int newX = RoundTo(roughPos.x, HexDiameter);
-		int newY = RoundTo(roughPos.y, HexDiameter);
+		float newX = RoundTo(roughPos.x, HexDiameter);
+		float newY = RoundTo(roughPos.y, HexDiameter);
 		if (IsOdd(newY / HexDiameter))
 		{
 			newX += HexDiameter / 2;

@@ -9,6 +9,10 @@ class HexRep
 public:
 	float x;
 	float y;
+
+	int trueCoordX;
+	int trueCoordZ;
+
 	std::string terrainType;
 	ImColor colour;
 

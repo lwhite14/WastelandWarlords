@@ -3,6 +3,11 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <yaml-cpp/yaml.h>
+#include <nfd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "ImGuiUtils.h"
 #include "Runner.h"
 #include "HexCalc.h"
@@ -87,7 +92,7 @@ public:
 		rows = m_height / HexDiameter;
 	}
 
-	void Render() 
+	void Render(GLFWwindow* window) 
 	{
 		glEnable(GL_DEPTH_TEST);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -117,7 +122,63 @@ public:
 				}
 				if (ImGui::MenuItem("Export"))
 				{
+					nfdchar_t* outPath = NULL;
+					nfdchar_t filters[] = "yaml";
+					nfdchar_t defaultPath[] = "Maps\\0";
+					nfdresult_t result = NFD_SaveDialog(filters, defaultPath, &outPath);
 
+					if (result == NFD_OKAY)
+					{
+						bool isFileEx = false;
+						std::string filePath = "";
+						for (char c = *outPath; c; c = *++outPath)
+						{
+							if (c == '.')
+							{
+								isFileEx = true;
+							}
+							if (!isFileEx)
+							{
+								filePath.push_back(c);
+							}
+						}
+						filePath.push_back('.');
+						filePath.push_back('y');
+						filePath.push_back('a');
+						filePath.push_back('m');
+						filePath.push_back('l');
+	
+						std::vector<HexRep> hexCellsCopy = CalculateTrueCoords();
+
+						std::ofstream newSceneFile{ filePath };
+
+						YAML::Emitter out;
+
+						out << YAML::BeginMap;
+						out << YAML::Key << "Program" << YAML::Value << "FissionMapEditor";
+
+						out << YAML::Key << "HexCells" << YAML::Value;
+						out << YAML::BeginSeq;
+
+						for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+						{
+							out << YAML::BeginMap;
+							out << YAML::Key << "terrain" << YAML::Value << hexCellsCopy[i].terrainType;
+							out << YAML::Key << "x" << YAML::Value << hexCellsCopy[i].trueCoordX;
+							out << YAML::Key << "z" << YAML::Value << hexCellsCopy[i].trueCoordZ;
+							out << YAML::EndMap;
+						}
+
+						out << YAML::EndSeq;
+						out << YAML::EndMap;
+
+						newSceneFile << out.c_str();
+						newSceneFile.close();
+					}
+					else if (result == NFD_ERROR)
+					{
+						std::cout << NFD_GetError() << std::endl;
+					}
 				}
 				ImGui::EndMenu();
 			}
@@ -141,7 +202,11 @@ public:
 						alreadyExists = true;
 					}
 				}
-				if (!alreadyExists) { hexCells.push_back(HexRep(hexPosProper.x, hexPosProper.y, brushTypes[brushSelected].name, brushTypes[brushSelected].colour)); }
+				if (!alreadyExists) 
+				{ 
+					hexCells.push_back(HexRep(hexPosProper.x, hexPosProper.y, brushTypes[brushSelected].name, brushTypes[brushSelected].colour)); 
+					std::cout << "x: " << hexPosProper.x << ", z: " << hexPosProper.y << std::endl;
+				}
 			}
 			else if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) 
 			{
@@ -219,6 +284,54 @@ public:
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
+	}
+
+	std::vector<HexRep> CalculateTrueCoords()
+	{
+		std::vector<HexRep> hexCellsCopy = hexCells;
+
+		float highestY = hexCellsCopy[0].y;
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			if (hexCellsCopy[i].y < highestY)
+			{
+				highestY = hexCellsCopy[i].y;
+			}
+		}
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			float distanceFromTop = (hexCellsCopy[i].y - highestY) / HexDiameter;
+			hexCellsCopy[i].trueCoordZ = distanceFromTop;
+		}
+
+		float lowestY = hexCellsCopy[0].y;
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			if (hexCellsCopy[i].y > lowestY)
+			{
+				lowestY = hexCellsCopy[i].y;
+			}
+		}
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			float distanceFromBottom = (lowestY - hexCellsCopy[i].y) / HexDiameter;
+			hexCellsCopy[i].x = hexCellsCopy[i].x - (distanceFromBottom * (HexDiameter / 2));
+		}
+		float leftMostX = hexCellsCopy[0].x;
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			if (hexCellsCopy[i].x < leftMostX)
+			{
+				leftMostX = hexCellsCopy[i].x;
+			}
+		}
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			float distanceFromLeftMost = (hexCellsCopy[i].x - leftMostX) / HexDiameter;
+			hexCellsCopy[i].trueCoordX = distanceFromLeftMost;
+		}
+
+		return hexCellsCopy;
 	}
 };
 
