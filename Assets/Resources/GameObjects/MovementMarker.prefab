@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5513162008854551063}
   - component: {fileID: 7738970775971213021}
   - component: {fileID: 1585245471055491645}
+  - component: {fileID: 241993110345492068}
   m_Layer: 0
   m_Name: MovementMarker
   m_TagString: MovementMarker
@@ -98,3 +99,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2124705421725058983, guid: 56647e63ca90cb14296371d4504c53b6, type: 3}
+--- !u!114 &241993110345492068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8099341964598251272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66eecc44d75bd894488877965fb8b089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,8 +1,9 @@
-﻿using Unity.VisualScripting;
+﻿using HexPathfinding;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
-public struct HexCoordinates
+public class HexCoordinates
 {
     [SerializeField]
     private int x, z;
@@ -68,5 +69,25 @@ public struct HexCoordinates
             return false;
         }
         return true;
+    }
+
+    public override bool Equals(System.Object obj)
+    {
+        if (obj == null) { return false; }
+
+        HexCoordinates hexCoordinatesObj = obj as HexCoordinates;
+        if ((this.X == hexCoordinatesObj.X) && (this.Z == hexCoordinatesObj.Z))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return this.X.GetHashCode() + this.Z.GetHashCode();
     }
 }

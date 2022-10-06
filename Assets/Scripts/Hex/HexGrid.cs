@@ -12,7 +12,6 @@ public class HexGrid : MonoBehaviour
     public static HexGrid instance = null;
 
     public HexCell[,] hexCells;
-    HexCell selectedCell = null;
 
     private void Awake()
     {
@@ -31,32 +30,32 @@ public class HexGrid : MonoBehaviour
         hexCells = new HexCell[CurrentMap.instance.currentMap.GetWidth(), CurrentMap.instance.currentMap.GetHeight()];
         foreach (HexCellAbstract cell in CurrentMap.instance.currentMap.GetCells())
         {
-            if (cell.type == "Water") { CreateCell(cell.coordinates, HexTypes.GetWater()); }
-            if (cell.type == "Plains") { CreateCell(cell.coordinates, HexTypes.GetPlains()); }
-            if (cell.type == "Forest") { CreateCell(cell.coordinates, HexTypes.GetForest()); }
-            if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, HexTypes.GetImpactSite()); }
+            if (cell.type == "Water") { CreateCell(cell.coordinates, ResourceFactory.HexCellWater); }
+            if (cell.type == "Plains") { CreateCell(cell.coordinates, ResourceFactory.HexCellPlains); }
+            if (cell.type == "Forest") { CreateCell(cell.coordinates, ResourceFactory.HexCellForest); }
+            if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, ResourceFactory.HexCellImpactSite); }
         }
 
-        Unit unit1 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit1.SetCell(hexCells[21, 6]);
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[0].SetCell(hexCells[21, 6]);
 
-        Unit unit2 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit2.SetCell(hexCells[17, 12]);
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[1].SetCell(hexCells[17, 12]);
 
-        Unit unit3 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit3.SetCell(hexCells[13, 12]);        
-        
-        Unit unit4 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit4.SetCell(hexCells[1, 27]);   
-        
-        Unit unit5 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit5.SetCell(hexCells[19, 26]);  
-        
-        Unit unit6 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit6.SetCell(hexCells[32, 0]); 
-        
-        Unit unit7 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
-        unit7.SetCell(hexCells[13, 0]);
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[2].SetCell(hexCells[13, 12]);
+
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[3].SetCell(hexCells[1, 27]);
+
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[4].SetCell(hexCells[19, 26]);
+
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[5].SetCell(hexCells[32, 0]);
+
+        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+        GameState.Units[6].SetCell(hexCells[13, 0]);
     }
 
     void Update()
@@ -69,18 +68,27 @@ public class HexGrid : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
                 {
-                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != selectedCell) 
+                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != GameState.CellSelected) 
                     {
-                        if (selectedCell != null)
+                        if (GameState.CellSelected != null)
                         {
-                            selectedCell.Unselect();
+                            GameState.CellSelected.Unselect();
                             foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) 
                             {
                                 Destroy(marker);
                             }
                         }
-                        selectedCell = hit.transform.gameObject.GetComponentInParent<HexCell>();
-                        selectedCell.Select();
+                        GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                        foreach (HexCell cell in GameState.CellsMovement) 
+                        {
+                            if (cell.coordinates == GameState.CellSelected.coordinates) 
+                            {
+                                GameState.UnitSelected.Move(GameState.CellSelected);
+                            }
+                        }
+                        GameState.UnitSelected = null;
+                        GameState.CellsMovement = new List<HexCell>();
+                        GameState.CellSelected.Select();
                     }
                 }
             }

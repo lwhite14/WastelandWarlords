@@ -18,7 +18,7 @@ namespace HexPathfinding
         {
             List<MovementNode> returnCells = new List<MovementNode>();
 
-            MovementNode initialNode = new MovementNode(null, unusedMovementPoints, startingCell.coordinates);
+            MovementNode initialNode = new MovementNode(null, unusedMovementPoints, startingCell.coordinates, true);
             CreateNodes(returnCells, initialNode);
 
             for (int i = 0; i < unusedMovementPoints; i++)
@@ -151,18 +151,20 @@ namespace HexPathfinding
         public MovementNode prevNode;
         public int movementPointsLeft;
 
-        public MovementNode(MovementNode prevNode, int movementPointsPreMove, HexCoordinates coordinates) 
+        public MovementNode(MovementNode prevNode, int movementPointsPreMove, HexCoordinates coordinates, bool rootNode = false) 
         {
             this.prevNode = prevNode;
-            this.movementPointsLeft = movementPointsPreMove - HexGrid.instance.hexCells[coordinates.X, coordinates.Z].movementCost;
+            if (rootNode)   { this.movementPointsLeft = movementPointsPreMove; }
+            else            { this.movementPointsLeft = movementPointsPreMove - HexGrid.instance.hexCells[coordinates.X, coordinates.Z].movementCost; }
             this.coordinates = coordinates;
         }
 
-        public bool Equals(MovementNode other)
+        public override bool Equals(System.Object obj)
         {
-            if (other == null) { return false; }
+            if (obj == null) { return false; }
 
-            if (this.coordinates == other.coordinates)
+            MovementNode movementNodeObj = obj as MovementNode;
+            if (this.coordinates == movementNodeObj.coordinates)
             {
                 return true;
             }
@@ -170,6 +172,29 @@ namespace HexPathfinding
             {
                 return false;
             }
+        }
+
+        public static bool operator ==(MovementNode node1, MovementNode node2)
+        {
+            if ((node1.coordinates.X == node2.coordinates.X) && (node1.coordinates.Z == node2.coordinates.Z))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(MovementNode node1, MovementNode node2)
+        {
+            if ((node1.coordinates.X == node2.coordinates.X) && (node1.coordinates.Z == node2.coordinates.Z))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.coordinates.X.GetHashCode() + this.coordinates.Z.GetHashCode();
         }
     }
 }
