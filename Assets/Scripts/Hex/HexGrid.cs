@@ -11,9 +11,6 @@ public class HexGrid : MonoBehaviour
 {
     public static HexGrid instance = null;
 
-    public int width;
-    public int height;
-
     public HexCell[,] hexCells;
     HexCell selectedCell = null;
 
@@ -31,7 +28,7 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
-        hexCells = new HexCell[width, height];
+        hexCells = new HexCell[CurrentMap.instance.currentMap.GetWidth(), CurrentMap.instance.currentMap.GetHeight()];
         foreach (HexCellAbstract cell in CurrentMap.instance.currentMap.GetCells())
         {
             if (cell.type == "Water") { CreateCell(cell.coordinates, HexTypes.GetWater()); }

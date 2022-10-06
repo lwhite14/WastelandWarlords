@@ -2,6 +2,9 @@
 
 public class EnglishChannelMap : Map
 {
+    int width = 33;
+    int height = 28;
+
     public HexCellAbstract[] allCells =
     {
         new HexCellAbstract("Water", new HexCoordinates(13, 3)),
@@ -558,4 +561,7 @@ public class EnglishChannelMap : Map
     public HexCoordinates GetBottomRightCoords() { return new HexCoordinates(32, 0); }
     public HexCoordinates GetTopLeftCoords() { return new HexCoordinates(0, 27); }
     public HexCoordinates GetTopRightCoords() { return new HexCoordinates(18, 27); }
+
+    public int GetWidth() { return width; }
+    public int GetHeight() { return height; }
 }

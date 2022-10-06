@@ -35,54 +35,113 @@ namespace HexPathfinding
 
         public static void CreateNodes(List<MovementNode> returnCells, MovementNode rootNode) 
         {
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + topRight).X, (rootNode.coordinates + topRight).Z].movementCost >= 0) 
+            if (((rootNode.coordinates + topRight).X >= 0) && ((rootNode.coordinates + topRight).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + topRight);
-                if (!returnCells.Contains(node)) 
+                if (((rootNode.coordinates + topRight).Z >= 0) && ((rootNode.coordinates + topRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + topRight).X, (rootNode.coordinates + topRight).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + topRight).X, (rootNode.coordinates + topRight).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + topRight);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //top right
+                    }
                 }
-            } //top right
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + topLeft).X, (rootNode.coordinates + topLeft).Z].movementCost >= 0) 
+            }
+
+            if (((rootNode.coordinates + topLeft).X >= 0) && ((rootNode.coordinates + topLeft).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + topLeft);
-                if (!returnCells.Contains(node))
+                if (((rootNode.coordinates + topLeft).Z >= 0) && ((rootNode.coordinates + topLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + topLeft).X, (rootNode.coordinates + topLeft).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + topLeft).X, (rootNode.coordinates + topLeft).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + topLeft);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //top left
+                    }
                 }
-            } //top left
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + bottomRight).X, (rootNode.coordinates + bottomRight).Z].movementCost >= 0)
+            }
+
+            if (((rootNode.coordinates + bottomRight).X >= 0) && ((rootNode.coordinates + bottomRight).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + bottomRight);
-                if (!returnCells.Contains(node))
+                if (((rootNode.coordinates + bottomRight).Z >= 0) && ((rootNode.coordinates + bottomRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + bottomRight).X, (rootNode.coordinates + bottomRight).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + bottomRight).X, (rootNode.coordinates + bottomRight).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + bottomRight);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //bottom right
+                    }
                 }
-            } //bottom right
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + bottomLeft).X, (rootNode.coordinates + bottomLeft).Z].movementCost >= 0) 
+            }
+
+            if (((rootNode.coordinates + bottomLeft).X >= 0) && ((rootNode.coordinates + bottomLeft).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + bottomLeft);
-                if (!returnCells.Contains(node))
+                if (((rootNode.coordinates + bottomLeft).Z >= 0) && ((rootNode.coordinates + bottomLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + bottomLeft).X, (rootNode.coordinates + bottomLeft).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + bottomLeft).X, (rootNode.coordinates + bottomLeft).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + bottomLeft);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //bottom left
+                    }
                 }
-            } //bottom left
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + left).X, (rootNode.coordinates + left).Z].movementCost >= 0) 
+            }
+
+            if (((rootNode.coordinates + left).X >= 0) && ((rootNode.coordinates + left).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + left);
-                if (!returnCells.Contains(node))
+                if (((rootNode.coordinates + left).Z >= 0) && ((rootNode.coordinates + left).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + left).X, (rootNode.coordinates + left).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + left).X, (rootNode.coordinates + left).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + left);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //left
+                    }
                 }
-            } //left
-            if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + right).X, (rootNode.coordinates + right).Z].movementCost >= 0) 
+            }
+
+            if (((rootNode.coordinates + right).X >= 0) && ((rootNode.coordinates + right).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
             {
-                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + right);
-                if (!returnCells.Contains(node))
+                if (((rootNode.coordinates + right).Z >= 0) && ((rootNode.coordinates + right).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    returnCells.Add(node);
+                    if (HexGrid.instance.hexCells[(rootNode.coordinates + right).X, (rootNode.coordinates + right).Z] != null)
+                    {
+                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + right).X, (rootNode.coordinates + right).Z].movementCost >= 0)
+                        {
+                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + right);
+                            if (!returnCells.Contains(node))
+                            {
+                                returnCells.Add(node);
+                            }
+                        } //right
+                    }
                 }
-            } //right
+            }
         }
     }
 
