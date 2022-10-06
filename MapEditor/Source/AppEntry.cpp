@@ -3,7 +3,7 @@
 
 int main(int)
 {
-    Runner* runner = new Runner("Map Editor", 800, 600);
+    Runner* runner = new Runner("Map Editor", 1600, 900);
     Editor* editor = new Editor();
     return runner->Run(editor);
 }

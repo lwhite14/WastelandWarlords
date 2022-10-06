@@ -2,6 +2,7 @@
 #define HEXCALC_H
 
 #include <imgui.h>
+#include "UniversalHexSize.h"
 
 namespace HexCalc 
 {
@@ -11,11 +12,11 @@ namespace HexCalc
 
 	inline static ImVec2 CalcHexPos(ImVec2 roughPos)
 	{
-		int newX = RoundTo(roughPos.x, 30);
-		int newY = RoundTo(roughPos.y, 30);
-		if (IsOdd(newY / 30)) 
+		int newX = RoundTo(roughPos.x, HexDiameter);
+		int newY = RoundTo(roughPos.y, HexDiameter);
+		if (IsOdd(newY / HexDiameter))
 		{
-			newX += 15;
+			newX += HexDiameter / 2;
 		}
 		return ImVec2(newX, newY);
 	}

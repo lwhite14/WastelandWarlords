@@ -8,13 +8,15 @@
 #include "HexCalc.h"
 #include "Brush.h"
 #include "HexRep.h"
+#include "UniversalHexSize.h"
 
 class Editor 
 {
 private:
 	ImGuiViewport*				viewport;
 	ImGuiWindowFlags			m_mainWindowFlags;
-	ImGuiWindowFlags			m_brushWindowFlags;
+	ImGuiWindowFlags			m_childWindowFlags;
+	ImGuiDockNodeFlags			m_dockspaceFlags;
 	int							m_width;
 	int							m_height;
 	std::vector<HexRep>			hexCells;
@@ -27,12 +29,15 @@ private:
 									Brush("Forest", ImColor(ImVec4(0, 1, 0, 1))),
 									Brush("ImpactSite", ImColor(ImVec4(0.2, 0.2, 0.2, 1)))
 								};
+	int							rows;
+	int							cols;
 
 public:
 	Editor() 
 	{
 		m_mainWindowFlags = ImGuiWindowFlags_None;
-		m_brushWindowFlags = ImGuiWindowFlags_None;
+		m_childWindowFlags = ImGuiWindowFlags_None;
+		m_dockspaceFlags = ImGuiWindowFlags_None;
 	}
 
 	void Init(GLFWwindow* window)
@@ -45,33 +50,41 @@ public:
 
 		viewport = ImGui::GetMainViewport();
 
+		ImGuiIO* io = &ImGui::GetIO();
+		io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
 		ImGui::SetUpStyle();
 
 		m_mainWindowFlags |= ImGuiWindowFlags_NoResize;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoTitleBar;
-		//m_windowFlags |= ImGuiWindowFlags_NoScrollbar;
+		//m_mainWindowFlags |= ImGuiWindowFlags_NoScrollbar;
 		m_mainWindowFlags |= ImGuiWindowFlags_MenuBar;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoMove;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoCollapse;
-		//m_windowFlags |= ImGuiWindowFlags_NoNav;
-		//m_windowFlags |= ImGuiWindowFlags_NoBackground;
+		//m_mainWindowFlags |= ImGuiWindowFlags_NoNav;
+		//m_mainWindowFlags |= ImGuiWindowFlags_NoBackground;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoDocking;
-		//m_windowFlags |= ImGuiWindowFlags_UnsavedDocument;
+		//m_mainWindowFlags |= ImGuiWindowFlags_UnsavedDocument;
 		m_mainWindowFlags |= ImGuiWindowFlags_NoNavFocus;
 
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoResize;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoTitleBar;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoScrollbar;
-		//m_brushWindowFlags |= ImGuiWindowFlags_MenuBar;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoMove;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoCollapse;
-		m_brushWindowFlags |= ImGuiWindowFlags_NoNav;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoBackground;
-		//m_brushWindowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-		m_brushWindowFlags |= ImGuiWindowFlags_NoDocking;
-		//m_brushWindowFlags |= ImGuiWindowFlags_UnsavedDocument;
-		m_brushWindowFlags |= ImGuiWindowFlags_NoNavFocus;
+		m_dockspaceFlags = ImGuiDockNodeFlags_None;
+
+		m_childWindowFlags = ImGuiModFlags_None;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoResize;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoTitleBar;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoScrollbar;
+		//m_childWindowFlags |= ImGuiWindowFlags_MenuBar;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoMove;
+		m_childWindowFlags |= ImGuiWindowFlags_NoCollapse;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoNav;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoBackground;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+		//m_childWindowFlags |= ImGuiWindowFlags_NoDocking;
+		//m_childWindowFlags |= ImGuiWindowFlags_UnsavedDocument;
+
+		cols = m_width / HexDiameter;
+		rows = m_height / HexDiameter;
 	}
 
 	void Render() 
@@ -91,16 +104,16 @@ public:
 		ImGui::SetNextWindowSize(viewport->WorkSize);
 		ImGui::SetNextWindowViewport(viewport->ID);
 
-		static int brushSelected = 0;
-
-		ImGui::Begin("Editor", (bool*)0, m_mainWindowFlags);
-        if (ImGui::BeginMenuBar())
-        {
+		ImGui::Begin("Workspace", NULL, m_mainWindowFlags);
+		ImGuiID dockspace_id = ImGui::GetID("DockSpace");
+		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), m_dockspaceFlags);
+		if (ImGui::BeginMenuBar())
+		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Reset")) 
+				if (ImGui::MenuItem("Reset"))
 				{
-				
+					hexCells = std::vector<HexRep>();
 				}
 				if (ImGui::MenuItem("Export"))
 				{
@@ -108,8 +121,13 @@ public:
 				}
 				ImGui::EndMenu();
 			}
-            ImGui::EndMenuBar();
-        }
+			ImGui::EndMenuBar();
+		}
+		ImGui::End();
+
+		static int brushSelected = 0;
+
+		ImGui::Begin("Editor", (bool*)0, m_childWindowFlags);
 		if (ImGui::IsWindowHovered())
 		{
 			if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) 
@@ -145,16 +163,25 @@ public:
 		ImDrawList* drawList = ImGui::GetWindowDrawList();
 		for (unsigned int i = 0; i < hexCells.size(); i++)
 		{
-			drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), 15, hexCells[i].colour, 8);
+			drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), HexDiameter / 2, hexCells[i].colour, 8);
 		}
 		drawList->AddCircleFilled(HexCalc::CalcHexPos(ImVec2(io.MousePos.x, io.MousePos.y)), 2.5f, ImColor(ImVec4(1, 0, 0, 1)), 8);
+		for (unsigned int x = 0; x < cols; x++) 
+		{
+			for (unsigned int y = 0; y < rows; y++) 
+			{	
+				ImVec2 center = ImVec2((x * HexDiameter), (y * HexDiameter));
+				center = HexCalc::CalcHexPos(center);
+				drawList->AddRect(ImVec2(center.x - HexDiameter / 2, center.y - HexDiameter / 2), ImVec2(center.x + HexDiameter / 2, center.y + HexDiameter / 2), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 0.25f)), 0.0f, ImDrawFlags_None);
+			}
+		}
 		ImGui::End();
 
 		ImVec2 size = ImVec2(225, 100);
 		ImGui::SetNextWindowPos(ImVec2(m_width - size.x , 20), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowViewport(viewport->ID);
-		ImGui::Begin("Brush", (bool*)0, m_brushWindowFlags);
+		ImGui::Begin("Brush", (bool*)0, m_childWindowFlags);
 		if (ImGui::BeginCombo("Brush", brushTypes[brushSelected].name.c_str()))
 		{
 			for (int i = 0; i < brushTypes.size(); i++)
@@ -168,7 +195,7 @@ public:
 		}
 		ImGui::End();
 
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
