@@ -10,7 +10,8 @@ public class CurrentMap : MonoBehaviour
 
     Map[] allMaps =
     {
-        new EnglishChannelMap()
+        new EnglishChannelMap(),
+        new WalesMap()
     };
 
     public int mapUsed = 0;

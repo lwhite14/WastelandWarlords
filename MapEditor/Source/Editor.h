@@ -205,7 +205,6 @@ public:
 				if (!alreadyExists) 
 				{ 
 					hexCells.push_back(HexRep(hexPosProper.x, hexPosProper.y, brushTypes[brushSelected].name, brushTypes[brushSelected].colour)); 
-					std::cout << "x: " << hexPosProper.x << ", z: " << hexPosProper.y << std::endl;
 				}
 			}
 			else if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) 
@@ -290,20 +289,6 @@ public:
 	{
 		std::vector<HexRep> hexCellsCopy = hexCells;
 
-		float highestY = hexCellsCopy[0].y;
-		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
-		{
-			if (hexCellsCopy[i].y < highestY)
-			{
-				highestY = hexCellsCopy[i].y;
-			}
-		}
-		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
-		{
-			float distanceFromTop = (hexCellsCopy[i].y - highestY) / HexDiameter;
-			hexCellsCopy[i].trueCoordZ = distanceFromTop;
-		}
-
 		float lowestY = hexCellsCopy[0].y;
 		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
 		{
@@ -312,6 +297,12 @@ public:
 				lowestY = hexCellsCopy[i].y;
 			}
 		}
+		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
+		{
+			float distanceFromBotton = (lowestY - hexCellsCopy[i].y) / HexDiameter;
+			hexCellsCopy[i].trueCoordZ = distanceFromBotton;
+		}
+
 		for (unsigned int i = 0; i < hexCellsCopy.size(); i++)
 		{
 			float distanceFromBottom = (lowestY - hexCellsCopy[i].y) / HexDiameter;

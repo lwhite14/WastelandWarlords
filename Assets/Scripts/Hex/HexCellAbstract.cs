@@ -1,4 +1,6 @@
-﻿
+﻿using YamlDotNet.Serialization;
+
+
 
 public class HexCellAbstract
 {

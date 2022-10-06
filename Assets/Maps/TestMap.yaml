@@ -1,0 +1,107 @@
+Program: FissionMapEditor
+HexCells:
+  - terrain: Forest
+    x: 1
+    z: 5
+  - terrain: Forest
+    x: 1
+    z: 4
+  - terrain: Forest
+    x: 2
+    z: 3
+  - terrain: Forest
+    x: 2
+    z: 2
+  - terrain: Forest
+    x: 3
+    z: 1
+  - terrain: Forest
+    x: 4
+    z: 1
+  - terrain: Forest
+    x: 5
+    z: 1
+  - terrain: Forest
+    x: 5
+    z: 2
+  - terrain: Forest
+    x: 4
+    z: 3
+  - terrain: Forest
+    x: 4
+    z: 4
+  - terrain: Forest
+    x: 3
+    z: 5
+  - terrain: Water
+    x: 2
+    z: 5
+  - terrain: Water
+    x: 2
+    z: 4
+  - terrain: Water
+    x: 3
+    z: 4
+  - terrain: Water
+    x: 3
+    z: 2
+  - terrain: Water
+    x: 3
+    z: 3
+  - terrain: Water
+    x: 4
+    z: 2
+  - terrain: Water
+    x: 2
+    z: 1
+  - terrain: Water
+    x: 1
+    z: 2
+  - terrain: Water
+    x: 1
+    z: 3
+  - terrain: Water
+    x: 0
+    z: 4
+  - terrain: Water
+    x: 0
+    z: 5
+  - terrain: Water
+    x: 0
+    z: 6
+  - terrain: Water
+    x: 1
+    z: 6
+  - terrain: Water
+    x: 2
+    z: 6
+  - terrain: Water
+    x: 3
+    z: 6
+  - terrain: Water
+    x: 4
+    z: 5
+  - terrain: Water
+    x: 5
+    z: 4
+  - terrain: Water
+    x: 5
+    z: 3
+  - terrain: Water
+    x: 6
+    z: 2
+  - terrain: Water
+    x: 6
+    z: 1
+  - terrain: Water
+    x: 5
+    z: 0
+  - terrain: Water
+    x: 4
+    z: 0
+  - terrain: Water
+    x: 3
+    z: 0
+  - terrain: Water
+    x: 6
+    z: 0
