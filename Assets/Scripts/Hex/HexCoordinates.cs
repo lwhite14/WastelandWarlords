@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 [System.Serializable]
 public struct HexCoordinates
@@ -43,5 +44,29 @@ public struct HexCoordinates
     public string ToStringOnSeparateLines()
     {
         return X.ToString() + "\n" + Z.ToString();
+    }
+
+    public static HexCoordinates operator +(HexCoordinates hex1, HexCoordinates hex2)
+    {
+        HexCoordinates newHex = new HexCoordinates(hex1.X + hex2.X, hex1.Z + hex2.Z);
+        return newHex;
+    }
+
+    public static bool operator ==(HexCoordinates hex1, HexCoordinates hex2) 
+    {
+        if ((hex1.X == hex2.X) && (hex1.Z == hex2.Z))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool operator !=(HexCoordinates hex1, HexCoordinates hex2)
+    {
+        if ((hex1.X == hex2.X) && (hex1.Z == hex2.Z))
+        {
+            return false;
+        }
+        return true;
     }
 }

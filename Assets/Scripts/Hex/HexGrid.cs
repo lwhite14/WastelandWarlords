@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using System.IO;
+using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
 {
@@ -13,10 +14,8 @@ public class HexGrid : MonoBehaviour
     public int width;
     public int height;
 
-    HexCell[,] hexCells;
+    public HexCell[,] hexCells;
     HexCell selectedCell = null;
-
-    public Unit unit;
 
     private void Awake()
     {
@@ -41,13 +40,31 @@ public class HexGrid : MonoBehaviour
             if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, HexTypes.GetImpactSite()); }
         }
 
-        unit = Instantiate<Unit>(unit);
-        unit.SetCell(hexCells[18, 9]);
+        Unit unit1 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit1.SetCell(hexCells[21, 6]);
+
+        Unit unit2 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit2.SetCell(hexCells[17, 12]);
+
+        Unit unit3 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit3.SetCell(hexCells[13, 12]);        
+        
+        Unit unit4 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit4.SetCell(hexCells[1, 27]);   
+        
+        Unit unit5 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit5.SetCell(hexCells[19, 26]);  
+        
+        Unit unit6 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit6.SetCell(hexCells[32, 0]); 
+        
+        Unit unit7 = Instantiate<Unit>(Resources.Load<Unit>("GameObjects/Unit"));
+        unit7.SetCell(hexCells[13, 0]);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -60,6 +77,10 @@ public class HexGrid : MonoBehaviour
                         if (selectedCell != null)
                         {
                             selectedCell.Unselect();
+                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) 
+                            {
+                                Destroy(marker);
+                            }
                         }
                         selectedCell = hit.transform.gameObject.GetComponentInParent<HexCell>();
                         selectedCell.Select();

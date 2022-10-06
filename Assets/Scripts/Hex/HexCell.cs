@@ -10,11 +10,12 @@ public class HexCell : MonoBehaviour
     public int movementCost = 1; 
     public bool selected = false;
     float selectedHeight = 2.0f;
-    public Transform unitTarget { get; private set; }
+    public Transform topTarget { get; private set; }
+    [HideInInspector]public Unit unit = null;
 
     void Awake()
     {
-        unitTarget = transform.Find("UnitTarget").transform;
+        topTarget = transform.Find("TopTarget").transform;
     }
 
 
@@ -23,6 +24,10 @@ public class HexCell : MonoBehaviour
         selected = true;
         transform.position = new Vector3(transform.position.x, transform.position.y + selectedHeight, transform.position.z);
         MasterUI.instance.UpdateTerrainPanel(this);
+        if (unit != null) 
+        {
+            unit.Select();
+        }
     }
 
     public void Unselect() 

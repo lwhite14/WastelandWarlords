@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4424603655586650555}
   m_Layer: 0
-  m_Name: UnitTarget
+  m_Name: TopTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,4 +181,6 @@ MonoBehaviour:
   coordinates:
     x: 0
     z: 0
+  movementCost: 1
   selected: 0
+  unit: {fileID: 0}
