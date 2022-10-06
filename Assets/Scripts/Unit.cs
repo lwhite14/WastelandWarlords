@@ -45,4 +45,9 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
+    public void ResetMovementPoints() 
+    {
+        movementPoints = fullMovementPoints;
+    }
 }
