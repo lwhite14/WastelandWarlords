@@ -31,6 +31,7 @@
     <ClCompile Include="Source\AppEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Brush.h" />
     <ClInclude Include="Source\Dependencies\imgui\imconfig.h" />
     <ClInclude Include="Source\Dependencies\imgui\imgui.h" />
@@ -49,6 +50,12 @@
     <ClInclude Include="Source\ImGuiUtils.h" />
     <ClInclude Include="Source\Runner.h" />
     <ClInclude Include="Source\UniversalHexSize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MapEditor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="MapEditor.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

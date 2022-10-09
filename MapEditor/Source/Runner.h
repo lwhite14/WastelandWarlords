@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Editor.h"
+#include "Dependencies/stb/stb_image.h"
 
 class Runner 
 {
@@ -52,6 +53,16 @@ public:
 			exit(EXIT_FAILURE);
 		}
 		glfwMakeContextCurrent(m_window);
+
+		int iWidth, iHeight;
+		int channels;
+		unsigned char* iPixels = stbi_load("MapEditor.png", &iWidth, &iHeight, &channels, 4);
+
+		GLFWimage images[1];
+		images[0].width = iWidth;
+		images[0].height = iHeight;
+		images[0].pixels = iPixels;
+		glfwSetWindowIcon(m_window, 1, images);
 	}
 
 	int Run(Editor* editor) 
