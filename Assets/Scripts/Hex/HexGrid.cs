@@ -37,25 +37,7 @@ public class HexGrid : MonoBehaviour
         }
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[0].SetCell(hexCells[21, 6]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[1].SetCell(hexCells[17, 12]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[2].SetCell(hexCells[13, 12]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[3].SetCell(hexCells[1, 27]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[4].SetCell(hexCells[19, 26]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[5].SetCell(hexCells[32, 0]);
-
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[6].SetCell(hexCells[13, 0]);
+        GameState.Units[0].SetCell(hexCells[17, 13]);
     }
 
     void Update()
