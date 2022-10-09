@@ -36,9 +36,14 @@ private:
 								};
 	int							rows;
 	int							cols;
+	bool						isTerrainBrush;
+	bool						isHeightBrush;
+	float						height;
 
 public:
-	Editor() 
+	Editor() : 
+		isTerrainBrush{ true },
+		isHeightBrush{ false }
 	{
 		m_mainWindowFlags = ImGuiWindowFlags_None;
 		m_childWindowFlags = ImGuiWindowFlags_None;
@@ -166,6 +171,7 @@ public:
 							out << YAML::Key << "terrain" << YAML::Value << hexCellsCopy[i].terrainType;
 							out << YAML::Key << "x" << YAML::Value << hexCellsCopy[i].trueCoordX;
 							out << YAML::Key << "z" << YAML::Value << hexCellsCopy[i].trueCoordZ;
+							out << YAML::Key << "height" << YAML::Value << hexCellsCopy[i].height;
 							out << YAML::EndMap;
 						}
 
@@ -174,6 +180,68 @@ public:
 
 						newSceneFile << out.c_str();
 						newSceneFile.close();
+					}
+					else if (result == NFD_ERROR)
+					{
+						std::cout << NFD_GetError() << std::endl;
+					}
+				}
+				if (ImGui::MenuItem("Load"))
+				{
+					nfdchar_t* outPath = NULL;
+					nfdchar_t filters[] = "yaml";
+					nfdchar_t defaultPath[] = "Maps\\0";
+					nfdresult_t result = NFD_OpenDialog(filters, defaultPath, &outPath);
+
+					if (result == NFD_OKAY)
+					{
+						bool isFileEx = false;
+						std::string ex = "";
+						std::string filePath = "";
+						for (char c = *outPath; c; c = *++outPath)
+						{
+							filePath.push_back(c);
+							if (isFileEx)
+							{
+								ex.push_back(c);
+							}
+							if (c == '.')
+							{
+								isFileEx = true;
+							}
+						}
+						if (ex == "yaml")
+						{
+							hexCells = std::vector<HexRep>();
+							YAML::Node config = YAML::LoadFile(filePath);
+
+							std::cout << config["HexCells"][9]["terrain"];
+
+							for (unsigned int i = 0; i < config["HexCells"].size(); i++) 
+							{
+								std::string terrain = config["HexCells"][i]["terrain"].as<std::string>();
+								ImColor colour = ImColor(ImVec4(0, 0, 0, 1));
+								if (terrain == "Water") { colour = ImColor(ImVec4(0, 0, 1, 1)); }
+								if (terrain == "WaterShallow") { colour = ImColor(ImVec4(0.2, 0.2, 1, 1)); }
+								if (terrain == "Plains") { colour = ImColor(ImVec4(0.75, 1, 0.75, 1)); }
+								if (terrain == "Forest") { colour = ImColor(ImVec4(0, 1, 0, 1)); }
+								if (terrain == "ImpactSite") { colour = ImColor(ImVec4(0.2, 0.2, 0.2, 1)); }
+
+								float x = config["HexCells"][i]["x"].as<float>();
+								float z = config["HexCells"][i]["z"].as<float>();
+								float height;
+								if (config["HexCells"][i]["height"]) 
+								{
+									height = config["HexCells"][i]["height"].as<float>();
+								}
+								else 
+								{
+									height = 0.0f;
+								}
+
+								hexCells.push_back(HexRep((x) * HexDiameter + (HexDiameter / 2) * z, (z - 50) * -HexDiameter, terrain, colour, height));
+							}
+						}
 					}
 					else if (result == NFD_ERROR)
 					{
@@ -191,7 +259,7 @@ public:
 		ImGui::Begin("Editor", (bool*)0, m_childWindowFlags);
 		if (ImGui::IsWindowHovered())
 		{
-			if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) 
+			if (ImGui::IsMouseDown(ImGuiMouseButton_Left)) 
 			{
 				ImVec2 hexPosProper = HexCalc::CalcHexPos(ImVec2(io.MousePos.x, io.MousePos.y));
 				bool alreadyExists = false;
@@ -200,34 +268,61 @@ public:
 					if ((hexPosProper.x == hexCells[i].x) && (hexPosProper.y == hexCells[i].y))
 					{
 						alreadyExists = true;
+						if (isHeightBrush)
+						{
+							if (hexCells[i].terrainType != "Water") 
+							{
+								hexCells[i].height = height;
+							}
+						}
 					}
 				}
 				if (!alreadyExists) 
 				{ 
-					hexCells.push_back(HexRep(hexPosProper.x, hexPosProper.y, brushTypes[brushSelected].name, brushTypes[brushSelected].colour)); 
+					if (isTerrainBrush) { hexCells.push_back(HexRep(hexPosProper.x, hexPosProper.y, brushTypes[brushSelected].name, brushTypes[brushSelected].colour, height)); }
 				}
 			}
 			else if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) 
 			{
-				ImVec2 hexPosProper = HexCalc::CalcHexPos(ImVec2(io.MousePos.x, io.MousePos.y));
-				int index = -1;
-				for (unsigned int i = 0; i < hexCells.size(); i++)
+				if (isTerrainBrush) 
 				{
-					if ((hexPosProper.x == hexCells[i].x) && (hexPosProper.y == hexCells[i].y))
+					ImVec2 hexPosProper = HexCalc::CalcHexPos(ImVec2(io.MousePos.x, io.MousePos.y));
+					int index = -1;
+					for (unsigned int i = 0; i < hexCells.size(); i++)
 					{
-						index = i;
+						if ((hexPosProper.x == hexCells[i].x) && (hexPosProper.y == hexCells[i].y))
+						{
+							index = i;
+						}
+					}
+					if (index != -1)
+					{
+						hexCells.erase(hexCells.begin() + index);
 					}
 				}
-				if (index != -1)
-				{
-					hexCells.erase(hexCells.begin() + index);
-				}		
 			}
 		}
 		ImDrawList* drawList = ImGui::GetWindowDrawList();
-		for (unsigned int i = 0; i < hexCells.size(); i++)
+		if (isTerrainBrush) 
 		{
-			drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), HexDiameter / 2, hexCells[i].colour, 8);
+			for (unsigned int i = 0; i < hexCells.size(); i++)
+			{
+				drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), HexDiameter / 2, hexCells[i].colour, 8);			
+			}
+		}
+		if (isHeightBrush)
+		{
+			for (unsigned int i = 0; i < hexCells.size(); i++)
+			{
+				if (hexCells[i].terrainType != "Water") 
+				{
+					drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), HexDiameter / 2, ImColor(ImVec4(hexCells[i].height, hexCells[i].height, hexCells[i].height, 1)), 8);
+				}
+				else 
+				{
+					drawList->AddNgonFilled(ImVec2(hexCells[i].x, hexCells[i].y), HexDiameter / 2, ImColor(ImVec4(hexCells[i].height, hexCells[i].height, hexCells[i].colour, 1)), 8);
+				}
+			}
 		}
 		drawList->AddCircleFilled(HexCalc::CalcHexPos(ImVec2(io.MousePos.x, io.MousePos.y)), 2.5f, ImColor(ImVec4(1, 0, 0, 1)), 8);
 		for (unsigned int x = 0; x < cols; x++) 
@@ -246,16 +341,30 @@ public:
 		ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowViewport(viewport->ID);
 		ImGui::Begin("Brush", (bool*)0, m_childWindowFlags);
-		if (ImGui::BeginCombo("Brush", brushTypes[brushSelected].name.c_str()))
+		if (ImGui::BeginCombo("Brush Type", "Terrain")) 
 		{
-			for (int i = 0; i < brushTypes.size(); i++)
-			{
-				if (ImGui::Selectable(brushTypes[i].name.c_str()))
-				{
-					brushSelected = i;
-				}
-			}
+			if (ImGui::Selectable("Terrain")) { isTerrainBrush = true; isHeightBrush = false; }
+			if (ImGui::Selectable("Height")) { isTerrainBrush = false; isHeightBrush = true; }
 			ImGui::EndCombo();
+		}
+		ImGui::Separator();
+		if (isTerrainBrush) 
+		{
+			if (ImGui::BeginCombo("Terrain Type", brushTypes[brushSelected].name.c_str()))
+			{
+				for (int i = 0; i < brushTypes.size(); i++)
+				{
+					if (ImGui::Selectable(brushTypes[i].name.c_str()))
+					{
+						brushSelected = i;
+					}
+				}
+				ImGui::EndCombo();
+			}
+		}
+		if (isHeightBrush) 
+		{
+			ImGui::DragFloat("Height Value", &height, 0.05f, 0.0f, 1.0f);
 		}
 		ImGui::End();
 

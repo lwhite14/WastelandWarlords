@@ -13,14 +13,17 @@ public:
 	int trueCoordX;
 	int trueCoordZ;
 
+	float height;
+
 	std::string terrainType;
 	ImColor colour;
 
-	HexRep(float x, float y, std::string terrainType, ImColor colour) :
+	HexRep(float x, float y, std::string terrainType, ImColor colour, float height) :
 		x{ x },
 		y{ y },
 		terrainType{ terrainType },
-		colour{ colour }
+		colour{ colour },
+		height{ height }
 	{
 		
 	}

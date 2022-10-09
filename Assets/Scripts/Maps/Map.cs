@@ -42,11 +42,13 @@ public class Map
             string terrain = item.Children[new YamlScalarNode("terrain")].ConvertTo<string>();
             string xString = item.Children[new YamlScalarNode("x")].ConvertTo<string>();
             string zString = item.Children[new YamlScalarNode("z")].ConvertTo<string>();
+            string heightString = item.Children[new YamlScalarNode("height")].ConvertTo<string>();
 
             int x = Int16.Parse(xString);
             int z = Int16.Parse(zString);
+            float height = float.Parse(heightString);
 
-            allCells.Add(new HexCellAbstract(terrain, new HexCoordinates(x, z)));
+            allCells.Add(new HexCellAbstract(terrain, new HexCoordinates(x, z), height));
         }
 
         int lowestX = allCells[0].coordinates.X;

@@ -11,12 +11,14 @@ public class CurrentMap : MonoBehaviour
     Map[] allMaps =
     {
         new Map(@"Assets\Maps\EnglishChannelMap.yaml"),
-        new Map(@"Assets\Maps\WalesMap.yaml")
+        new Map(@"Assets\Maps\WalesMap.yaml"),
+        new Map(@"Assets\Maps\IslandMap.yaml")
     };
 
     [Tooltip(   "1: EnglishChannel\n" +
-                "2: Wales"),
-     Range(0, 1)]
+                "2: Wales\n" +
+                "3: Island"),
+     Range(0, 2)]
     public int mapUsed = 0;
 
     private void Awake()
