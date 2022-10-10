@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
     public float moveSpeed = 4.0f;
     int movementPoints;
     Animator anim;
+    bool isMoving = false;
 
     public HexCell cellOn { get; private set; }
 
@@ -48,6 +49,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator LerpUnit(MovementNode toNode, HexCell newCell) 
     {
+        isMoving = true;
         transform.SetParent(null);
         anim.SetBool("isRunning", true);
 
@@ -94,22 +96,30 @@ public class Unit : MonoBehaviour
         transform.SetParent(newCell.topTarget);
         anim.SetBool("isRunning", false);
         transform.localPosition = new Vector3(0, 0, 0);
+        isMoving = false;
+        if (GameState.CellSelected == newCell) 
+        {
+            Select();
+        }
         yield return null;
     }
 
     public void Select() 
     {
-        GameState.UnitSelected = this;
-        MovementNode[] movementNodes = MovementFinder.DisplayMovement(movementPoints, cellOn);
-        foreach (MovementNode node in movementNodes) 
+        if (!isMoving)
         {
-            if (node.coordinates != cellOn.coordinates)
+            GameState.UnitSelected = this;
+            MovementNode[] movementNodes = MovementFinder.DisplayMovement(movementPoints, cellOn);
+            foreach (MovementNode node in movementNodes)
             {
-                GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
-                tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
-                GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
-                tempMovementMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
-                tempMovementMarker.GetComponent<MovementMarker>().movementNode = node;
+                if (node.coordinates != cellOn.coordinates)
+                {
+                    GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
+                    tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
+                    GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
+                    tempMovementMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
+                    tempMovementMarker.GetComponent<MovementMarker>().movementNode = node;
+                }
             }
         }
     }
