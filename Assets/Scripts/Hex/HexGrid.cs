@@ -37,8 +37,7 @@ public class HexGrid : MonoBehaviour
         }
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[0].SetCell(hexCells[17, 13]);
-        GameState.Units[0].transform.localPosition = new Vector3(0, 0, 0);
+        GameState.Units[0].SetCell(hexCells[23, 10]);
     }
 
     void Update()

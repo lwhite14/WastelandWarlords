@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HexPathfinding;
+using System.Drawing;
 
 public class Unit : MonoBehaviour
 {
     public int fullMovementPoints = 3;
     public float moveSpeed = 4.0f;
     int movementPoints;
+    Animator anim;
 
     public HexCell cellOn { get; private set; }
+
+    void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     void Start()
     {
@@ -25,6 +32,7 @@ public class Unit : MonoBehaviour
         this.cellOn = newCell;
         this.cellOn.unit = this;
         transform.SetParent(newCell.topTarget);
+        transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void Move(HexCell newCell)
@@ -41,6 +49,7 @@ public class Unit : MonoBehaviour
     IEnumerator LerpUnit(MovementNode toNode, HexCell newCell) 
     {
         transform.SetParent(null);
+        anim.SetBool("isRunning", true);
 
         List<MovementNode> nodes = new List<MovementNode>();
         nodes.Add(toNode);
@@ -67,6 +76,8 @@ public class Unit : MonoBehaviour
             Vector3 endPosition = HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.position;
             Vector3 newPosition;
 
+
+            transform.LookAt(HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget, Vector3.up);
             float progress = 0.0f;
             while (progress < 1.0f)
             {
@@ -81,6 +92,7 @@ public class Unit : MonoBehaviour
         }
 
         transform.SetParent(newCell.topTarget);
+        anim.SetBool("isRunning", false);
         transform.localPosition = new Vector3(0, 0, 0);
         yield return null;
     }
