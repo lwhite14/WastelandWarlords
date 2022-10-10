@@ -176,6 +176,10 @@ namespace HexPathfinding
 
         public static bool operator ==(MovementNode node1, MovementNode node2)
         {
+            if (ReferenceEquals(node1, node2)) return true;
+
+            if (ReferenceEquals(node1, null) || ReferenceEquals(node2, null)) return false;
+
             if ((node1.coordinates.X == node2.coordinates.X) && (node1.coordinates.Z == node2.coordinates.Z))
             {
                 return true;
@@ -185,6 +189,10 @@ namespace HexPathfinding
 
         public static bool operator !=(MovementNode node1, MovementNode node2)
         {
+            if (ReferenceEquals(node1, node2)) { return false; }
+
+            if (ReferenceEquals(node1, null) || ReferenceEquals(node2, null)) { return true; }
+
             if ((node1.coordinates.X == node2.coordinates.X) && (node1.coordinates.Z == node2.coordinates.Z))
             {
                 return false;

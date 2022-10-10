@@ -48,7 +48,7 @@ public class Map
             int z = Int16.Parse(zString);
             float height = float.Parse(heightString);
 
-            allCells.Add(new HexCellAbstract(terrain, new HexCoordinates(x, z), height));
+            allCells.Add(new HexCellAbstract(terrain, new HexCoordinates(x, z, height)));
         }
 
         int lowestX = allCells[0].coordinates.X;

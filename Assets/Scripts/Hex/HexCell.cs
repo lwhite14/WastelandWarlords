@@ -8,7 +8,6 @@ public class HexCell : MonoBehaviour
     public string type;
     public HexCoordinates coordinates;
     public int movementCost = 1; 
-    float selectedHeight = 2.0f;
     public Transform topTarget { get; private set; }
     [HideInInspector]public Unit unit = null;
 
@@ -20,7 +19,6 @@ public class HexCell : MonoBehaviour
 
     public void Select()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + selectedHeight, transform.position.z);
         GameObject selectionMarker = Instantiate<GameObject>(ResourceFactory.SelectionMarker);
         selectionMarker.transform.SetParent(topTarget);
         selectionMarker.transform.localPosition = new Vector3(0, 0, 0);
@@ -33,6 +31,6 @@ public class HexCell : MonoBehaviour
 
     public void Unselect() 
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y - selectedHeight, transform.position.z);
+
     }
 }

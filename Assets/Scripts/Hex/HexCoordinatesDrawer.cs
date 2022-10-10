@@ -8,7 +8,8 @@ public class HexCoordinatesDrawer : PropertyDrawer
     {
         HexCoordinates coordinates = new HexCoordinates(
             property.FindPropertyRelative("x").intValue,
-            property.FindPropertyRelative("z").intValue
+            property.FindPropertyRelative("z").intValue,
+            property.FindPropertyRelative("height").floatValue
         );
         position = EditorGUI.PrefixLabel(position, label);
         GUI.Label(position, coordinates.ToString());

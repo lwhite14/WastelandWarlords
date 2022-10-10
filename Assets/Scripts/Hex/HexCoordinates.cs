@@ -7,6 +7,7 @@ public class HexCoordinates
 {
     [SerializeField]
     private int x, z;
+    private float height;
 
     public int X
     {
@@ -24,27 +25,40 @@ public class HexCoordinates
         }
     }
 
+    public float Height 
+    {
+        get 
+        {
+            return height;
+        }
+    }
+
     public int Y { get { return -X - Z; } }
 
-    public HexCoordinates(int x, int z)
+    public HexCoordinates(int x, int z, float height = 0.0f)
     {
         this.x = x;
         this.z = z;
-    }
-
-    public static HexCoordinates FromOffsetCoordinates(int x, int z)
-    {
-        return new HexCoordinates(x - z / 2, z);
+        this.height = height;  
     }
 
     public override string ToString()
     {
-        return "(" + X.ToString() + ", " + Z.ToString() + ")";
+        return "(" + X.ToString() + ", " + Z.ToString() + "), (Height: " + Height + ")";
     }
 
     public string ToStringOnSeparateLines()
     {
         return X.ToString() + "\n" + Z.ToString();
+    }
+
+    public Vector3 ToWorldSpace() 
+    {
+        Vector3 position;
+        position.x = X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * Z);
+        position.y = Height * 8;
+        position.z = Z * (HexMetrics.outerRadius * 1.5f);
+        return position; 
     }
 
     public static HexCoordinates operator +(HexCoordinates hex1, HexCoordinates hex2)

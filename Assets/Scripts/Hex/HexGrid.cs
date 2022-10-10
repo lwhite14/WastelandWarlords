@@ -30,14 +30,15 @@ public class HexGrid : MonoBehaviour
         hexCells = new HexCell[CurrentMap.instance.currentMap.GetWidth(), CurrentMap.instance.currentMap.GetHeight()];
         foreach (HexCellAbstract cell in CurrentMap.instance.currentMap.GetCells())
         {
-            if (cell.type == "Water") { CreateCell(cell.coordinates, ResourceFactory.HexCellWater, cell.height); }
-            if (cell.type == "Plains") { CreateCell(cell.coordinates, ResourceFactory.HexCellPlains, cell.height); }
-            if (cell.type == "Forest") { CreateCell(cell.coordinates, ResourceFactory.HexCellForest, cell.height); }
-            if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, ResourceFactory.HexCellImpactSite, cell.height); }
+            if (cell.type == "Water") { CreateCell(cell.coordinates, ResourceFactory.HexCellWater); }
+            if (cell.type == "Plains") { CreateCell(cell.coordinates, ResourceFactory.HexCellPlains); }
+            if (cell.type == "Forest") { CreateCell(cell.coordinates, ResourceFactory.HexCellForest); }
+            if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, ResourceFactory.HexCellImpactSite); }
         }
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
         GameState.Units[0].SetCell(hexCells[17, 13]);
+        GameState.Units[0].transform.localPosition = new Vector3(0, 0, 0);
     }
 
     void Update()
@@ -81,12 +82,9 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    void CreateCell(HexCoordinates coords, HexCell celltype, float height)
+    void CreateCell(HexCoordinates coords, HexCell celltype)
     {
-        Vector3 position;
-        position.x = coords.X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * coords.Z);
-        position.y = height * 8;
-        position.z = coords.Z * (HexMetrics.outerRadius * 1.5f);
+        Vector3 position = coords.ToWorldSpace();
 
         HexCell cell = hexCells[coords.X, coords.Z] = Instantiate<HexCell>(celltype);
         cell.transform.SetParent(transform, false);
