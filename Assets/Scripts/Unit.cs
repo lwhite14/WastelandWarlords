@@ -9,19 +9,16 @@ public class Unit : MonoBehaviour
     public int fullMovementPoints = 3;
     public float moveSpeed = 4.0f;
     int movementPoints;
-    Animator anim;
+    public Animator anim;
+    public Animator uiAnim;
     bool isMoving = false;
 
     public HexCell cellOn { get; private set; }
 
-    void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
-    }
-
     void Start()
     {
         movementPoints = fullMovementPoints;
+        CalcUIState();
     }
 
     public void SetCell(HexCell newCell)
@@ -42,6 +39,7 @@ public class Unit : MonoBehaviour
         this.cellOn = newCell;
         this.cellOn.unit = this;
         movementPoints = newCell.topTarget.GetComponentInChildren<MovementMarker>().movementNode.movementPointsLeft;
+        CalcUIState();
 
         MovementNode toNode = newCell.topTarget.GetChild(0).GetComponent<MovementMarker>().movementNode;
         StartCoroutine(LerpUnit(toNode, newCell));;
@@ -127,5 +125,20 @@ public class Unit : MonoBehaviour
     public void ResetMovementPoints() 
     {
         movementPoints = fullMovementPoints;
+        CalcUIState();
+        if (GameState.UnitSelected == this) 
+        {
+            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker"))
+            {
+                Destroy(marker);
+            }
+            Select(); 
+        }
+    }
+
+    void CalcUIState() 
+    {
+        if (movementPoints > 0) { uiAnim.SetBool("hasMovesLeft", true); }
+        else { uiAnim.SetBool("hasMovesLeft", false); }
     }
 }
