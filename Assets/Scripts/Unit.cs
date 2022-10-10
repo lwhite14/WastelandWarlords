@@ -17,6 +17,10 @@ public class Unit : MonoBehaviour
 
     public void SetCell(HexCell newCell)
     {
+        if (this.cellOn != null)
+        {
+            this.cellOn.unit = null;
+        }
         this.cellOn = newCell;
         this.cellOn.unit = this;
         transform.SetParent(newCell.topTarget);

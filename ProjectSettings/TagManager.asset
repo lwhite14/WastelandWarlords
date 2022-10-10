@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MovementMarker
+  - SelectionMarker
   layers:
   - Default
   - TransparentFX

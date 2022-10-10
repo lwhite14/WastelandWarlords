@@ -59,6 +59,10 @@ public class HexGrid : MonoBehaviour
                             {
                                 Destroy(marker);
                             }
+                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker"))
+                            {
+                                Destroy(marker);
+                            }
                         }
                         GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
                         foreach (HexCell cell in GameState.CellsMovement) 
