@@ -7,6 +7,8 @@ public class MasterUI : MonoBehaviour
     public static MasterUI instance = null;
 
     public TerrainPanel terrainPanel;
+    public UnitPanel unitPanel;
+    public SettlementPanel settlementPanel;
 
     void Awake()
     {
@@ -20,8 +22,24 @@ public class MasterUI : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        unitPanel.UpdateUnitPanel(null);
+        settlementPanel.UpdateSettlementPanel(null);
+    }
+
     public void UpdateTerrainPanel(HexCell selectedCell) 
     {
         terrainPanel.UpdateTerrainPanel(selectedCell);
+    }
+
+    public void UpdateUnitPanel(Unit selectedUnit) 
+    {
+        unitPanel.UpdateUnitPanel(selectedUnit);
+    }
+
+    public void UpdateSettlementPanel(Settlement selectedSettlement) 
+    {
+        settlementPanel.UpdateSettlementPanel(selectedSettlement);
     }
 }

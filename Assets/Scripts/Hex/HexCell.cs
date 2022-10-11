@@ -24,10 +24,10 @@ public class HexCell : MonoBehaviour
         selectionMarker.transform.SetParent(topTarget);
         selectionMarker.transform.localPosition = new Vector3(0, 0, 0);
         MasterUI.instance.UpdateTerrainPanel(this);
-        if (unit != null) 
-        {
-            unit.Select();
-        }
+        if (unit != null)  { unit.Select(); }
+        if (settlement != null)  { settlement.Select(); }
+        MasterUI.instance.UpdateUnitPanel(unit);
+        MasterUI.instance.UpdateSettlementPanel(settlement);
     }
 
     public void Unselect() 

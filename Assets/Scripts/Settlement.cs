@@ -5,6 +5,7 @@ using UnityEngine;
 public class Settlement : MonoBehaviour
 {
     public HexCell cellOn { get; private set; }
+    public string settlementName { get; set; }
 
     public void SetCell(HexCell newCell)
     {
@@ -16,5 +17,10 @@ public class Settlement : MonoBehaviour
         this.cellOn.settlement = this;
         transform.SetParent(newCell.topTarget);
         transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void Select() 
+    {
+        
     }
 }

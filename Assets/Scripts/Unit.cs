@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
     GameObject GFX;
 
     public HexCell cellOn { get; private set; }
+    public string unitName { get; set; }
 
     private void Awake()
     {
