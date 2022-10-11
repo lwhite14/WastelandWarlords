@@ -38,6 +38,9 @@ public class HexGrid : MonoBehaviour
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
         GameState.Units[0].SetCell(hexCells[26, 19]);
+
+        GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.SettlementL1));
+        GameState.Settlements[0].SetCell(hexCells[19, 21]);
     }
 
     void Update()

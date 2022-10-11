@@ -12,8 +12,14 @@ public class Unit : MonoBehaviour
     public Animator anim;
     public Animator uiAnim;
     bool isMoving = false;
+    GameObject GFX;
 
     public HexCell cellOn { get; private set; }
+
+    private void Awake()
+    {
+        GFX = transform.GetChild(0).gameObject;
+    }
 
     void Start()
     {
@@ -41,15 +47,14 @@ public class Unit : MonoBehaviour
         movementPoints = newCell.topTarget.GetComponentInChildren<MovementMarker>().movementNode.movementPointsLeft;
         CalcUIState();
 
-        MovementNode toNode = newCell.topTarget.GetChild(0).GetComponent<MovementMarker>().movementNode;
-        StartCoroutine(LerpUnit(toNode, newCell));;
+        MovementNode toNode = newCell.topTarget.GetComponentInChildren<MovementMarker>().movementNode;
+        StartCoroutine(LerpUnit(toNode, newCell));
     }
 
     IEnumerator LerpUnit(MovementNode toNode, HexCell newCell) 
     {
         isMoving = true;
         transform.SetParent(null);
-        anim.SetBool("isRunning", true);
 
         List<MovementNode> nodes = new List<MovementNode>();
         nodes.Add(toNode);
@@ -72,6 +77,10 @@ public class Unit : MonoBehaviour
         nodes.RemoveAt(nodes.Count - 1);
         for (int i = nodes.Count - 1; i >= 0; i--)
         {
+            GFX.SetActive(true);
+            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.GetComponentInChildren<Settlement>() != null) { GFX.SetActive(false); }
+            if (GFX.activeInHierarchy) { anim.SetBool("isRunning", true); }
+
             Vector3 startingPosition = transform.position;
             Vector3 endPosition = HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.position;
             Vector3 newPosition;

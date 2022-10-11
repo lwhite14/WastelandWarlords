@@ -5,6 +5,7 @@ public static class ResourceFactory
     public static GameObject    MovementMarker          = Resources.Load<GameObject>("GameObjects/MovementMarker");
     public static GameObject    SelectionMarker         = Resources.Load<GameObject>("GameObjects/SelectionMarker");
     public static Unit          Unit                    = Resources.Load<Unit>("GameObjects/Unit");
+    public static Settlement    SettlementL1            = Resources.Load<Settlement>("GameObjects/SettlementL1");
     public static HexCell       HexCell                 = Resources.Load<HexCell>("GameObjects/HexTypes/HexCell"); 
     public static HexCell       HexCellWater            = Resources.Load<HexCell>("GameObjects/HexTypes/Water"); 
     public static HexCell       HexCellWaterShallow     = Resources.Load<HexCell>("GameObjects/HexTypes/WaterShallow"); 
