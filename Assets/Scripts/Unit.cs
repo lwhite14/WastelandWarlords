@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
         this.cellOn.unit = this;
         transform.SetParent(newCell.topTarget);
         transform.localPosition = new Vector3(0, 0, 0);
+        transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
     public void Move(HexCell newCell)

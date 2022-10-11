@@ -47,39 +47,62 @@ public class HexGrid : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(inputRay, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
+                Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(inputRay, out hit))
                 {
-                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != GameState.CellSelected) 
+                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
                     {
-                        if (GameState.CellSelected != null)
+                        if (hit.transform.gameObject.GetComponentInParent<HexCell>() != GameState.CellSelected)
                         {
-                            GameState.CellSelected.Unselect();
-                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) 
+                            if (GameState.CellSelected != null) { GameState.CellSelected.Unselect(); }
+                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
+                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+                            GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                            GameState.UnitSelected = null;
+                            GameState.CellsMovement = new List<HexCell>();
+                            GameState.CellSelected.Select();
+                        }
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(1)) 
+            {
+                Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(inputRay, out hit))
+                {
+                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
+                    {
+                        if (hit.transform.gameObject.GetComponentInParent<HexCell>() != GameState.CellSelected)
+                        {
+                            HexCell prevCellSelected = GameState.CellSelected;
+                            bool isCellSelected = false;
+                            GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                            foreach (HexCell cell in GameState.CellsMovement)
                             {
-                                Destroy(marker);
+                                if (cell.coordinates == GameState.CellSelected.coordinates)
+                                {
+                                    if (GameState.CellSelected != null) { GameState.CellSelected.Unselect(); }
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+                                    GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                                    GameState.UnitSelected.Move(GameState.CellSelected);
+                                    GameState.UnitSelected = null;
+                                    GameState.CellsMovement = new List<HexCell>();
+                                    GameState.CellSelected.Select();
+                                    isCellSelected = true;
+                                }
                             }
-                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker"))
+                            if (!isCellSelected)
                             {
-                                Destroy(marker);
+                                GameState.CellSelected = prevCellSelected;
                             }
                         }
-                        GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
-                        foreach (HexCell cell in GameState.CellsMovement) 
-                        {
-                            if (cell.coordinates == GameState.CellSelected.coordinates) 
-                            {
-                                GameState.UnitSelected.Move(GameState.CellSelected);
-                            }
-                        }
-                        GameState.UnitSelected = null;
-                        GameState.CellsMovement = new List<HexCell>();
-                        GameState.CellSelected.Select();
                     }
                 }
             }

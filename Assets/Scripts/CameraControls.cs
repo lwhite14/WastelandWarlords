@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,7 +8,13 @@ public class CameraControls : MonoBehaviour
 {
     public static CameraControls instance = null;
 
-    public float speed = 10.0f;
+    public float moveSpeed = 10.0f;
+    public float scrollSpeed = 10.0f;
+
+    float minCameraY = 30.0f;
+    float maxCameraY = 200.0f;
+    float yConstant = 100.0f;
+
     public float minCameraX { private get; set; }
     public float maxCameraX { private get; set; }
     public float minCameraZ { private get; set; }
@@ -36,26 +43,31 @@ public class CameraControls : MonoBehaviour
 
     void Update()
     {
+        float yPos = transform.position.y;
+        yPos -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed * yConstant;
+        yPos = Mathf.Clamp(yPos, minCameraY, maxCameraY);
+
         float xPos = transform.position.x;
         float zPos = transform.position.z;
-        if (Input.GetKey(KeyCode.W)) 
+        if (Input.GetKey(KeyCode.W))
         {
-            zPos = transform.position.z + speed * Time.deltaTime;
+            zPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
         }
-        if (Input.GetKey(KeyCode.S)) 
+        if (Input.GetKey(KeyCode.S))
         {
-            zPos = transform.position.z - speed * Time.deltaTime;
+            zPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
         }
-        if (Input.GetKey(KeyCode.A)) 
+        if (Input.GetKey(KeyCode.A))
         {
-            xPos = transform.position.x - speed * Time.deltaTime;
+            xPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
         }
-        if (Input.GetKey(KeyCode.D)) 
+        if (Input.GetKey(KeyCode.D))
         {
-            xPos = transform.position.x + speed * Time.deltaTime;
+            xPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
         }
         xPos = Mathf.Clamp(xPos, minCameraX, maxCameraX);
         zPos = Mathf.Clamp(zPos, minCameraZ, maxCameraZ);
-        transform.position = new Vector3(xPos, transform.position.y, zPos);
+
+        transform.position = new Vector3(xPos, yPos, zPos);
     }
 }
