@@ -6,7 +6,8 @@ public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar instance = null;
 
-    public GameObject fogOfWarPlane;
+    public GameObject fogPlane;
+    public GameObject raySpawn;
     public LayerMask fogLayer;
     public float radius = 5.0f;
     float radiusSqr { get { return radius * radius; } }
@@ -46,13 +47,13 @@ public class FogOfWar : MonoBehaviour
 
     void CalculateVertexAlphas(Transform point) 
     {
-        Ray r = new Ray(transform.position, point.transform.position - transform.position);
+        Ray r = new Ray(raySpawn.transform.position, point.transform.position - raySpawn.transform.position);
         RaycastHit hit;
         if (Physics.Raycast(r, out hit, 1000, fogLayer, QueryTriggerInteraction.Collide))
         {
             for (int i = 0; i < vertices.Length; i++)
             {
-                Vector3 v = fogOfWarPlane.transform.TransformPoint(vertices[i]);
+                Vector3 v = fogPlane.transform.TransformPoint(vertices[i]);
                 float dist = Vector3.SqrMagnitude(v - hit.point);
                 if (dist < radiusSqr)
                 {
@@ -66,11 +67,16 @@ public class FogOfWar : MonoBehaviour
 
     void Initialize() 
     {
-        mesh = fogOfWarPlane.GetComponent<MeshFilter>().mesh;
+        mesh = fogPlane.GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
         colours = new Color[vertices.Length];
 
-        for (int i = 0; i < colours.Length; i++) 
+        ResetVertexColours();
+    }
+
+    void ResetVertexColours() 
+    {
+        for (int i = 0; i < colours.Length; i++)
         {
             colours[i] = Color.grey;
         }
@@ -84,7 +90,7 @@ public class FogOfWar : MonoBehaviour
 
     public void EndTurn() 
     {
-        Initialize();
+        ResetVertexColours();
     }
 
 }
