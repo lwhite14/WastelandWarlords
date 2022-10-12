@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class EndTurnPanel : MonoBehaviour
 {
-    public void EndTurnButton() 
+    public void EndTurnButton()
     {
-        ResetMovementPoints();
+        EndTurn();
     }
 
-    void EndTurn() 
+    void EndTurn()
     {
-        //End turn logic
-    }
-
-    void ResetMovementPoints()
-    {
-        foreach (Unit unit in FindObjectsOfType<Unit>()) 
+        foreach (Unit unit in GameState.Units)
         {
             unit.ResetMovementPoints();
         }
+        foreach (Settlement settlement in GameState.Settlements)
+        {
+            settlement.EndTurnGrowth();
+        }
+        MasterUI.instance.UpdateAllUI();
     }
 }

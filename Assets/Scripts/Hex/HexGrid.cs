@@ -40,7 +40,7 @@ public class HexGrid : MonoBehaviour
         GameState.Units[0].SetCell(hexCells[26, 19]);
         GameState.Units[0].unitName = "Lucian";
 
-        GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.SettlementL1));
+        GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
         GameState.Settlements[0].SetCell(hexCells[19, 21]);
         GameState.Settlements[0].settlementName = "Grapguard";
     }

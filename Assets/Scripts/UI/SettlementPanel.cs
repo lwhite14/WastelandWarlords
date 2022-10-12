@@ -12,7 +12,7 @@ public class SettlementPanel : MonoBehaviour
     {
         if (settlement != null)
         {
-            text.text = settlement.settlementName;
+            text.text = settlement.settlementName + ", level= " + settlement.level + ", at growth=" + settlement.growth;
             image.sprite = ResourceFactory.SettlementL1Sprite;
         }
         else 

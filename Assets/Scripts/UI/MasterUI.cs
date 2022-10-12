@@ -28,6 +28,13 @@ public class MasterUI : MonoBehaviour
         settlementPanel.UpdateSettlementPanel(null);
     }
 
+    public void UpdateAllUI() 
+    {
+        UpdateTerrainPanel(GameState.CellSelected);
+        UpdateUnitPanel(GameState.CellSelected.unit);
+        UpdateSettlementPanel(GameState.CellSelected.settlement);
+    }
+
     public void UpdateTerrainPanel(HexCell selectedCell) 
     {
         terrainPanel.UpdateTerrainPanel(selectedCell);

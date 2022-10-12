@@ -8,7 +8,10 @@ public static class ResourceFactory
 
     public static Unit          Unit                    = Resources.Load<Unit>("GameObjects/Unit");
 
-    public static Settlement    SettlementL1            = Resources.Load<Settlement>("GameObjects/SettlementL1");
+    public static Settlement    Settlement              = Resources.Load<Settlement>("GameObjects/Settlements/Settlement");
+    public static GameObject    L1GFX                   = Resources.Load<GameObject>("GameObjects/Settlements/L1GFX");
+    public static GameObject    L2GFX                   = Resources.Load<GameObject>("GameObjects/Settlements/L2GFX");
+    public static GameObject    L3GFX                   = Resources.Load<GameObject>("GameObjects/Settlements/L3GFX");
 
     public static HexCell       HexCell                 = Resources.Load<HexCell>("GameObjects/HexTypes/HexCell"); 
     public static HexCell       HexCellWater            = Resources.Load<HexCell>("GameObjects/HexTypes/Water"); 
