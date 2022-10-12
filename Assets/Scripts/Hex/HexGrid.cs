@@ -13,6 +13,8 @@ public class HexGrid : MonoBehaviour
 
     public HexCell[,] hexCells;
 
+    public LayerMask IgnoreMe;
+
     private void Awake()
     {
         if (instance == null)
@@ -53,7 +55,7 @@ public class HexGrid : MonoBehaviour
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(inputRay, out hit))
+                if (Physics.Raycast(inputRay, out hit, 1000f, ~IgnoreMe))
                 {
                     if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
                     {
@@ -74,7 +76,7 @@ public class HexGrid : MonoBehaviour
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(inputRay, out hit))
+                if (Physics.Raycast(inputRay, out hit, 1000f, ~IgnoreMe))
                 {
                     if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null)
                     {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6129227848019339790}
   - component: {fileID: -2168754402272671259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,8 @@ MonoBehaviour:
     x: 0
     z: 0
   movementCost: 50
-  selected: 0
   unit: {fileID: 0}
+  settlement: {fileID: 0}
 --- !u!1 &3713338786056372121
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3668185873323573948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TopTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7318675491019801964}
   - component: {fileID: 4788979917692285350}
   - component: {fileID: 3960240217098699573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WaterModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

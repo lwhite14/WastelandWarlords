@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1759924371140575208}
   - component: {fileID: 4578039510774975266}
   - component: {fileID: 8530727983667419791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WaterShallowModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2586330630149435881}
   - component: {fileID: 6188709272372558651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WaterShallow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,8 +150,8 @@ MonoBehaviour:
     x: 0
     z: 0
   movementCost: 50
-  selected: 0
   unit: {fileID: 0}
+  settlement: {fileID: 0}
 --- !u!1 &8873997065969030663
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7959647897104507146}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TopTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

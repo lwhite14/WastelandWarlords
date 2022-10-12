@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3870516318970369193}
   - component: {fileID: 1320154320792199267}
   - component: {fileID: 2728262750665684365}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlainsModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4424603655586650555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TopTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003754094415524979}
   - component: {fileID: 3219282450714407552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,5 +182,5 @@ MonoBehaviour:
     x: 0
     z: 0
   movementCost: 1
-  selected: 0
   unit: {fileID: 0}
+  settlement: {fileID: 0}

@@ -11,7 +11,7 @@ public class CameraControls : MonoBehaviour
     public float moveSpeed = 10.0f;
     public float scrollSpeed = 10.0f;
 
-    float minCameraY = 30.0f;
+    float minCameraY = 50.0f;
     float maxCameraY = 200.0f;
     float yConstant = 100.0f;
 

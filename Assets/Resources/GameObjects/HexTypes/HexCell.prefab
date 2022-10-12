@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2187636162907118685}
   - component: {fileID: -7843616659892705385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HexCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,8 @@ MonoBehaviour:
     x: 0
     z: 0
   movementCost: 1
-  selected: 0
   unit: {fileID: 0}
+  settlement: {fileID: 0}
 --- !u!1 &6396379135312215292
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 7214920358543911395}
   - component: {fileID: 4883164918715424041}
   - component: {fileID: 4060426281322311413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HexCellModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2341782919583893658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TopTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
