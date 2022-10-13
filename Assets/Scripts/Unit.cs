@@ -133,6 +133,7 @@ public class Unit : MonoBehaviour
     IEnumerator AttackEnemy(MovementNode toNode, HexCell newCell, Enemy enemy) 
     {
         yield return LerpUnit(toNode, newCell);
+        transform.LookAt(HexGrid.instance.hexCells[enemy.cellOn.coordinates.X, enemy.cellOn.coordinates.Z].topTarget, Vector3.up);
         anim.Play("Attack");
         enemy.GiveDamage(damage);
         MasterUI.instance.UpdateAllUI();

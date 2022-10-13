@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         GameState.Enemies.Remove(this);
+        this.cellOn.enemy = null;
         Destroy(gameObject);
     }
 }
