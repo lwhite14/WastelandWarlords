@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class FPSDisplay : MonoBehaviour
 {
     public Text fpsText;
-    float pollingTime = 1f;
+    public float pollingTime = 0.25f;
     float time;
     int frameCount;
 

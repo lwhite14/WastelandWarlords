@@ -8,8 +8,6 @@ public class FogOfWar : MonoBehaviour
 
     public Color fogColour;
     public LayerMask fogLayer;
-    public float radius = 5.0f;
-    float radiusSqr { get { return radius * radius; } }
 
     Mesh mesh;
     Vector3[] vertices;
@@ -36,15 +34,15 @@ public class FogOfWar : MonoBehaviour
     {
         foreach (Unit unit in GameState.Units) 
         {
-            CalculateVertexAlphas(unit.transform.position, new Vector3(unit.transform.position.x, unit.transform.position.y + 200.0f, unit.transform.position.z));
+            CalculateVertexAlphas(unit.transform.position, new Vector3(unit.transform.position.x, unit.transform.position.y + 200.0f, unit.transform.position.z), unit.sightRange);
         }
         foreach (Settlement settlement in GameState.Settlements)
         {
-            CalculateVertexAlphas(settlement.transform.position, new Vector3(settlement.transform.position.x, settlement.transform.position.y + 200.0f, settlement.transform.position.z));
+            CalculateVertexAlphas(settlement.transform.position, new Vector3(settlement.transform.position.x, settlement.transform.position.y + 200.0f, settlement.transform.position.z), settlement.sightRange);
         }
     }
 
-    void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn) 
+    void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn, float sightRange) 
     {
         Ray r = new Ray(raySpawn, point - raySpawn);
         RaycastHit hit;
@@ -54,9 +52,9 @@ public class FogOfWar : MonoBehaviour
             {
                 Vector3 v = transform.TransformPoint(vertices[i]);
                 float dist = Vector3.SqrMagnitude(v - hit.point);
-                if (dist < radiusSqr)
+                if (dist < (sightRange * sightRange))
                 {
-                    float alpha = Mathf.Min(colours[i].a, dist / radiusSqr);
+                    float alpha = Mathf.Min(colours[i].a, dist / (sightRange * sightRange));
                     colours[i].a = alpha;
                 }
             }

@@ -39,8 +39,12 @@ public class HexGrid : MonoBehaviour
         }
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[0].SetCell(hexCells[26, 19]);
+        GameState.Units[0].SetCell(hexCells[24, 19]);
         GameState.Units[0].unitName = "Lucian";
+
+        GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
+        GameState.Enemies[0].SetCell(hexCells[22, 30]);
+        GameState.Enemies[0].enemyName = "Geeker";
 
         GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
         GameState.Settlements[0].SetCell(hexCells[19, 21]);

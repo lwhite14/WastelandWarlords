@@ -10,6 +10,7 @@ public class HexCell : MonoBehaviour
     public int movementCost = 1; 
     public Transform topTarget { get; private set; }
     [HideInInspector]public Unit unit = null;
+    [HideInInspector]public Enemy enemy = null;
     [HideInInspector]public Settlement settlement = null;
 
     void Awake()
@@ -26,7 +27,7 @@ public class HexCell : MonoBehaviour
         MasterUI.instance.UpdateTerrainPanel(this);
         if (unit != null)  { unit.Select(); }
         if (settlement != null)  { settlement.Select(); }
-        MasterUI.instance.UpdateUnitPanel(unit);
+        MasterUI.instance.UpdateUnitPanel(unit, enemy);
         MasterUI.instance.UpdateSettlementPanel(settlement);
     }
 

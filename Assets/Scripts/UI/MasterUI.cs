@@ -7,7 +7,7 @@ public class MasterUI : MonoBehaviour
     public static MasterUI instance = null;
 
     public TerrainPanel terrainPanel;
-    public UnitPanel unitPanel;
+    public CharacterPanel characterPanel;
     public SettlementPanel settlementPanel;
 
     void Awake()
@@ -24,14 +24,14 @@ public class MasterUI : MonoBehaviour
 
     void Start()
     {
-        unitPanel.UpdateUnitPanel(null);
+        characterPanel.UpdateCharacterPanel(null, null);
         settlementPanel.UpdateSettlementPanel(null);
     }
 
     public void UpdateAllUI() 
     {
         UpdateTerrainPanel(GameState.CellSelected);
-        UpdateUnitPanel(GameState.CellSelected.unit);
+        UpdateUnitPanel(GameState.CellSelected.unit, GameState.CellSelected.enemy);
         UpdateSettlementPanel(GameState.CellSelected.settlement);
     }
 
@@ -40,9 +40,9 @@ public class MasterUI : MonoBehaviour
         terrainPanel.UpdateTerrainPanel(selectedCell);
     }
 
-    public void UpdateUnitPanel(Unit selectedUnit) 
+    public void UpdateUnitPanel(Unit selectedUnit, Enemy enemy) 
     {
-        unitPanel.UpdateUnitPanel(selectedUnit);
+        characterPanel.UpdateCharacterPanel(selectedUnit, enemy);
     }
 
     public void UpdateSettlementPanel(Settlement selectedSettlement) 

@@ -3164,6 +3164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullMovementPoints: 6
   moveSpeed: 2
+  sightRange: 75
   anim: {fileID: 9202457514697512112}
   uiAnim: {fileID: 2514264970693173631}
 --- !u!1 &6801754491242595969

@@ -7,6 +7,7 @@ public static class ResourceFactory
     public static GameObject    SelectionMarker         = Resources.Load<GameObject>("GameObjects/SelectionMarker");
 
     public static Unit          Unit                    = Resources.Load<Unit>("GameObjects/Unit");
+    public static Enemy         Enemy                   = Resources.Load<Enemy>("GameObjects/Enemy");
 
     public static Settlement    Settlement              = Resources.Load<Settlement>("GameObjects/Settlements/Settlement");
     public static GameObject    L1GFX                   = Resources.Load<GameObject>("GameObjects/Settlements/L1GFX");

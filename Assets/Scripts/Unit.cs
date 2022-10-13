@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HexPathfinding;
-using System.Drawing;
 
 public class Unit : MonoBehaviour
 {
     public int fullMovementPoints = 3;
     public float moveSpeed = 4.0f;
+    public float sightRange = 5.0f;
     int movementPoints;
     public Animator anim;
     public Animator uiAnim;
@@ -121,7 +121,7 @@ public class Unit : MonoBehaviour
             MovementNode[] movementNodes = MovementFinder.DisplayMovement(movementPoints, cellOn);
             foreach (MovementNode node in movementNodes)
             {
-                if (node.coordinates != cellOn.coordinates)
+                if ((node.coordinates != cellOn.coordinates) && (HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].enemy == null))
                 {
                     GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
                     tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);

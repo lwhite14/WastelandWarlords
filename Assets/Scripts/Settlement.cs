@@ -14,6 +14,7 @@ public class Settlement : MonoBehaviour
     public int growth { get; set; } = 0;
     public int growthPerTurn { get; set; }
     public Transform gfxSlot;
+    public float sightRange = 5.0f;
 
     void Start()
     {
