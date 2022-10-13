@@ -20,6 +20,5 @@ public class EndTurnPanel : MonoBehaviour
             settlement.EndTurnGrowth();
         }
         MasterUI.instance.UpdateAllUI();
-        FogOfWar.instance.EndTurn();
     }
 }

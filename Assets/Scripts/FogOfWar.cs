@@ -6,8 +6,7 @@ public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar instance = null;
 
-    public GameObject fogPlane;
-    public GameObject raySpawn;
+    public Color fogColour;
     public LayerMask fogLayer;
     public float radius = 5.0f;
     float radiusSqr { get { return radius * radius; } }
@@ -37,23 +36,23 @@ public class FogOfWar : MonoBehaviour
     {
         foreach (Unit unit in GameState.Units) 
         {
-            CalculateVertexAlphas(unit.transform);
+            CalculateVertexAlphas(unit.transform.position, new Vector3(unit.transform.position.x, unit.transform.position.y + 200.0f, unit.transform.position.z));
         }
         foreach (Settlement settlement in GameState.Settlements)
         {
-            CalculateVertexAlphas(settlement.transform);
+            CalculateVertexAlphas(settlement.transform.position, new Vector3(settlement.transform.position.x, settlement.transform.position.y + 200.0f, settlement.transform.position.z));
         }
     }
 
-    void CalculateVertexAlphas(Transform point) 
+    void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn) 
     {
-        Ray r = new Ray(raySpawn.transform.position, point.transform.position - raySpawn.transform.position);
+        Ray r = new Ray(raySpawn, point - raySpawn);
         RaycastHit hit;
         if (Physics.Raycast(r, out hit, 1000, fogLayer, QueryTriggerInteraction.Collide))
         {
             for (int i = 0; i < vertices.Length; i++)
             {
-                Vector3 v = fogPlane.transform.TransformPoint(vertices[i]);
+                Vector3 v = transform.TransformPoint(vertices[i]);
                 float dist = Vector3.SqrMagnitude(v - hit.point);
                 if (dist < radiusSqr)
                 {
@@ -67,18 +66,13 @@ public class FogOfWar : MonoBehaviour
 
     void Initialize() 
     {
-        mesh = fogPlane.GetComponent<MeshFilter>().mesh;
+        mesh = GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
         colours = new Color[vertices.Length];
 
-        ResetVertexColours();
-    }
-
-    void ResetVertexColours() 
-    {
         for (int i = 0; i < colours.Length; i++)
         {
-            colours[i] = Color.grey;
+            colours[i] = fogColour;
         }
         UpdateColour();
     }
@@ -86,11 +80,6 @@ public class FogOfWar : MonoBehaviour
     void UpdateColour() 
     {
         mesh.colors = colours;
-    }
-
-    public void EndTurn() 
-    {
-        ResetVertexColours();
     }
 
 }
