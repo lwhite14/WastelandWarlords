@@ -5,6 +5,7 @@ public static class ResourceFactory
 {
     public static GameObject    MovementMarker          = Resources.Load<GameObject>("GameObjects/MovementMarker");
     public static GameObject    SelectionMarker         = Resources.Load<GameObject>("GameObjects/SelectionMarker");
+    public static GameObject    AttackMarker            = Resources.Load<GameObject>("GameObjects/AttackMarker");
 
     public static Unit          Unit                    = Resources.Load<Unit>("GameObjects/Unit");
     public static Enemy         Enemy                   = Resources.Load<Enemy>("GameObjects/Enemy");

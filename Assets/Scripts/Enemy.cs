@@ -5,6 +5,8 @@ using HexPathfinding;
 
 public class Enemy : MonoBehaviour
 {
+    public float health = 4f;
+    public float damage = 2f;
     public Animator anim;
     public Animator uiAnim;
     GameObject GFX;
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
         bool hasBeenTrued = false;
         foreach (Unit unit in GameState.Units)
         {
-            if (Vector3.Distance(unit.transform.position, transform.position) <= unit.sightRange) 
+            if (Vector3.Distance(unit.transform.position, transform.position) <= unit.sightRange)
             {
                 canBeSeen = true;
                 hasBeenTrued = true;
@@ -51,7 +53,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (!hasBeenTrued) 
+        if (!hasBeenTrued)
         {
             canBeSeen = false;
         }
@@ -68,5 +70,20 @@ public class Enemy : MonoBehaviour
         transform.SetParent(newCell.topTarget);
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+    }
+
+    public void GiveDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        GameState.Enemies.Remove(this);
+        Destroy(gameObject);
     }
 }

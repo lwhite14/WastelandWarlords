@@ -1727,7 +1727,6 @@ MonoBehaviour:
   fogLayer:
     serializedVersion: 2
     m_Bits: 64
-  radius: 75
 --- !u!64 &1567693880
 MeshCollider:
   m_ObjectHideFlags: 0

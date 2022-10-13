@@ -37,7 +37,8 @@ public class CameraControls : MonoBehaviour
         maxCameraX = CurrentMap.instance.currentMap.GetBottomRightCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.instance.currentMap.GetBottomRightCoords().Z);
         minCameraZ = CurrentMap.instance.currentMap.GetBottomLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
         maxCameraZ = CurrentMap.instance.currentMap.GetTopLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
-        transform.position = new Vector3(minCameraX + ((maxCameraX - minCameraX) / 2), transform.position.y, minCameraZ + ((maxCameraZ - minCameraZ) / 2));
+        //transform.position = new Vector3(minCameraX + ((maxCameraX - minCameraX) / 2), transform.position.y, minCameraZ + ((maxCameraZ - minCameraZ) / 2));
+        transform.position = new Vector3(GameState.Units[0].transform.position.x, transform.position.y, GameState.Units[0].transform.position.z);
     }
 
     void Update()

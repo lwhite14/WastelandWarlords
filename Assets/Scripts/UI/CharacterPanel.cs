@@ -23,7 +23,7 @@ public class CharacterPanel : MonoBehaviour
 
         if (enemy != null)
         {
-            text.text = enemy.enemyName;
+            text.text = enemy.enemyName + ", health = " + enemy.health;
             image.sprite = ResourceFactory.UnitSprite;
         }
         else

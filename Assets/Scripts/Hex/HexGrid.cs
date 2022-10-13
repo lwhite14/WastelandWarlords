@@ -46,6 +46,10 @@ public class HexGrid : MonoBehaviour
         GameState.Enemies[0].SetCell(hexCells[22, 30]);
         GameState.Enemies[0].enemyName = "Geeker";
 
+        GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
+        GameState.Enemies[1].SetCell(hexCells[23, 22]);
+        GameState.Enemies[1].enemyName = "Geeker";
+
         GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
         GameState.Settlements[0].SetCell(hexCells[19, 21]);
         GameState.Settlements[0].settlementName = "Grapguard";
@@ -68,9 +72,11 @@ public class HexGrid : MonoBehaviour
                             if (GameState.CellSelected != null) { GameState.CellSelected.Unselect(); }
                             foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
                             foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
                             GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
                             GameState.UnitSelected = null;
                             GameState.CellsMovement = new List<HexCell>();
+                            GameState.CellsAttack = new List<HexCell>();
                             GameState.CellSelected.Select();
                         }
                     }
@@ -93,13 +99,30 @@ public class HexGrid : MonoBehaviour
                             {
                                 if (cell.coordinates == GameState.CellSelected.coordinates)
                                 {
-                                    if (GameState.CellSelected != null) { GameState.CellSelected.Unselect(); }
                                     foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
                                     foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
                                     GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
                                     GameState.UnitSelected.Move(GameState.CellSelected);
                                     GameState.UnitSelected = null;
                                     GameState.CellsMovement = new List<HexCell>();
+                                    GameState.CellsAttack = new List<HexCell>();
+                                    GameState.CellSelected.Select();
+                                    isCellSelected = true;
+                                }
+                            }
+                            foreach (HexCell cell in GameState.CellsAttack)
+                            {
+                                if (cell.coordinates == GameState.CellSelected.coordinates)
+                                {
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
+                                    GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
+                                    GameState.UnitSelected.Attack(GameState.CellSelected);
+                                    GameState.UnitSelected = null;
+                                    GameState.CellsMovement = new List<HexCell>();
+                                    GameState.CellsAttack = new List<HexCell>();
                                     GameState.CellSelected.Select();
                                     isCellSelected = true;
                                 }

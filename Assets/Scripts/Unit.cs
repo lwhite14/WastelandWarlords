@@ -5,6 +5,8 @@ using HexPathfinding;
 
 public class Unit : MonoBehaviour
 {
+    public float health = 10f;
+    public float damage = 2f;
     public int fullMovementPoints = 3;
     public float moveSpeed = 4.0f;
     public float sightRange = 5.0f;
@@ -46,11 +48,26 @@ public class Unit : MonoBehaviour
         this.cellOn.unit = null;
         this.cellOn = newCell;
         this.cellOn.unit = this;
-        movementPoints = newCell.topTarget.GetComponentInChildren<MovementMarker>().movementNode.movementPointsLeft;
+        movementPoints = newCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
         CalcUIState();
 
-        MovementNode toNode = newCell.topTarget.GetComponentInChildren<MovementMarker>().movementNode;
+        MovementNode toNode = newCell.topTarget.GetComponentInChildren<HexMarker>().movementNode;
         StartCoroutine(LerpUnit(toNode, newCell));
+    }
+
+    public void Attack(HexCell attackCell) 
+    {
+        MovementNode prevNode = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.prevNode;
+        HexCell cellToMoveTo = HexGrid.instance.hexCells[prevNode.coordinates.X, prevNode.coordinates.Z];
+
+        this.cellOn.unit = null;
+        this.cellOn = cellToMoveTo;
+        this.cellOn.unit = this;
+        movementPoints = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
+        CalcUIState();
+
+        StartCoroutine(AttackEnemy(prevNode, cellToMoveTo, attackCell.enemy));
+
     }
 
     IEnumerator LerpUnit(MovementNode toNode, HexCell newCell) 
@@ -113,6 +130,15 @@ public class Unit : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator AttackEnemy(MovementNode toNode, HexCell newCell, Enemy enemy) 
+    {
+        yield return LerpUnit(toNode, newCell);
+        anim.Play("Attack");
+        enemy.GiveDamage(damage);
+        MasterUI.instance.UpdateAllUI();
+        yield return null;
+    }
+
     public void Select() 
     {
         if (!isMoving)
@@ -121,13 +147,24 @@ public class Unit : MonoBehaviour
             MovementNode[] movementNodes = MovementFinder.DisplayMovement(movementPoints, cellOn);
             foreach (MovementNode node in movementNodes)
             {
-                if ((node.coordinates != cellOn.coordinates) && (HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].enemy == null))
+                if (node.coordinates != cellOn.coordinates)
                 {
-                    GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
-                    tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
-                    GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
-                    tempMovementMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
-                    tempMovementMarker.GetComponent<MovementMarker>().movementNode = node;
+                    if (HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].enemy == null)
+                    {
+                        GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
+                        tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
+                        GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
+                        tempMovementMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
+                        tempMovementMarker.GetComponent<HexMarker>().movementNode = node;
+                    }
+                    else 
+                    {
+                        GameObject tempAttackMarker = Instantiate<GameObject>(ResourceFactory.AttackMarker);
+                        tempAttackMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
+                        GameState.CellsAttack.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
+                        tempAttackMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
+                        tempAttackMarker.GetComponent<HexMarker>().movementNode = node;
+                    }
                 }
             }
         }

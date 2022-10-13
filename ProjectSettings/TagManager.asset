@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovementMarker
   - SelectionMarker
+  - AttackMarker
   layers:
   - Default
   - TransparentFX
