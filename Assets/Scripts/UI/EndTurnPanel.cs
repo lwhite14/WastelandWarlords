@@ -15,6 +15,7 @@ public class EndTurnPanel : MonoBehaviour
         HexGrid.DestroyMarkers();
         HexGrid.ResetMarkerCellLists();
         yield return StartCoroutine(EnemyMoves());
+        yield return new WaitForSeconds(0.5f);
         foreach (Unit unit in GameState.Units)
         {
             unit.ResetMovementPoints();
