@@ -10,6 +10,8 @@ public class MasterUI : MonoBehaviour
     public CharacterPanel characterPanel;
     public SettlementPanel settlementPanel;
 
+    public GameObject endTurnPanel;
+
     void Awake()
     {
         if (instance == null)
@@ -28,25 +30,30 @@ public class MasterUI : MonoBehaviour
         settlementPanel.UpdateSettlementPanel(null);
     }
 
-    public void UpdateAllUI() 
+    public void UpdateAllUI()
     {
         UpdateTerrainPanel(GameState.CellSelected);
         UpdateUnitPanel(GameState.CellSelected.unit, GameState.CellSelected.enemy);
         UpdateSettlementPanel(GameState.CellSelected.settlement);
     }
 
-    public void UpdateTerrainPanel(HexCell selectedCell) 
+    public void UpdateTerrainPanel(HexCell selectedCell)
     {
         terrainPanel.UpdateTerrainPanel(selectedCell);
     }
 
-    public void UpdateUnitPanel(Unit selectedUnit, Enemy enemy) 
+    public void UpdateUnitPanel(Unit selectedUnit, Enemy enemy)
     {
         characterPanel.UpdateCharacterPanel(selectedUnit, enemy);
     }
 
-    public void UpdateSettlementPanel(Settlement selectedSettlement) 
+    public void UpdateSettlementPanel(Settlement selectedSettlement)
     {
         settlementPanel.UpdateSettlementPanel(selectedSettlement);
+    }
+
+    public void EndTurnPanel(bool isOn)
+    {
+        endTurnPanel.SetActive(isOn);
     }
 }

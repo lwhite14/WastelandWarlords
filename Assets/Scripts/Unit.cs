@@ -63,7 +63,7 @@ public class Unit : MonoBehaviour
         this.cellOn.unit = null;
         this.cellOn = cellToMoveTo;
         this.cellOn.unit = this;
-        movementPoints = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
+        movementPoints = 0;
         CalcUIState();
 
         StartCoroutine(AttackEnemy(prevNode, cellToMoveTo, attackCell.enemy));
@@ -183,6 +183,22 @@ public class Unit : MonoBehaviour
             }
             Select(); 
         }
+    }
+
+    public void GiveDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        GameState.Units.Remove(this);
+        this.cellOn.unit = null;
+        Destroy(gameObject);
     }
 
     void CalcUIState() 

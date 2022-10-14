@@ -70,13 +70,9 @@ public class HexGrid : MonoBehaviour
                         if (hit.transform.gameObject.GetComponentInParent<HexCell>() != GameState.CellSelected)
                         {
                             if (GameState.CellSelected != null) { GameState.CellSelected.Unselect(); }
-                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
-                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
-                            foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
+                            DestroyMarkers();
                             GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
-                            GameState.UnitSelected = null;
-                            GameState.CellsMovement = new List<HexCell>();
-                            GameState.CellsAttack = new List<HexCell>();
+                            ResetMarkerCellLists();
                             GameState.CellSelected.Select();
                         }
                     }
@@ -99,14 +95,10 @@ public class HexGrid : MonoBehaviour
                             {
                                 if (cell.coordinates == GameState.CellSelected.coordinates)
                                 {
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
+                                    DestroyMarkers();
                                     GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
                                     GameState.UnitSelected.Move(GameState.CellSelected);
-                                    GameState.UnitSelected = null;
-                                    GameState.CellsMovement = new List<HexCell>();
-                                    GameState.CellsAttack = new List<HexCell>();
+                                    ResetMarkerCellLists();
                                     GameState.CellSelected.Select();
                                     isCellSelected = true;
                                 }
@@ -115,14 +107,10 @@ public class HexGrid : MonoBehaviour
                             {
                                 if (cell.coordinates == GameState.CellSelected.coordinates)
                                 {
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
-                                    foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
+                                    DestroyMarkers();
                                     GameState.CellSelected = hit.transform.gameObject.GetComponentInParent<HexCell>();
                                     GameState.UnitSelected.Attack(GameState.CellSelected);
-                                    GameState.UnitSelected = null;
-                                    GameState.CellsMovement = new List<HexCell>();
-                                    GameState.CellsAttack = new List<HexCell>();
+                                    ResetMarkerCellLists();
                                     GameState.CellSelected.Select();
                                     isCellSelected = true;
                                 }
@@ -146,5 +134,19 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = coords;
+    }
+
+    public static void ResetMarkerCellLists() 
+    {
+        GameState.UnitSelected = null;
+        GameState.CellsMovement = new List<HexCell>();
+        GameState.CellsAttack = new List<HexCell>();
+    }
+
+    public static void DestroyMarkers() 
+    {
+        foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
+        foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
+        foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
     }
 }
