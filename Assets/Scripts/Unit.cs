@@ -63,7 +63,7 @@ public class Unit : MonoBehaviour
         this.cellOn.unit = null;
         this.cellOn = cellToMoveTo;
         this.cellOn.unit = this;
-        movementPoints = 0;
+        movementPoints = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
         CalcUIState();
 
         StartCoroutine(AttackEnemy(prevNode, cellToMoveTo, attackCell.enemy));

@@ -14,15 +14,17 @@ public class CurrentMap : MonoBehaviour
         new Map(@"Maps\WalesMap.yaml"),
         new Map(@"Maps\IslandMap.yaml"),
         new Map(@"Maps\GreeceMap.yaml"),
-        new Map(@"Maps\SmallContinentsMap.yaml")
+        new Map(@"Maps\SmallContinentsMap.yaml"),
+        new Map(@"Maps\TutorialMap.yaml")
     };
 
     [Tooltip(   "0: EnglishChannel\n" +
                 "1: Wales\n" +
                 "2: Island\n" + 
-                "3: Greece\n" + 
-                "4: Small Continents"),
-     Range(0, 4)]
+                "3: Greece\n" +
+                "4: Small Continents\n" + 
+                "5: Tutorial"),
+     Range(0, 5)]
     public int mapUsed = 0;
 
     private void Awake()

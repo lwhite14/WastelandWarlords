@@ -39,16 +39,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + TopRight).Z >= 0) && ((rootNode.coordinates + TopRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + TopRight).X, (rootNode.coordinates + TopRight).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + TopRight).X, (rootNode.coordinates + TopRight).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + TopRight).X, (rootNode.coordinates + TopRight).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + TopRight);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //top right
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + TopRight);
+                                if (cell.enemy != null)  { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //top right
+                        }
                     }
                 }
             }
@@ -57,16 +62,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + TopLeft).Z >= 0) && ((rootNode.coordinates + TopLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + TopLeft).X, (rootNode.coordinates + TopLeft).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + TopLeft).X, (rootNode.coordinates + TopLeft).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + TopLeft).X, (rootNode.coordinates + TopLeft).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + TopLeft);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //top left
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + TopLeft);
+                                if (cell.enemy != null) { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //top left
+                        }
                     }
                 }
             }
@@ -75,16 +85,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + BottomRight).Z >= 0) && ((rootNode.coordinates + BottomRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + BottomRight).X, (rootNode.coordinates + BottomRight).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + BottomRight).X, (rootNode.coordinates + BottomRight).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + BottomRight).X, (rootNode.coordinates + BottomRight).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + BottomRight);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //bottom right
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + BottomRight);
+                                if (cell.enemy != null) { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //bottom right
+                        }
                     }
                 }
             }
@@ -93,16 +108,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + BottomLeft).Z >= 0) && ((rootNode.coordinates + BottomLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + BottomLeft).X, (rootNode.coordinates + BottomLeft).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + BottomLeft).X, (rootNode.coordinates + BottomLeft).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + BottomLeft).X, (rootNode.coordinates + BottomLeft).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + BottomLeft);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //bottom left
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + BottomLeft);
+                                if (cell.enemy != null) { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //bottom left
+                        }
                     }
                 }
             }
@@ -111,16 +131,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + Left).Z >= 0) && ((rootNode.coordinates + Left).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + Left).X, (rootNode.coordinates + Left).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + Left).X, (rootNode.coordinates + Left).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + Left).X, (rootNode.coordinates + Left).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + Left);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //left
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + Left);
+                                if (cell.enemy != null) { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //left
+                        }
                     }
                 }
             }
@@ -129,16 +154,21 @@ namespace HexPathfinding
             {
                 if (((rootNode.coordinates + Right).Z >= 0) && ((rootNode.coordinates + Right).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
                 {
-                    if (HexGrid.instance.hexCells[(rootNode.coordinates + Right).X, (rootNode.coordinates + Right).Z] != null)
+                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + Right).X, (rootNode.coordinates + Right).Z];
+                    if (cell != null)
                     {
-                        if (rootNode.movementPointsLeft - HexGrid.instance.hexCells[(rootNode.coordinates + Right).X, (rootNode.coordinates + Right).Z].movementCost >= 0)
+                        if (cell.unit == null)
                         {
-                            MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + Right);
-                            if (!returnCells.Contains(node))
+                            if (rootNode.movementPointsLeft - cell.movementCost >= 0)
                             {
-                                returnCells.Add(node);
-                            }
-                        } //right
+                                MovementNode node = new MovementNode(rootNode, rootNode.movementPointsLeft, rootNode.coordinates + Right);
+                                if (cell.enemy != null) { node.movementPointsLeft = 0; }
+                                if (!returnCells.Contains(node))
+                                {
+                                    returnCells.Add(node);
+                                }
+                            } //right
+                        }
                     }
                 }
             }
