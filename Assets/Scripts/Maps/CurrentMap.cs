@@ -10,17 +10,19 @@ public class CurrentMap : MonoBehaviour
 
     Map[] allMaps =
     {
-        new Map(@"Assets\Maps\EnglishChannelMap.yaml"),
-        new Map(@"Assets\Maps\WalesMap.yaml"),
-        new Map(@"Assets\Maps\IslandMap.yaml"),
-        new Map(@"Assets\Maps\GreeceMap.yaml")
+        new Map(@"Maps\EnglishChannelMap.yaml"),
+        new Map(@"Maps\WalesMap.yaml"),
+        new Map(@"Maps\IslandMap.yaml"),
+        new Map(@"Maps\GreeceMap.yaml"),
+        new Map(@"Maps\SmallContinentsMap.yaml")
     };
 
-    [Tooltip(   "1: EnglishChannel\n" +
-                "2: Wales\n" +
-                "3: Island\n" + 
-                "4: Greece"),
-     Range(0, 3)]
+    [Tooltip(   "0: EnglishChannel\n" +
+                "1: Wales\n" +
+                "2: Island\n" + 
+                "3: Greece\n" + 
+                "4: Small Continents"),
+     Range(0, 4)]
     public int mapUsed = 0;
 
     private void Awake()

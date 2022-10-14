@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6788470715732947029}
   - component: {fileID: 7609576710449168368}
   - component: {fileID: 5656049417992047418}
+  - component: {fileID: 4406394755300320981}
   m_Layer: 7
   m_Name: ForestModel
   m_TagString: Untagged
@@ -170,3 +171,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4406394755300320981
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6160553251001805551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8314571269056883277, guid: 3ea2b2d07ad79704aafb03e03dabf566, type: 3}

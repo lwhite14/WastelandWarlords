@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7102697306481779209}
   - component: {fileID: 895338021956777983}
   - component: {fileID: 2023071894398542986}
-  - component: {fileID: 4592918088781121325}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3295214694778065872}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.7365894, y: 8.05161, z: 8.256408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0.07736589, y: -0.08256408, z: 0.08051608}
+  m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3012754984247594446}
-  m_RootOrder: 2
+  m_Father: {fileID: 3466456643131361700}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7862512920815298040
 MonoBehaviour:
@@ -193,41 +192,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 3055
   m_IsSelectable: 1
-  m_SelectedFaces: 03000000000000000200000001000000
-  m_SelectedEdges:
-  - a: 12
-    b: 13
-  - a: 14
-    b: 12
-  - a: 13
-    b: 15
-  - a: 15
-    b: 14
-  - a: 0
-    b: 1
-  - a: 2
-    b: 0
-  - a: 1
-    b: 3
-  - a: 3
-    b: 2
-  - a: 8
-    b: 9
-  - a: 10
-    b: 8
-  - a: 9
-    b: 11
-  - a: 11
-    b: 10
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  m_SelectedVertices: 0c0000000d0000000e0000000f0000000000000001000000020000000300000008000000090000000a0000000b00000004000000050000000600000007000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &7102697306481779209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,20 +275,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3295214694778065872}
   m_Mesh: {fileID: 0}
---- !u!64 &4592918088781121325
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3295214694778065872}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &4274060494472680222
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +286,7 @@ GameObject:
   - component: {fileID: 3466456643131361700}
   - component: {fileID: 555218626499331585}
   - component: {fileID: 2328500850533380811}
+  - component: {fileID: 2064471088888661302}
   m_Layer: 7
   m_Name: WaterModel
   m_TagString: Untagged
@@ -351,7 +305,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5514428826647519229}
   m_Father: {fileID: 3012754984247594446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -407,6 +362,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2064471088888661302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274060494472680222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2124705421725058983, guid: 401b0191f02a28245adbd03cf4aab56a, type: 3}
 --- !u!1 &5712953572620212313
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +438,6 @@ Transform:
   m_Children:
   - {fileID: 3466456643131361700}
   - {fileID: 5631772702534313340}
-  - {fileID: 5514428826647519229}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

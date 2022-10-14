@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HexPathfinding;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Enemy : MonoBehaviour
 {
