@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour
                         GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
                         tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
                         GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
-                        tempMovementMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
+                        tempMovementMarker.transform.localPosition = new Vector3(0, 0.0f, 0);
                         tempMovementMarker.GetComponent<HexMarker>().movementNode = node;
                     }
                     else 
@@ -163,7 +163,7 @@ public class Unit : MonoBehaviour
                         GameObject tempAttackMarker = Instantiate<GameObject>(ResourceFactory.AttackMarker);
                         tempAttackMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
                         GameState.CellsAttack.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
-                        tempAttackMarker.transform.localPosition = new Vector3(0, 0.05f, 0);
+                        tempAttackMarker.transform.localPosition = new Vector3(0, 0.0f, 0);
                         tempAttackMarker.GetComponent<HexMarker>().movementNode = node;
                     }
                 }

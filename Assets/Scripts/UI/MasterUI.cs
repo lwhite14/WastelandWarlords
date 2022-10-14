@@ -32,9 +32,12 @@ public class MasterUI : MonoBehaviour
 
     public void UpdateAllUI()
     {
-        UpdateTerrainPanel(GameState.CellSelected);
-        UpdateUnitPanel(GameState.CellSelected.unit, GameState.CellSelected.enemy);
-        UpdateSettlementPanel(GameState.CellSelected.settlement);
+        if (GameState.CellSelected != null)
+        {
+            UpdateTerrainPanel(GameState.CellSelected);
+            UpdateUnitPanel(GameState.CellSelected.unit, GameState.CellSelected.enemy);
+            UpdateSettlementPanel(GameState.CellSelected.settlement);
+        }
     }
 
     public void UpdateTerrainPanel(HexCell selectedCell)

@@ -15,6 +15,6 @@ public class TerrainPanel : MonoBehaviour
         if (selectedCell.type == "Plains") { image.sprite = ResourceFactory.PlainsSprite; }
         if (selectedCell.type == "Impact Site") { image.sprite = ResourceFactory.ImpactSiteSprite; }
         if (selectedCell.type == "Water") { image.sprite = ResourceFactory.WaterSprite; }
-        if (selectedCell.type == "Shallow Water") { image.sprite = ResourceFactory.WaterShallowSprite; }
+        if (selectedCell.type == "Shallow Water") { image.sprite = ResourceFactory.WaterShallowSprite; }   
     }
 }

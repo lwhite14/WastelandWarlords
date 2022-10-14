@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: 3a47624b5cbe7c74faef88919588df12
+guid: fa4e954af7fc50044998326b6ec7c10f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HexCell
+    second: {fileID: 2100000, guid: 9c5b008a21d377a49b480b6e90d30c6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plains1
+    second: {fileID: 2100000, guid: 4adfd3deb0da47247a315c0817236349, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plains2
+    second: {fileID: 2100000, guid: c0d36f0b16eac5c40b1a93dbd804c783, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plains3
+    second: {fileID: 2100000, guid: e10395d0d42a7ba45bb58d19fa2c8d14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TwistedFoliege
+    second: {fileID: 2100000, guid: 09dd4c6fd6414ef438df512684e479fa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +113,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.08
+    globalScale: 8
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
