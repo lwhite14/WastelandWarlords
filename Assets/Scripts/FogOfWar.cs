@@ -42,7 +42,7 @@ public class FogOfWar : MonoBehaviour
         }
     }
 
-    void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn, float sightRange) 
+    public void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn, float sightRange) 
     {
         Ray r = new Ray(raySpawn, point - raySpawn);
         RaycastHit hit;

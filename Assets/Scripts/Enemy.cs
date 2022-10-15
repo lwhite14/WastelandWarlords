@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour
     public Animator uiAnim;
     GameObject GFX;
     GameObject UI;
-    bool canBeSeen = false;
 
+    public bool canBeSeen { get; private set; } = false;
+    public bool firstSeen { get; private set; } = false;
     public HexCell cellOn { get; private set; }
     public string enemyName { get; set; }
 
@@ -42,6 +43,11 @@ public class Enemy : MonoBehaviour
             {
                 canBeSeen = true;
                 hasBeenTrued = true;
+                if (!firstSeen) 
+                {
+                    FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), 50.0f);
+                    firstSeen = true;
+                }
             }
         }
         foreach (Settlement settlement in GameState.Settlements)

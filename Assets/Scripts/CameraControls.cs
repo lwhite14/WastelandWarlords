@@ -19,6 +19,8 @@ public class CameraControls : MonoBehaviour
     public float minCameraZ { private get; set; }
     public float maxCameraZ { private get; set; }
 
+    public bool control { set; get; } = true;
+
     void Awake()
     {
         if (instance == null)
@@ -44,30 +46,41 @@ public class CameraControls : MonoBehaviour
     void Update()
     {
         float yPos = transform.position.y;
-        yPos -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed * yConstant;
+        if (control)
+        {
+            yPos -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed * yConstant;
+        }
         yPos = Mathf.Clamp(yPos, minCameraY, maxCameraY);
 
         float xPos = transform.position.x;
         float zPos = transform.position.z;
-        if (Input.GetKey(KeyCode.W))
+        if (control)
         {
-            zPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            zPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            xPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            xPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
+            if (Input.GetKey(KeyCode.W))
+            {
+                zPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                zPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                xPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                xPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
+            }
         }
         xPos = Mathf.Clamp(xPos, minCameraX, maxCameraX);
         zPos = Mathf.Clamp(zPos, minCameraZ, maxCameraZ);
 
         transform.position = new Vector3(xPos, yPos, zPos);
+    }
+
+    public float GetMinCameraY() 
+    {
+        return minCameraY;
     }
 }
