@@ -3756,6 +3756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5864ba46ed1704892fb1488375389e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 4
+  damage: 2
+  sightRange: 10
   anim: {fileID: 3094751702281163425}
   uiAnim: {fileID: 2265841256562671549}
 --- !u!1 &7244455761046948004

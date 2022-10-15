@@ -77,4 +77,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gfxSlot: {fileID: 8033715810607917287}
-  sightRange: 75
+  sightRange: 40

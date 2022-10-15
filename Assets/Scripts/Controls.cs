@@ -29,7 +29,7 @@ public class Controls : MonoBehaviour
 
     void Update()
     {
-        ScrollVal -= Input.GetAxis("Mouse ScrollWheel");
+        ScrollVal = Input.GetAxis("Mouse ScrollWheel");
 
         if (Input.GetKey(KeyCode.W)) { UpKey = true; }
         else { UpKey = false; }

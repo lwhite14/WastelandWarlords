@@ -3162,9 +3162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d917bbd319a72414d8f47d1333b1b4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  damage: 2
   fullMovementPoints: 6
   moveSpeed: 2
-  sightRange: 75
+  sightRange: 40
   anim: {fileID: 9202457514697512112}
   uiAnim: {fileID: 2514264970693173631}
 --- !u!1 &6801754491242595969

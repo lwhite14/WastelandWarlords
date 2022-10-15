@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public float health = 4f;
     public float damage = 2f;
+    public float sightRange = 5.0f;
     public Animator anim;
     public Animator uiAnim;
     GameObject GFX;
@@ -45,7 +46,7 @@ public class Enemy : MonoBehaviour
                 hasBeenTrued = true;
                 if (!firstSeen) 
                 {
-                    FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), 50.0f);
+                    FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
                     firstSeen = true;
                 }
             }

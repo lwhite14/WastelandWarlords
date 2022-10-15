@@ -54,7 +54,7 @@ public class FogOfWar : MonoBehaviour
                 float dist = Vector3.SqrMagnitude(v - hit.point);
                 if (dist < (sightRange * sightRange))
                 {
-                    float alpha = Mathf.Min(colours[i].a, dist / (sightRange * sightRange));
+                    float alpha = 0;
                     colours[i].a = alpha;
                 }
             }
