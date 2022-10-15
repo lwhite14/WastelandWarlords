@@ -11,8 +11,8 @@ public class HexGrid : MonoBehaviour
 {
     public static HexGrid instance = null;
 
+    public bool canClick { get; set; } = true;
     public HexCell[,] hexCells;
-
     public LayerMask IgnoreMe;
 
     private void Awake()
@@ -61,7 +61,7 @@ public class HexGrid : MonoBehaviour
 
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && canClick)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -82,7 +82,7 @@ public class HexGrid : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetMouseButtonDown(1)) 
+            if (Input.GetMouseButtonDown(1) && canClick) 
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;

@@ -48,7 +48,7 @@ public class CameraControls : MonoBehaviour
         float yPos = transform.position.y;
         if (control)
         {
-            yPos -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed * yConstant;
+            yPos -= Controls.instance.ScrollVal * Time.deltaTime * scrollSpeed * yConstant;
         }
         yPos = Mathf.Clamp(yPos, minCameraY, maxCameraY);
 
@@ -56,19 +56,19 @@ public class CameraControls : MonoBehaviour
         float zPos = transform.position.z;
         if (control)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Controls.instance.UpKey)
             {
                 zPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Controls.instance.DownKey)
             {
                 zPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Controls.instance.LeftKey)
             {
                 xPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Controls.instance.RightKey)
             {
                 xPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
             }

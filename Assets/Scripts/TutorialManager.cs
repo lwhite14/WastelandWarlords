@@ -64,6 +64,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator SpottingFirstEnemy(Enemy enemy) 
     {
         CameraControls.instance.control = false;
+        HexGrid.instance.canClick = false;
 
         Vector3 startPosition = CameraControls.instance.transform.position;
         Vector3 endPosition = new Vector3(enemy.transform.position.x, CameraControls.instance.GetMinCameraY(), enemy.transform.position.z - 20.0f);
@@ -77,12 +78,15 @@ public class TutorialManager : MonoBehaviour
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
 
         CameraControls.instance.control = true;
+        HexGrid.instance.canClick = true;
         yield return null;
     }
 
     IEnumerator SpottingFirstSettlement(Settlement settlement) 
     {
         CameraControls.instance.control = false;
+        HexGrid.instance.canClick = false;
+
         Vector3 startPosition = CameraControls.instance.transform.position;
         Vector3 endPosition = new Vector3(settlement.transform.position.x, CameraControls.instance.GetMinCameraY(), settlement.transform.position.z - 20.0f);
 
@@ -95,12 +99,15 @@ public class TutorialManager : MonoBehaviour
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
 
         CameraControls.instance.control = true;
+        HexGrid.instance.canClick = true;
         yield return null;
     }
 
     IEnumerator SpottingFirstUnit(Unit unit)
     {
         CameraControls.instance.control = false;
+        HexGrid.instance.canClick = false;
+
         Vector3 startPosition = CameraControls.instance.transform.position;
         Vector3 endPosition = new Vector3(unit.transform.position.x, CameraControls.instance.GetMinCameraY(), unit.transform.position.z - 20.0f);
 
@@ -113,6 +120,7 @@ public class TutorialManager : MonoBehaviour
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
 
         CameraControls.instance.control = true;
+        HexGrid.instance.canClick = true;
         yield return null;
     }
 
