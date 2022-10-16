@@ -30,12 +30,14 @@ public class LevelManager : MonoBehaviour
     public void StartGame() 
     {
         GameState.ResetFields();
+        GameStatistics.ResetFields();
         SceneManager.LoadScene("Level1");
     }
 
     public void ReturnToMenu() 
     {
         GameState.ResetFields();
+        GameStatistics.ResetFields();
         SceneManager.LoadScene("Menu");
     }
 

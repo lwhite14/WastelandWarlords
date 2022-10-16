@@ -123,6 +123,7 @@ public class Unit : MonoBehaviour
             newPosition = Vector3.Lerp(startingPosition, endPosition, 1.0f);
             transform.position = newPosition;
             FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
+            GameStatistics.HexesTraversed++;
             if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null)
             {
                 HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();

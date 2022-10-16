@@ -95,7 +95,7 @@ public class TutorialManager : MonoBehaviour
     }
     IEnumerator ReturnedWithBattery()
     {
-        yield return StartCoroutine(DisplayConversation(new string[] { "Wow well done!", "I really didn't think you would make it home.", "A successful mission." }));
+        yield return StartCoroutine(DisplayConversation(new string[] { "Wow well done!", "I really didn't think you would make it home.", "A successful mission. You felled " + GameStatistics.EnemiesFelled.ToString() + " enemies, traversed " + GameStatistics.HexesTraversed.ToString() + " hexes, all in " + GameStatistics.TurnNumber.ToString() + " turns!" }));
         LevelManager.instance.ReturnToMenu();
         yield return null;
     }

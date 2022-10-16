@@ -100,6 +100,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         PlayDeathSound();
+        GameStatistics.EnemiesFelled++;
         GameState.Enemies.Remove(this);
         this.cellOn.enemy = null;
         Destroy(gameObject);

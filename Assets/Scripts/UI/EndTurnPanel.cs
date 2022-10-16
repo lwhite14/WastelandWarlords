@@ -29,6 +29,7 @@ public class EndTurnPanel : MonoBehaviour
         MasterUI.instance.UpdateAllUI();
         if (GameState.CellSelected != null) { GameState.CellSelected.Select(); }
         MasterUI.instance.EndTurnPanel(false);
+        GameStatistics.TurnNumber++;
         yield return null;
     }
 
