@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public Animator uiAnim;
     GameObject GFX;
     GameObject UI;
+    AudioSource audioSource;
 
     public bool canBeSeen { get; private set; } = false;
     public bool firstSeen { get; private set; } = false;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     {
         GFX = transform.GetChild(0).gameObject;
         UI = transform.GetChild(1).gameObject;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -82,6 +84,7 @@ public class Enemy : MonoBehaviour
     public void Select()
     {
         MasterUI.instance.UpdateUnitPanel(null, this);
+        PlaySound(0);
     }
 
     public void GiveDamage(float damage)
@@ -98,6 +101,19 @@ public class Enemy : MonoBehaviour
         GameState.Enemies.Remove(this);
         this.cellOn.enemy = null;
         Destroy(gameObject);
+    }
+
+    int RandomSound()
+    {
+        System.Random random = new System.Random();
+        return random.Next(0, 3);
+    }
+
+    void PlaySound(int type = 0)
+    {
+        audioSource.Stop();
+        if (type == 0) { audioSource.clip = ResourceFactory.EnemySelect[RandomSound()]; }
+        audioSource.Play();
     }
 
 

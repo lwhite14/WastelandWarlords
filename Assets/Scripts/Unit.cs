@@ -14,7 +14,9 @@ public class Unit : MonoBehaviour
     public Animator anim;
     public Animator uiAnim;
     bool isMoving = false;
+
     GameObject GFX;
+    AudioSource audioSource;
 
     public HexCell cellOn { get; private set; }
     public string unitName { get; set; }
@@ -22,6 +24,7 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         GFX = transform.GetChild(0).gameObject;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -46,6 +49,8 @@ public class Unit : MonoBehaviour
 
     public void Move(HexCell newCell)
     {
+        PlaySound(1);
+
         cellOn.unit = null;
         movementPoints = newCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
         CalcUIState();
@@ -54,8 +59,10 @@ public class Unit : MonoBehaviour
         StartCoroutine(LerpUnit(toNode, newCell));
     }
 
-    public void Attack(HexCell attackCell) 
+    public void Attack(HexCell attackCell)
     {
+        PlaySound(1);
+
         MovementNode prevNode = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.prevNode;
         HexCell cellToMoveTo = HexGrid.instance.hexCells[prevNode.coordinates.X, prevNode.coordinates.Z];
 
@@ -69,7 +76,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    IEnumerator LerpUnit(MovementNode toNode, HexCell newCell) 
+    IEnumerator LerpUnit(MovementNode toNode, HexCell newCell)
     {
         isMoving = true;
         transform.SetParent(null);
@@ -79,14 +86,14 @@ public class Unit : MonoBehaviour
 
         bool cont = true;
         int currentNode = 0;
-        while (cont) 
+        while (cont)
         {
             if (nodes[currentNode].prevNode != null)
             {
                 nodes.Add(nodes[currentNode].prevNode);
                 currentNode++;
             }
-            else 
+            else
             {
                 cont = false;
             }
@@ -116,7 +123,7 @@ public class Unit : MonoBehaviour
             newPosition = Vector3.Lerp(startingPosition, endPosition, 1.0f);
             transform.position = newPosition;
             FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
-            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null) 
+            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null)
             {
                 HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();
             }
@@ -129,14 +136,14 @@ public class Unit : MonoBehaviour
         anim.SetBool("isRunning", false);
         transform.localPosition = new Vector3(0, 0, 0);
         isMoving = false;
-        if (GameState.CellSelected == newCell) 
+        if (GameState.CellSelected == newCell)
         {
             Select();
         }
         yield return null;
     }
 
-    IEnumerator AttackEnemy(MovementNode toNode, HexCell newCell, Enemy enemy) 
+    IEnumerator AttackEnemy(MovementNode toNode, HexCell newCell, Enemy enemy)
     {
         yield return LerpUnit(toNode, newCell);
         transform.LookAt(HexGrid.instance.hexCells[enemy.cellOn.coordinates.X, enemy.cellOn.coordinates.Z].topTarget, Vector3.up);
@@ -146,9 +153,10 @@ public class Unit : MonoBehaviour
         yield return null;
     }
 
-    public void Select() 
+    public void Select()
     {
         MasterUI.instance.UpdateUnitPanel(this, null);
+        PlaySound(0);
         if (!isMoving)
         {
             GameState.UnitSelected = this;
@@ -165,7 +173,7 @@ public class Unit : MonoBehaviour
                         tempMovementMarker.transform.localPosition = new Vector3(0, 0.0f, 0);
                         tempMovementMarker.GetComponent<HexMarker>().movementNode = node;
                     }
-                    else 
+                    else
                     {
                         GameObject tempAttackMarker = Instantiate<GameObject>(ResourceFactory.AttackMarker);
                         tempAttackMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
@@ -178,17 +186,17 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void ResetMovementPoints() 
+    public void ResetMovementPoints()
     {
         movementPoints = fullMovementPoints;
         CalcUIState();
-        if (GameState.UnitSelected == this) 
+        if (GameState.UnitSelected == this)
         {
             foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker"))
             {
                 Destroy(marker);
             }
-            Select(); 
+            Select();
         }
     }
 
@@ -205,13 +213,27 @@ public class Unit : MonoBehaviour
     {
         GameState.Units.Remove(this);
         this.cellOn.unit = null;
-        if (TutorialManager.instance != null)  { TutorialManager.instance.UnitDied(); }
+        if (TutorialManager.instance != null) { TutorialManager.instance.UnitDied(); }
         Destroy(gameObject);
     }
 
-    void CalcUIState() 
+    void CalcUIState()
     {
         if (movementPoints > 0) { uiAnim.SetBool("hasMovesLeft", true); }
         else { uiAnim.SetBool("hasMovesLeft", false); }
+    }
+
+    int RandomSound()
+    {
+        System.Random random = new System.Random();
+        return random.Next(0, 3);
+    }
+
+    void PlaySound(int type = 0)
+    {
+        audioSource.Stop();
+        if (type == 0) { audioSource.clip = ResourceFactory.Select[RandomSound()]; }
+        if (type == 1) { audioSource.clip = ResourceFactory.Command[RandomSound()]; }
+        audioSource.Play();
     }
 }
