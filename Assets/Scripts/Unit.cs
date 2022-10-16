@@ -32,12 +32,12 @@ public class Unit : MonoBehaviour
 
     public void SetCell(HexCell newCell)
     {
-        if (this.cellOn != null)
+        if (cellOn != null)
         {
-            this.cellOn.unit = null;
+            cellOn.unit = null;
         }
-        this.cellOn = newCell;
-        this.cellOn.unit = this;
+        cellOn = newCell;
+        cellOn.unit = this;
         transform.SetParent(newCell.topTarget);
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
@@ -45,9 +45,7 @@ public class Unit : MonoBehaviour
 
     public void Move(HexCell newCell)
     {
-        this.cellOn.unit = null;
-        this.cellOn = newCell;
-        this.cellOn.unit = this;
+        cellOn.unit = null;
         movementPoints = newCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
         CalcUIState();
 
@@ -60,9 +58,9 @@ public class Unit : MonoBehaviour
         MovementNode prevNode = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.prevNode;
         HexCell cellToMoveTo = HexGrid.instance.hexCells[prevNode.coordinates.X, prevNode.coordinates.Z];
 
-        this.cellOn.unit = null;
-        this.cellOn = cellToMoveTo;
-        this.cellOn.unit = this;
+        cellOn.unit = null;
+        cellOn = cellToMoveTo;
+        cellOn.unit = this;
         movementPoints = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.movementPointsLeft;
         CalcUIState();
 
@@ -116,9 +114,15 @@ public class Unit : MonoBehaviour
             }
             newPosition = Vector3.Lerp(startingPosition, endPosition, 1.0f);
             transform.position = newPosition;
+            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null) 
+            {
+                HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();
+            }
             yield return null;
         }
 
+        cellOn = newCell;
+        cellOn.unit = this;
         transform.SetParent(newCell.topTarget);
         anim.SetBool("isRunning", false);
         transform.localPosition = new Vector3(0, 0, 0);

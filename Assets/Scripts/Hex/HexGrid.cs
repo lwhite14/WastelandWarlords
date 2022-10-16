@@ -15,7 +15,7 @@ public class HexGrid : MonoBehaviour
     public HexCell[,] hexCells;
     public LayerMask IgnoreMe;
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
@@ -39,11 +39,11 @@ public class HexGrid : MonoBehaviour
         }
 
         GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[0].SetCell(hexCells[23, 4]);
+        GameState.Units[0].SetCell(hexCells[32, 26]);
         GameState.Units[0].unitName = "Lucian";
 
         GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
-        GameState.Enemies[0].SetCell(hexCells[17, 12]);
+        GameState.Enemies[0].SetCell(hexCells[33, 21]);
         GameState.Enemies[0].enemyName = "Geeker";
 
         GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
@@ -59,7 +59,7 @@ public class HexGrid : MonoBehaviour
         GameState.Settlements[0].settlementName = "Grapguard";
 
         GameState.Collectables.Add(Instantiate<Collectable>(ResourceFactory.Battery));
-        GameState.Collectables[0].SetCell(hexCells[37, 12]);
+        GameState.Collectables[0].SetCell(hexCells[37, 7]);
     }
 
     void Update()

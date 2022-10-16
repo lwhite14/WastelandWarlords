@@ -156,6 +156,7 @@ MonoBehaviour:
   panSpeed: 4
   letterAppearSpeed: 0.025
   nextSentenceSpeed: 1
+  haveBattery: 0
 --- !u!4 &83875440
 Transform:
   m_ObjectHideFlags: 0

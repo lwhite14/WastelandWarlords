@@ -23,4 +23,10 @@ public class Collectable : MonoBehaviour
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
+
+    public void PickUp() 
+    {
+        if (!TutorialManager.instance.haveBattery) { TutorialManager.instance.haveBattery = true; TutorialManager.instance.CollectedBattery(); }
+        Destroy(gameObject);
+    }
 }

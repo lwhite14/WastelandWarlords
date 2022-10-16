@@ -6,12 +6,29 @@ using UnityEngine.UIElements;
 
 public class TutorialManager : MonoBehaviour
 {
+    public static TutorialManager instance = null;
+
     public Text TextBox;
     bool firstEnemySpotted = false;
+    bool firstReturnBattery = false;
 
     public float panSpeed = 4.0f;
     public float letterAppearSpeed = 0.05f;
     public float nextSentenceSpeed = 0.05f;
+
+    public bool haveBattery = false;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -19,7 +36,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(PreMove());
     }
 
-    IEnumerator PreMove() 
+    IEnumerator PreMove()
     {
         yield return StartCoroutine(SpottingFirstSettlement(GameState.Settlements[0]));
         yield return StartCoroutine(SpottingFirstUnit(GameState.Units[0]));
@@ -47,6 +64,31 @@ public class TutorialManager : MonoBehaviour
                 StartCoroutine(SpottingFirstEnemy(enemyForCoroutine));
             }
         }
+
+        if (haveBattery && !firstReturnBattery) 
+        {
+            if (GameState.Units[0].cellOn == GameState.Settlements[0].cellOn) 
+            {
+                firstReturnBattery = true;
+                StartCoroutine(ReturnedWithBattery());
+            }
+        }
+    }
+
+    public void CollectedBattery() 
+    {
+        StartCoroutine(CollectBatteryNotification());
+    }
+
+    IEnumerator CollectBatteryNotification() 
+    {
+        yield return StartCoroutine(DisplayConversation(new string[] { "Wow thanks, I didn't think you would actually make it!", "Just come on home to Grapguard now..." }));
+    }
+    IEnumerator ReturnedWithBattery()
+    {
+        yield return StartCoroutine(DisplayConversation(new string[] { "Wow well done!", "I really didn't think you would make it home.", "A successful mission." }));
+        LevelManager.instance.ReturnToMenu();
+        yield return null;
     }
 
     IEnumerator LerpToPoint(Transform toChange, Vector3 startPos, Vector3 endPos) 

@@ -135,7 +135,7 @@ HexCells:
   - terrain: Plains
     x: 18
     z: 7
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 17
     z: 7
@@ -143,7 +143,7 @@ HexCells:
   - terrain: Plains
     x: 19
     z: 7
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 22
     z: 6
@@ -151,11 +151,11 @@ HexCells:
   - terrain: Plains
     x: 19
     z: 6
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 18
     z: 6
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 17
     z: 6
@@ -171,15 +171,15 @@ HexCells:
   - terrain: Plains
     x: 19
     z: 5
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 20
     z: 5
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 21
     z: 5
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 22
     z: 5
@@ -451,26 +451,6 @@ HexCells:
   - terrain: Plains
     x: 23
     z: 25
-    height: 0.150000006
-  - terrain: Plains
-    x: 23
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 24
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 25
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 26
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 27
-    z: 26
     height: 0
   - terrain: Plains
     x: 27
@@ -545,10 +525,6 @@ HexCells:
     z: 18
     height: 0
   - terrain: Plains
-    x: 38
-    z: 18
-    height: 0
-  - terrain: Plains
     x: 37
     z: 19
     height: 0
@@ -561,70 +537,6 @@ HexCells:
     z: 21
     height: 0
   - terrain: Plains
-    x: 37
-    z: 21
-    height: 0
-  - terrain: Plains
-    x: 37
-    z: 22
-    height: 0
-  - terrain: Plains
-    x: 36
-    z: 23
-    height: 0
-  - terrain: Plains
-    x: 36
-    z: 24
-    height: 0
-  - terrain: Plains
-    x: 35
-    z: 24
-    height: 0
-  - terrain: Plains
-    x: 34
-    z: 25
-    height: 0
-  - terrain: Plains
-    x: 33
-    z: 25
-    height: 0
-  - terrain: Plains
-    x: 33
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 32
-    z: 26
-    height: 0
-  - terrain: Plains
-    x: 31
-    z: 27
-    height: 0
-  - terrain: Plains
-    x: 30
-    z: 27
-    height: 0
-  - terrain: Plains
-    x: 30
-    z: 28
-    height: 0
-  - terrain: Plains
-    x: 29
-    z: 27
-    height: 0
-  - terrain: Plains
-    x: 28
-    z: 27
-    height: 0
-  - terrain: Plains
-    x: 29
-    z: 26
-    height: 0.150000006
-  - terrain: Plains
-    x: 28
-    z: 26
-    height: 0.150000006
-  - terrain: Plains
     x: 17
     z: 12
     height: 0.150000006
@@ -635,7 +547,7 @@ HexCells:
   - terrain: Plains
     x: 17
     z: 13
-    height: 0
+    height: 0.150000006
   - terrain: Plains
     x: 17
     z: 14
@@ -643,11 +555,11 @@ HexCells:
   - terrain: Plains
     x: 16
     z: 14
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 15
     z: 15
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 14
     z: 15
@@ -659,7 +571,7 @@ HexCells:
   - terrain: Plains
     x: 14
     z: 16
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 14
     z: 17
@@ -861,10 +773,6 @@ HexCells:
     z: 24
     height: 0
   - terrain: Plains
-    x: 22
-    z: 24
-    height: 0
-  - terrain: Plains
     x: 23
     z: 22
     height: 0.150000006
@@ -877,60 +785,20 @@ HexCells:
     z: 23
     height: 0.150000006
   - terrain: Plains
-    x: 23
-    z: 24
-    height: 0.150000006
-  - terrain: Plains
-    x: 24
-    z: 24
-    height: 0.150000006
-  - terrain: Plains
-    x: 24
-    z: 23
-    height: 0.150000006
-  - terrain: Plains
     x: 25
     z: 24
-    height: 0.150000006
+    height: 0
   - terrain: Plains
     x: 24
     z: 25
-    height: 0.150000006
-  - terrain: Plains
-    x: 25
-    z: 25
-    height: 0.150000006
-  - terrain: Plains
-    x: 26
-    z: 25
-    height: 0.25
-  - terrain: Plains
-    x: 27
-    z: 25
-    height: 0.25
-  - terrain: Plains
-    x: 28
-    z: 25
-    height: 0.25
-  - terrain: Plains
-    x: 34
-    z: 24
-    height: 0.150000006
+    height: 0
   - terrain: Plains
     x: 34
     z: 23
-    height: 0.150000006
-  - terrain: Plains
-    x: 35
-    z: 22
-    height: 0.150000006
-  - terrain: Plains
-    x: 36
-    z: 22
     height: 0
   - terrain: Plains
     x: 35
-    z: 23
+    z: 22
     height: 0
   - terrain: Plains
     x: 35
@@ -951,7 +819,7 @@ HexCells:
   - terrain: Plains
     x: 35
     z: 17
-    height: 0
+    height: 0.150000006
   - terrain: Plains
     x: 36
     z: 19
@@ -959,7 +827,7 @@ HexCells:
   - terrain: Plains
     x: 34
     z: 18
-    height: 0.25
+    height: 0.150000006
   - terrain: Plains
     x: 33
     z: 18
@@ -979,11 +847,11 @@ HexCells:
   - terrain: Plains
     x: 31
     z: 18
-    height: 0
+    height: 0.150000006
   - terrain: Plains
     x: 32
     z: 18
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 30
     z: 18
@@ -1011,7 +879,7 @@ HexCells:
   - terrain: Plains
     x: 32
     z: 20
-    height: 0.349999994
+    height: 0.25
   - terrain: Plains
     x: 31
     z: 20
@@ -1019,7 +887,7 @@ HexCells:
   - terrain: Plains
     x: 30
     z: 20
-    height: 0.150000006
+    height: 0.25
   - terrain: Plains
     x: 28
     z: 21
@@ -1027,19 +895,15 @@ HexCells:
   - terrain: Plains
     x: 29
     z: 21
-    height: 0.25
-  - terrain: Plains
-    x: 30
-    z: 21
-    height: 0.349999994
+    height: 0.150000006
   - terrain: Plains
     x: 31
     z: 21
-    height: 0.349999994
+    height: 0.25
   - terrain: Plains
     x: 32
     z: 21
-    height: 0.349999994
+    height: 0.25
   - terrain: Plains
     x: 33
     z: 21
@@ -1057,23 +921,7 @@ HexCells:
     z: 22
     height: 0.25
   - terrain: Plains
-    x: 32
-    z: 22
-    height: 0.349999994
-  - terrain: Plains
     x: 31
-    z: 22
-    height: 0.349999994
-  - terrain: Plains
-    x: 30
-    z: 22
-    height: 0.349999994
-  - terrain: Plains
-    x: 29
-    z: 22
-    height: 0.349999994
-  - terrain: Plains
-    x: 28
     z: 22
     height: 0.25
   - terrain: Plains
@@ -1089,33 +937,9 @@ HexCells:
     z: 22
     height: 0.150000006
   - terrain: Plains
-    x: 25
-    z: 23
-    height: 0.25
-  - terrain: Plains
-    x: 26
-    z: 23
-    height: 0.25
-  - terrain: Plains
-    x: 27
-    z: 23
-    height: 0.25
-  - terrain: Plains
-    x: 28
-    z: 23
-    height: 0.349999994
-  - terrain: Plains
-    x: 29
-    z: 23
-    height: 0.349999994
-  - terrain: Plains
-    x: 27
-    z: 24
-    height: 0.25
-  - terrain: Plains
     x: 26
     z: 24
-    height: 0.25
+    height: 0
   - terrain: Plains
     x: 33
     z: 15
@@ -1146,26 +970,6 @@ HexCells:
     height: 0.150000006
   - terrain: Plains
     x: 36
-    z: 14
-    height: 0.150000006
-  - terrain: Plains
-    x: 36
-    z: 13
-    height: 0.150000006
-  - terrain: Plains
-    x: 37
-    z: 13
-    height: 0
-  - terrain: Plains
-    x: 38
-    z: 12
-    height: 0
-  - terrain: Plains
-    x: 37
-    z: 12
-    height: 0.150000006
-  - terrain: Plains
-    x: 36
     z: 12
     height: 0.150000006
   - terrain: Plains
@@ -1187,19 +991,11 @@ HexCells:
   - terrain: Plains
     x: 36
     z: 11
-    height: 0
+    height: 0.150000006
   - terrain: Plains
     x: 37
     z: 11
-    height: 0
-  - terrain: Plains
-    x: 38
-    z: 11
-    height: 0
-  - terrain: Plains
-    x: 39
-    z: 11
-    height: 0
+    height: 0.25
   - terrain: Plains
     x: 39
     z: 12
@@ -1949,14 +1745,6 @@ HexCells:
     z: 27
     height: 0
   - terrain: Water
-    x: 33
-    z: 27
-    height: 0
-  - terrain: Water
-    x: 32
-    z: 27
-    height: 0
-  - terrain: Water
     x: 27
     z: 27
     height: 0
@@ -2125,10 +1913,6 @@ HexCells:
     z: 26
     height: 0
   - terrain: Water
-    x: 34
-    z: 26
-    height: 0
-  - terrain: Water
     x: 35
     z: 26
     height: 0
@@ -2262,10 +2046,6 @@ HexCells:
     height: 0
   - terrain: Water
     x: 38
-    z: 21
-    height: 0
-  - terrain: Water
-    x: 38
     z: 22
     height: 0
   - terrain: Water
@@ -3117,34 +2897,6 @@ HexCells:
     z: 11
     height: 0
   - terrain: Water
-    x: 35
-    z: 11
-    height: 0
-  - terrain: Water
-    x: 36
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 37
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 38
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 40
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 40
-    z: 11
-    height: 0
-  - terrain: Water
     x: 41
     z: 11
     height: 0
@@ -3174,10 +2926,6 @@ HexCells:
     height: 0
   - terrain: Water
     x: 41
-    z: 10
-    height: 0
-  - terrain: Water
-    x: 35
     z: 10
     height: 0
   - terrain: Water
@@ -3341,34 +3089,6 @@ HexCells:
     z: 9
     height: 0
   - terrain: Water
-    x: 40
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 38
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 37
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 36
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 35
-    z: 9
-    height: 0
-  - terrain: Water
-    x: 34
-    z: 9
-    height: 0
-  - terrain: Water
     x: 33
     z: 9
     height: 0
@@ -3449,34 +3169,6 @@ HexCells:
     z: 8
     height: 0
   - terrain: Water
-    x: 34
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 35
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 36
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 37
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 38
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 8
-    height: 0
-  - terrain: Water
-    x: 40
-    z: 8
-    height: 0
-  - terrain: Water
     x: 41
     z: 8
     height: 0
@@ -3510,34 +3202,6 @@ HexCells:
     height: 0
   - terrain: Water
     x: 42
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 41
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 40
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 38
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 37
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 36
-    z: 7
-    height: 0
-  - terrain: Water
-    x: 35
     z: 7
     height: 0
   - terrain: Water
@@ -3661,26 +3325,6 @@ HexCells:
     z: 6
     height: 0
   - terrain: Water
-    x: 36
-    z: 6
-    height: 0
-  - terrain: Water
-    x: 37
-    z: 6
-    height: 0
-  - terrain: Water
-    x: 38
-    z: 6
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 6
-    height: 0
-  - terrain: Water
-    x: 40
-    z: 6
-    height: 0
-  - terrain: Water
     x: 41
     z: 6
     height: 0
@@ -3730,14 +3374,6 @@ HexCells:
     height: 0
   - terrain: Water
     x: 40
-    z: 5
-    height: 0
-  - terrain: Water
-    x: 39
-    z: 5
-    height: 0
-  - terrain: Water
-    x: 38
     z: 5
     height: 0
   - terrain: Water
@@ -4283,15 +3919,15 @@ HexCells:
   - terrain: Forest
     x: 20
     z: 7
-    height: 0.150000006
+    height: 0.25
   - terrain: Forest
     x: 20
     z: 6
-    height: 0.150000006
+    height: 0.25
   - terrain: Forest
     x: 21
     z: 6
-    height: 0.150000006
+    height: 0.25
   - terrain: Forest
     x: 10
     z: 24
@@ -4347,75 +3983,11 @@ HexCells:
   - terrain: Forest
     x: 13
     z: 17
-    height: 0.150000006
+    height: 0.25
   - terrain: Forest
     x: 10
     z: 19
     height: 0.25
-  - terrain: Forest
-    x: 31
-    z: 26
-    height: 0.150000006
-  - terrain: Forest
-    x: 30
-    z: 26
-    height: 0.150000006
-  - terrain: Forest
-    x: 30
-    z: 25
-    height: 0.25
-  - terrain: Forest
-    x: 29
-    z: 25
-    height: 0.25
-  - terrain: Forest
-    x: 29
-    z: 24
-    height: 0.349999994
-  - terrain: Forest
-    x: 28
-    z: 24
-    height: 0.349999994
-  - terrain: Forest
-    x: 30
-    z: 24
-    height: 0.349999994
-  - terrain: Forest
-    x: 31
-    z: 24
-    height: 0.25
-  - terrain: Forest
-    x: 31
-    z: 25
-    height: 0.25
-  - terrain: Forest
-    x: 32
-    z: 25
-    height: 0.150000006
-  - terrain: Forest
-    x: 33
-    z: 24
-    height: 0.150000006
-  - terrain: Forest
-    x: 32
-    z: 24
-    height: 0.25
-  - terrain: Forest
-    x: 32
-    z: 23
-    height: 0.25
-  - terrain: Forest
-    x: 31
-    z: 23
-    height: 0.349999994
-  - terrain: Forest
-    x: 33
-    z: 23
-    height: 0.150000006
-  - terrain: Forest
-    x: 30
-    z: 23
-    height: 0.349999994
   - terrain: Plains
     x: 35
     z: 20
@@ -4427,7 +3999,7 @@ HexCells:
   - terrain: ImpactSite
     x: 34
     z: 19
-    height: 0.150000006
+    height: 0.25
   - terrain: ImpactSite
     x: 35
     z: 19
@@ -4440,3 +4012,431 @@ HexCells:
     x: 13
     z: 21
     height: 0.150000006
+  - terrain: Plains
+    x: 35
+    z: 11
+    height: 0
+  - terrain: Plains
+    x: 35
+    z: 10
+    height: 0
+  - terrain: Plains
+    x: 35
+    z: 9
+    height: 0
+  - terrain: Plains
+    x: 34
+    z: 9
+    height: 0
+  - terrain: Plains
+    x: 34
+    z: 8
+    height: 0
+  - terrain: Plains
+    x: 35
+    z: 7
+    height: 0
+  - terrain: Plains
+    x: 36
+    z: 6
+    height: 0
+  - terrain: Plains
+    x: 38
+    z: 5
+    height: 0
+  - terrain: Plains
+    x: 39
+    z: 5
+    height: 0
+  - terrain: Plains
+    x: 37
+    z: 6
+    height: 0
+  - terrain: Plains
+    x: 38
+    z: 6
+    height: 0.150000006
+  - terrain: Plains
+    x: 39
+    z: 6
+    height: 0
+  - terrain: Plains
+    x: 40
+    z: 6
+    height: 0
+  - terrain: Plains
+    x: 41
+    z: 7
+    height: 0
+  - terrain: Plains
+    x: 40
+    z: 7
+    height: 0
+  - terrain: Plains
+    x: 39
+    z: 7
+    height: 0.150000006
+  - terrain: Plains
+    x: 38
+    z: 7
+    height: 0.150000006
+  - terrain: Plains
+    x: 37
+    z: 7
+    height: 0.150000006
+  - terrain: Plains
+    x: 36
+    z: 7
+    height: 0.150000006
+  - terrain: Plains
+    x: 35
+    z: 8
+    height: 0.150000006
+  - terrain: Plains
+    x: 36
+    z: 8
+    height: 0.150000006
+  - terrain: Plains
+    x: 37
+    z: 8
+    height: 0.25
+  - terrain: Plains
+    x: 38
+    z: 8
+    height: 0.25
+  - terrain: Plains
+    x: 39
+    z: 8
+    height: 0.150000006
+  - terrain: Plains
+    x: 40
+    z: 8
+    height: 0
+  - terrain: Plains
+    x: 38
+    z: 9
+    height: 0.25
+  - terrain: Plains
+    x: 37
+    z: 9
+    height: 0.25
+  - terrain: Plains
+    x: 36
+    z: 9
+    height: 0.150000006
+  - terrain: Plains
+    x: 40
+    z: 10
+    height: 0
+  - terrain: Plains
+    x: 40
+    z: 11
+    height: 0
+  - terrain: Plains
+    x: 40
+    z: 9
+    height: 0
+  - terrain: Plains
+    x: 36
+    z: 10
+    height: 0.150000006
+  - terrain: Plains
+    x: 37
+    z: 10
+    height: 0.25
+  - terrain: Plains
+    x: 31
+    z: 24
+    height: 0
+  - terrain: Plains
+    x: 31
+    z: 25
+    height: 0
+  - terrain: Plains
+    x: 30
+    z: 26
+    height: 0
+  - terrain: Plains
+    x: 31
+    z: 26
+    height: 0
+  - terrain: Plains
+    x: 32
+    z: 26
+    height: 0
+  - terrain: Plains
+    x: 33
+    z: 26
+    height: 0
+  - terrain: Plains
+    x: 34
+    z: 25
+    height: 0
+  - terrain: Plains
+    x: 33
+    z: 24
+    height: 0
+  - terrain: Plains
+    x: 32
+    z: 24
+    height: 0
+  - terrain: Plains
+    x: 32
+    z: 25
+    height: 0
+  - terrain: Plains
+    x: 33
+    z: 25
+    height: 0
+  - terrain: Plains
+    x: 31
+    z: 27
+    height: 0
+  - terrain: Plains
+    x: 30
+    z: 27
+    height: 0
+  - terrain: Plains
+    x: 32
+    z: 27
+    height: 0
+  - terrain: Plains
+    x: 33
+    z: 27
+    height: 0
+  - terrain: Plains
+    x: 34
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 30
+    z: 28
+    height: 0
+  - terrain: Water
+    x: 29
+    z: 27
+    height: 0
+  - terrain: Water
+    x: 28
+    z: 27
+    height: 0
+  - terrain: Water
+    x: 23
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 24
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 25
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 26
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 27
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 28
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 29
+    z: 26
+    height: 0
+  - terrain: Water
+    x: 30
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 29
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 28
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 27
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 26
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 25
+    z: 25
+    height: 0
+  - terrain: Water
+    x: 27
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 28
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 29
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 30
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 34
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 35
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 36
+    z: 24
+    height: 0
+  - terrain: Water
+    x: 36
+    z: 23
+    height: 0
+  - terrain: Water
+    x: 35
+    z: 23
+    height: 0
+  - terrain: Water
+    x: 36
+    z: 22
+    height: 0
+  - terrain: Water
+    x: 37
+    z: 22
+    height: 0
+  - terrain: Water
+    x: 38
+    z: 21
+    height: 0
+  - terrain: Water
+    x: 37
+    z: 21
+    height: 0
+  - terrain: Water
+    x: 38
+    z: 18
+    height: 0
+  - terrain: Forest
+    x: 36
+    z: 14
+    height: 0.150000006
+  - terrain: Forest
+    x: 37
+    z: 13
+    height: 0.150000006
+  - terrain: Forest
+    x: 38
+    z: 12
+    height: 0.150000006
+  - terrain: Forest
+    x: 39
+    z: 11
+    height: 0.150000006
+  - terrain: Forest
+    x: 39
+    z: 10
+    height: 0.150000006
+  - terrain: Forest
+    x: 38
+    z: 10
+    height: 0.25
+  - terrain: Forest
+    x: 39
+    z: 9
+    height: 0.150000006
+  - terrain: Forest
+    x: 38
+    z: 11
+    height: 0.25
+  - terrain: Forest
+    x: 37
+    z: 12
+    height: 0.25
+  - terrain: Forest
+    x: 36
+    z: 13
+    height: 0.25
+  - terrain: Plains
+    x: 33
+    z: 23
+    height: 0.150000006
+  - terrain: Plains
+    x: 32
+    z: 23
+    height: 0.150000006
+  - terrain: Plains
+    x: 31
+    z: 23
+    height: 0.150000006
+  - terrain: Plains
+    x: 32
+    z: 22
+    height: 0.25
+  - terrain: Forest
+    x: 22
+    z: 24
+    height: 0.150000006
+  - terrain: Forest
+    x: 23
+    z: 24
+    height: 0.150000006
+  - terrain: Forest
+    x: 24
+    z: 24
+    height: 0.150000006
+  - terrain: Forest
+    x: 24
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 25
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 26
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 27
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 28
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 29
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 30
+    z: 23
+    height: 0.150000006
+  - terrain: Forest
+    x: 30
+    z: 22
+    height: 0.25
+  - terrain: Forest
+    x: 29
+    z: 22
+    height: 0.150000006
+  - terrain: Forest
+    x: 28
+    z: 22
+    height: 0.150000006
+  - terrain: Forest
+    x: 30
+    z: 21
+    height: 0.25
