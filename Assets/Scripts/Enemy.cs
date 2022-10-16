@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HexPathfinding;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {

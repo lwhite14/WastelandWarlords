@@ -40,5 +40,6 @@ public static class ResourceFactory
     public static List<AudioClip>   EnemySelect         = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/EnemySelect1"), Resources.Load<AudioClip>("Sounds/EnemySelect2"), Resources.Load<AudioClip>("Sounds/EnemySelect3") };
     public static GameObject        UnitDeath           = Resources.Load<GameObject>("Sounds/UnitDeath");
     public static GameObject        EnemyDeath          = Resources.Load<GameObject>("Sounds/EnemyDeath");
+    public static GameObject        Punch               = Resources.Load<GameObject>("Sounds/Punch");
 }
 
