@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 public static class ResourceFactory
 {
-    public static GameObject    MovementMarker          = Resources.Load<GameObject>("GameObjects/MovementMarker");
-    public static GameObject    SelectionMarker         = Resources.Load<GameObject>("GameObjects/SelectionMarker");
-    public static GameObject    AttackMarker            = Resources.Load<GameObject>("GameObjects/AttackMarker");
+    public static GameObject    MovementMarker          = Resources.Load<GameObject>("GameObjects/Markers/MovementMarker");
+    public static GameObject    SelectionMarker         = Resources.Load<GameObject>("GameObjects/Markers/SelectionMarker");
+    public static GameObject    AttackMarker            = Resources.Load<GameObject>("GameObjects/Markers/AttackMarker");
 
     public static Unit          Unit                    = Resources.Load<Unit>("GameObjects/Unit");
     public static Enemy         Enemy                   = Resources.Load<Enemy>("GameObjects/Enemy");
+    public static Collectable   Battery                 = Resources.Load<Collectable>("GameObjects/Battery");
 
     public static Settlement    Settlement              = Resources.Load<Settlement>("GameObjects/Settlements/Settlement");
     public static GameObject    L1GFX                   = Resources.Load<GameObject>("GameObjects/Settlements/L1GFX");

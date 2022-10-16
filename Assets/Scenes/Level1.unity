@@ -1796,7 +1796,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: No Tile Selected...
+  m_Text: The cosmos...
 --- !u!222 &1408966440
 CanvasRenderer:
   m_ObjectHideFlags: 0

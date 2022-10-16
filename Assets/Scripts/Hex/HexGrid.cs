@@ -57,6 +57,9 @@ public class HexGrid : MonoBehaviour
         GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
         GameState.Settlements[0].SetCell(hexCells[18, 4]);
         GameState.Settlements[0].settlementName = "Grapguard";
+
+        GameState.Collectables.Add(Instantiate<Collectable>(ResourceFactory.Battery));
+        GameState.Collectables[0].SetCell(hexCells[37, 12]);
     }
 
     void Update()

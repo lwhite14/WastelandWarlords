@@ -12,6 +12,7 @@ public class HexCell : MonoBehaviour
     [HideInInspector]public Unit unit = null;
     [HideInInspector]public Enemy enemy = null;
     [HideInInspector]public Settlement settlement = null;
+    [HideInInspector]public Collectable collectable = null;
 
     void Awake()
     {

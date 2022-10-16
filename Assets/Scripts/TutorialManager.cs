@@ -23,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     {
         yield return StartCoroutine(SpottingFirstSettlement(GameState.Settlements[0]));
         yield return StartCoroutine(SpottingFirstUnit(GameState.Units[0]));
+        yield return StartCoroutine(SpottingBattery(GameState.Collectables[0]));
         yield return null;
     }
 
@@ -112,10 +113,31 @@ public class TutorialManager : MonoBehaviour
         Vector3 endPosition = new Vector3(unit.transform.position.x, CameraControls.instance.GetMinCameraY(), unit.transform.position.z - 20.0f);
 
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
-        yield return StartCoroutine(DisplayConversation(new string[] { "Your faithful servant, Lucian.", "He will carry out your will, as long as you keep him safe...", "Left-click him to display his movement range, right-click to move him!" }));
+        yield return StartCoroutine(DisplayConversation(new string[] { "Your faithful servant, Lucian.", "He will carry out your will, as long as you keep him safe...", "Left-click him to display his movement range, right-click to move him!", "You can get more movement points for Lucian by ending your turn..." }));
 
         startPosition = CameraControls.instance.transform.position;
         endPosition = new Vector3(CameraControls.instance.transform.position.x, CameraControls.instance.transform.position.y + 20.0f, CameraControls.instance.transform.position.z);
+
+        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+
+        CameraControls.instance.control = true;
+        HexGrid.instance.canClick = true;
+        yield return null;
+    }
+
+    IEnumerator SpottingBattery(Collectable battery)
+    {
+        CameraControls.instance.control = false;
+        HexGrid.instance.canClick = false;
+
+        Vector3 startPosition = CameraControls.instance.transform.position;
+        Vector3 endPosition = new Vector3(battery.transform.position.x, CameraControls.instance.GetMinCameraY(), battery.transform.position.z - 20.0f);
+
+        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return StartCoroutine(DisplayConversation(new string[] { "We need some batteries... do you mind popping out to grab some? Thanks." }));
+
+        startPosition = CameraControls.instance.transform.position;
+        endPosition = new Vector3(GameState.Units[0].transform.position.x, CameraControls.instance.transform.position.y + 20.0f, GameState.Units[0].transform.position.z - 20.0f);
 
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
 
