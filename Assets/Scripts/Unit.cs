@@ -211,6 +211,7 @@ public class Unit : MonoBehaviour
 
     void Die()
     {
+        PlayDeathSound();
         GameState.Units.Remove(this);
         this.cellOn.unit = null;
         if (TutorialManager.instance != null) { TutorialManager.instance.UnitDied(); }
@@ -235,5 +236,12 @@ public class Unit : MonoBehaviour
         if (type == 0) { audioSource.clip = ResourceFactory.Select[RandomSound()]; }
         if (type == 1) { audioSource.clip = ResourceFactory.Command[RandomSound()]; }
         audioSource.Play();
+    }
+
+    void PlayDeathSound() 
+    {
+        audioSource.Stop();
+        GameObject tempObj = Instantiate<GameObject>(ResourceFactory.UnitDeath);
+        tempObj.transform.position = transform.position;
     }
 }

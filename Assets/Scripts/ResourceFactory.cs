@@ -35,8 +35,10 @@ public static class ResourceFactory
     public static Sprite        NoUnitSprite            = Resources.Load<Sprite>("Textures/NoUnit");
 
 
-    public static List<AudioClip>   Command                 = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/Command1"), Resources.Load<AudioClip>("Sounds/Command2"), Resources.Load<AudioClip>("Sounds/Command3") };
-    public static List<AudioClip>   Select                  = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/Select1"), Resources.Load<AudioClip>("Sounds/Select2"), Resources.Load<AudioClip>("Sounds/Select3") };
-    public static List<AudioClip>   EnemySelect             = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/EnemySelect1"), Resources.Load<AudioClip>("Sounds/EnemySelect2"), Resources.Load<AudioClip>("Sounds/EnemySelect3") };
+    public static List<AudioClip>   Command             = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/Command1"), Resources.Load<AudioClip>("Sounds/Command2"), Resources.Load<AudioClip>("Sounds/Command3") };
+    public static List<AudioClip>   Select              = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/Select1"), Resources.Load<AudioClip>("Sounds/Select2"), Resources.Load<AudioClip>("Sounds/Select3") };
+    public static List<AudioClip>   EnemySelect         = new List<AudioClip>() { Resources.Load<AudioClip>("Sounds/EnemySelect1"), Resources.Load<AudioClip>("Sounds/EnemySelect2"), Resources.Load<AudioClip>("Sounds/EnemySelect3") };
+    public static GameObject        UnitDeath           = Resources.Load<GameObject>("Sounds/UnitDeath");
+    public static GameObject        EnemyDeath          = Resources.Load<GameObject>("Sounds/EnemyDeath");
 }
 

@@ -26,7 +26,7 @@ public class Collectable : MonoBehaviour
 
     public void PickUp() 
     {
-        if (!TutorialManager.instance.haveBattery) { TutorialManager.instance.haveBattery = true; TutorialManager.instance.CollectedBattery(); }
+        if (TutorialManager.instance != null) { if (!TutorialManager.instance.haveBattery) { TutorialManager.instance.haveBattery = true; TutorialManager.instance.CollectedBattery(); } }
         Destroy(gameObject);
     }
 }

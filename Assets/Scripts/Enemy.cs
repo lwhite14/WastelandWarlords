@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        PlayDeathSound();
         GameState.Enemies.Remove(this);
         this.cellOn.enemy = null;
         Destroy(gameObject);
@@ -116,6 +117,12 @@ public class Enemy : MonoBehaviour
         audioSource.Play();
     }
 
+    void PlayDeathSound()
+    {
+        audioSource.Stop();
+        GameObject tempObj = Instantiate<GameObject>(ResourceFactory.EnemyDeath);
+        tempObj.transform.position = transform.position;
+    }
 
     public IEnumerator Movement() 
     {
