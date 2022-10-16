@@ -146,6 +146,7 @@ public class Unit : MonoBehaviour
 
     public void Select() 
     {
+        MasterUI.instance.UpdateUnitPanel(this, null);
         if (!isMoving)
         {
             GameState.UnitSelected = this;
@@ -202,6 +203,7 @@ public class Unit : MonoBehaviour
     {
         GameState.Units.Remove(this);
         this.cellOn.unit = null;
+        if (TutorialManager.instance != null)  { TutorialManager.instance.UnitDied(); }
         Destroy(gameObject);
     }
 

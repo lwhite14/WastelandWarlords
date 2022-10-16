@@ -79,6 +79,11 @@ public class Enemy : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
+    public void Select()
+    {
+        MasterUI.instance.UpdateUnitPanel(null, this);
+    }
+
     public void GiveDamage(float damage)
     {
         health -= damage;

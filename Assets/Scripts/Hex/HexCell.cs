@@ -28,8 +28,8 @@ public class HexCell : MonoBehaviour
         MasterUI.instance.UpdateTerrainPanel(this);
         if (unit != null)  { unit.Select(); }
         if (settlement != null)  { settlement.Select(); }
-        MasterUI.instance.UpdateUnitPanel(unit, enemy);
-        MasterUI.instance.UpdateSettlementPanel(settlement);
+        if (enemy != null)  { enemy.Select(); }
+        if (unit == null && enemy == null) { MasterUI.instance.UpdateUnitPanel(null, null); }
     }
 
     public void Unselect() 

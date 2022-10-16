@@ -37,7 +37,7 @@ public class Settlement : MonoBehaviour
 
     public void Select() 
     {
-        
+        MasterUI.instance.UpdateSettlementPanel(this);
     }
 
     public void EndTurnGrowth() 

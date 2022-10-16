@@ -11,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     public Text TextBox;
     bool firstEnemySpotted = false;
     bool firstReturnBattery = false;
+    bool firstUnitDied = false;
 
     public float panSpeed = 4.0f;
     public float letterAppearSpeed = 0.05f;
@@ -70,6 +71,7 @@ public class TutorialManager : MonoBehaviour
             if (GameState.Units[0].cellOn == GameState.Settlements[0].cellOn) 
             {
                 firstReturnBattery = true;
+                StopAllCoroutines();
                 StartCoroutine(ReturnedWithBattery());
             }
         }
@@ -77,7 +79,14 @@ public class TutorialManager : MonoBehaviour
 
     public void CollectedBattery() 
     {
+        StopAllCoroutines();
         StartCoroutine(CollectBatteryNotification());
+    }
+
+    public void UnitDied() 
+    {
+        StopAllCoroutines();
+        StartCoroutine(UnitDiedNotification());
     }
 
     IEnumerator CollectBatteryNotification() 
@@ -88,6 +97,13 @@ public class TutorialManager : MonoBehaviour
     {
         yield return StartCoroutine(DisplayConversation(new string[] { "Wow well done!", "I really didn't think you would make it home.", "A successful mission." }));
         LevelManager.instance.ReturnToMenu();
+        yield return null;
+    }
+
+    IEnumerator UnitDiedNotification() 
+    {
+        yield return StartCoroutine(DisplayConversation(new string[] { "Oh no... Lucian has perished...", "On other levels you will be able to recruit more units, but for now you just have Lucian...", "...or you had Lucian...", "Let's have another go!" }));
+        LevelManager.instance.StartGame();
         yield return null;
     }
 
