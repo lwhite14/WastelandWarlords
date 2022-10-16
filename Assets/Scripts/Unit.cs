@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
     {
         movementPoints = fullMovementPoints;
         CalcUIState();
+        FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
     }
 
     public void SetCell(HexCell newCell)
@@ -114,6 +115,7 @@ public class Unit : MonoBehaviour
             }
             newPosition = Vector3.Lerp(startingPosition, endPosition, 1.0f);
             transform.position = newPosition;
+            FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
             if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null) 
             {
                 HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();

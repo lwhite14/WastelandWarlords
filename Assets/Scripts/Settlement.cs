@@ -21,6 +21,7 @@ public class Settlement : MonoBehaviour
         level = 1;
         growthPerTurn = 10;
         UpgradeLevel();
+        FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
     }
 
     public void SetCell(HexCell newCell)

@@ -30,18 +30,6 @@ public class FogOfWar : MonoBehaviour
         Initialize();
     }
 
-    void Update()
-    {
-        foreach (Unit unit in GameState.Units) 
-        {
-            CalculateVertexAlphas(unit.transform.position, new Vector3(unit.transform.position.x, unit.transform.position.y + 200.0f, unit.transform.position.z), unit.sightRange);
-        }
-        foreach (Settlement settlement in GameState.Settlements)
-        {
-            CalculateVertexAlphas(settlement.transform.position, new Vector3(settlement.transform.position.x, settlement.transform.position.y + 200.0f, settlement.transform.position.z), settlement.sightRange);
-        }
-    }
-
     public void CalculateVertexAlphas(Vector3 point, Vector3 raySpawn, float sightRange) 
     {
         Ray r = new Ray(raySpawn, point - raySpawn);
