@@ -9,6 +9,7 @@ public class MasterUI : MonoBehaviour
     public TerrainPanel terrainPanel;
     public CharacterPanel characterPanel;
     public SettlementPanel settlementPanel;
+    public TopDock topDock;
 
     public GameObject endTurnPanel;
 
@@ -38,6 +39,7 @@ public class MasterUI : MonoBehaviour
             UpdateUnitPanel(GameState.CellSelected.unit, GameState.CellSelected.enemy);
             UpdateSettlementPanel(GameState.CellSelected.settlement);
         }
+        UpdateTopDock();
     }
 
     public void UpdateTerrainPanel(HexCell selectedCell)
@@ -53,6 +55,12 @@ public class MasterUI : MonoBehaviour
     public void UpdateSettlementPanel(Settlement selectedSettlement)
     {
         settlementPanel.UpdateSettlementPanel(selectedSettlement);
+    }
+
+    public void UpdateTopDock()
+    {
+        topDock.SetMoolah(GameStatistics.Moolah);
+        topDock.SetTurn(GameStatistics.TurnNumber);
     }
 
     public void EndTurnPanel(bool isOn)

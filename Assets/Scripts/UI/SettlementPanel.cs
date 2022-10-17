@@ -19,7 +19,9 @@ public class SettlementPanel : MonoBehaviour
         if (settlement != null)
         {
             anim.SetBool("Appear", true);
-            text.text = settlement.settlementName + ", level= " + settlement.level + ", at growth=" + settlement.growth;
+            text.text = settlement.settlementName + "\n" + 
+                        "Level = " + settlement.level + "\n" + 
+                        "Growth = " + settlement.growth;
             image.sprite = ResourceFactory.SettlementL1Sprite;
         }
         else 

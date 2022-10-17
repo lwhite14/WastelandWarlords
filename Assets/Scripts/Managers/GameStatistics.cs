@@ -1,13 +1,39 @@
 ﻿public static class GameStatistics
 {
-    public static int TurnNumber = 1;
-    public static int EnemiesFelled = 0;
-    public static int HexesTraversed = 0;
+    static int turnNumber = 1;
+    static int enemiesFelled = 0;
+    static int hexesTraversed = 0;
+    static int moolah = 0;
+
+    public static int TurnNumber 
+    {
+        get { return turnNumber; }
+        set { turnNumber = value; MasterUI.instance.UpdateTopDock(); }
+    }
+
+    public static int EnemiesFelled 
+    {
+        get { return enemiesFelled; }
+        set { enemiesFelled = value; }
+    }
+
+    public static int HexesTraversed 
+    {
+        get { return hexesTraversed; }
+        set { hexesTraversed = value; }
+    }
+
+    public static int Moolah 
+    {
+        get { return moolah; }
+        set { moolah = value; MasterUI.instance.UpdateTopDock(); }
+    }
 
     public static void ResetFields()
     {
-        TurnNumber = 1;
-        EnemiesFelled = 0;
-        HexesTraversed = 0; 
+        turnNumber = 1;
+        enemiesFelled = 0;
+        hexesTraversed = 0;
+        moolah = 0;
     }
 }
