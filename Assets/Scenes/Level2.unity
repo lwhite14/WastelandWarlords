@@ -2587,7 +2587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7799341aebfda734c9e758df0f79bb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogColour: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   fogLayer:
     serializedVersion: 2
     m_Bits: 64

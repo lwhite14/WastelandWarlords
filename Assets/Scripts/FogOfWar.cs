@@ -6,7 +6,6 @@ public class FogOfWar : MonoBehaviour
 {
     public static FogOfWar instance = null;
 
-    public Color fogColour;
     public LayerMask fogLayer;
 
     Mesh mesh;
@@ -58,7 +57,7 @@ public class FogOfWar : MonoBehaviour
 
         for (int i = 0; i < colours.Length; i++)
         {
-            colours[i] = fogColour;
+            colours[i] = Color.white;
         }
         UpdateColour();
     }
