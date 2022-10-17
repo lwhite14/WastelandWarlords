@@ -7,15 +7,7 @@ public class CurrentMap : MonoBehaviour
     public static CurrentMap instance = null;
 
     public Map currentMap;
-
-    Map[] allMaps =
-    {
-        new Map(@"Maps\TutorialMap.yaml")
-    };
-
-    [Tooltip("0: Tutorial"),
-     Range(0, 0)]
-    public int mapUsed = 0;
+    public string mapFileLocation;
 
     private void Awake()
     {
@@ -28,6 +20,8 @@ public class CurrentMap : MonoBehaviour
             Destroy(gameObject);
         }
 
-        currentMap = allMaps[mapUsed];
+        currentMap = new Map(mapFileLocation);
     }
 }
+
+// Map file locations are in the format 'Maps\TutorialMap.yaml'.

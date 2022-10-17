@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
-using System.IO;
-using Unity.VisualScripting;
+
 
 public class HexGrid : MonoBehaviour
 {
@@ -14,6 +10,21 @@ public class HexGrid : MonoBehaviour
     public bool canClick { get; set; } = true;
     public HexCell[,] hexCells;
     public LayerMask IgnoreMe;
+
+    [Header("Unit Data")]
+    public List<HexCoordinates> unitCoords;
+    public List<string> unitNames;
+
+    [Header("Enemy Data")]
+    public List<HexCoordinates> enemyCoords;
+    public List<string> enemyNames;
+
+    [Header("Settlement Data")]
+    public List<HexCoordinates> settlementCoords;
+    public List<string> settlementNames;
+
+    [Header("Collectable Data")]
+    public List<HexCoordinates> collectableCoords;
 
     void Awake()
     {
@@ -38,28 +49,29 @@ public class HexGrid : MonoBehaviour
             if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, ResourceFactory.HexCellImpactSite); }
         }
 
-        GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
-        GameState.Units[0].SetCell(hexCells[32, 26]);
-        GameState.Units[0].unitName = "Lucian";
-
-        GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
-        GameState.Enemies[0].SetCell(hexCells[33, 21]);
-        GameState.Enemies[0].enemyName = "Geeker";
-
-        GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
-        GameState.Enemies[1].SetCell(hexCells[18, 23]);
-        GameState.Enemies[1].enemyName = "Geeker";
-
-        GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
-        GameState.Enemies[2].SetCell(hexCells[19, 22]);
-        GameState.Enemies[2].enemyName = "Geeker";
-
-        GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
-        GameState.Settlements[0].SetCell(hexCells[18, 4]);
-        GameState.Settlements[0].settlementName = "Grapguard";
-
-        GameState.Collectables.Add(Instantiate<Collectable>(ResourceFactory.Battery));
-        GameState.Collectables[0].SetCell(hexCells[37, 7]);
+        for (int i = 0; i < unitCoords.Count; i++) 
+        {
+            GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
+            GameState.Units[i].SetCell(hexCells[unitCoords[i].X, unitCoords[i].Z]);
+            GameState.Units[i].unitName = unitNames[i];
+        }
+        for (int i = 0; i < enemyCoords.Count; i++)
+        {
+            GameState.Enemies.Add(Instantiate<Enemy>(ResourceFactory.Enemy));
+            GameState.Enemies[i].SetCell(hexCells[enemyCoords[i].X, enemyCoords[i].Z]);
+            GameState.Enemies[i].enemyName = enemyNames[i];
+        }
+        for (int i = 0; i < settlementCoords.Count; i++)
+        {
+            GameState.Settlements.Add(Instantiate<Settlement>(ResourceFactory.Settlement));
+            GameState.Settlements[i].SetCell(hexCells[settlementCoords[i].X, settlementCoords[i].Z]);
+            GameState.Settlements[i].settlementName = settlementNames[i];
+        }
+        for (int i = 0; i < collectableCoords.Count; i++)
+        {
+            GameState.Collectables.Add(Instantiate<Collectable>(ResourceFactory.Battery));
+            GameState.Collectables[i].SetCell(hexCells[collectableCoords[i].X, collectableCoords[i].Z]);
+        }
     }
 
     void Update()
