@@ -84,7 +84,6 @@ public class Enemy : MonoBehaviour
 
     public void Select()
     {
-        MasterUI.instance.UpdateUnitPanel(null, this);
         PlaySound(0);
     }
 

@@ -7,11 +7,18 @@ public class CharacterPanel : MonoBehaviour
 {
     public Text text;
     public Image image;
+    Animator anim;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void UpdateCharacterPanel(Unit unit, Enemy enemy)
     {
         if (unit != null || enemy != null)
         {
+            anim.SetBool("Appear", true);
             if (unit != null)
             {
                 text.text = unit.unitName + ", health = " + unit.health;
@@ -25,6 +32,7 @@ public class CharacterPanel : MonoBehaviour
         }
         else
         {
+            anim.SetBool("Appear", false);
             text.text = "No Character...";
             image.sprite = ResourceFactory.NoUnitSprite;
         }

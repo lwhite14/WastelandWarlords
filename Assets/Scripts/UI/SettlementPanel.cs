@@ -7,16 +7,24 @@ public class SettlementPanel : MonoBehaviour
 {
     public Text text;
     public Image image;
+    Animator anim;
+
+    void Awake() 
+    {
+        anim = GetComponent<Animator>();    
+    }
 
     public void UpdateSettlementPanel(Settlement settlement)
     {
         if (settlement != null)
         {
+            anim.SetBool("Appear", true);
             text.text = settlement.settlementName + ", level= " + settlement.level + ", at growth=" + settlement.growth;
             image.sprite = ResourceFactory.SettlementL1Sprite;
         }
         else 
         {
+            anim.SetBool("Appear", false);
             text.text = "No Settlement...";
             image.sprite = ResourceFactory.NoSettlementSprite;
         }

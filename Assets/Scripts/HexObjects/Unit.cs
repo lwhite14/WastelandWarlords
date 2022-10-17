@@ -156,8 +156,8 @@ public class Unit : MonoBehaviour
 
     public void Select()
     {
-        MasterUI.instance.UpdateUnitPanel(this, null);
         PlaySound(0);
+        MasterUI.instance.UpdateUnitPanel(this, null);
         if (!isMoving)
         {
             GameState.UnitSelected = this;
