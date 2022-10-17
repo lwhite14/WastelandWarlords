@@ -150,7 +150,7 @@ public class TutorialManager : MonoBehaviour
         Vector3 endPosition = new Vector3(settlement.transform.position.x, CameraControls.instance.GetMinCameraY(), settlement.transform.position.z - 20.0f);
 
         yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
-        yield return StartCoroutine(DisplayConversation(new string[] { "Your home, Grapguard.", "Here you are safe from the monsters who pratrol the wasteland... relatively safe..." }));
+        yield return StartCoroutine(DisplayConversation(new string[] { "Your home, Grapguard.", "Here you are safe from the monsters who patrol the wasteland... relatively safe..." }));
         
         startPosition = CameraControls.instance.transform.position;
         endPosition = new Vector3(CameraControls.instance.transform.position.x, CameraControls.instance.transform.position.y + 20.0f, CameraControls.instance.transform.position.z);
