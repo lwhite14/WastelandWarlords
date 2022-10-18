@@ -49,7 +49,7 @@ public class HexGrid : MonoBehaviour
             if (cell.type == "ImpactSite") { CreateCell(cell.coordinates, ResourceFactory.HexCellImpactSite); }
         }
 
-        for (int i = 0; i < unitCoords.Count; i++) 
+        for (int i = 0; i < unitCoords.Count; i++)
         {
             GameState.Units.Add(Instantiate<Unit>(ResourceFactory.Unit));
             GameState.Units[i].SetCell(hexCells[unitCoords[i].X, unitCoords[i].Z]);
@@ -76,9 +76,15 @@ public class HexGrid : MonoBehaviour
 
     void Update()
     {
+        if (ClickMode.UnitMode) { SelectAndMoveMode(); }
+        if (ClickMode.BuildingPlacementMode) { BuildableMode(); }
+    }
+
+    void SelectAndMoveMode() 
+    {
         if (!EventSystem.current.IsPointerOverGameObject() && canClick)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Controls.Instance.ClickLeft)
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -97,7 +103,7 @@ public class HexGrid : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetMouseButtonDown(1) && canClick) 
+            if (Controls.Instance.ClickRight && canClick)
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -145,6 +151,29 @@ public class HexGrid : MonoBehaviour
         }
     }
 
+    void BuildableMode() 
+    {
+        if (!EventSystem.current.IsPointerOverGameObject() && canClick)
+        {
+            if (Controls.Instance.ClickLeft)
+            {
+                Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(inputRay, out hit, 1000f, ~IgnoreMe))
+                {
+                    if (hit.transform.gameObject.GetComponentInParent<HexCell>() != null) 
+                    {
+                        // place building
+                        GameState.CellSelected.settlement.PlaceBuilding(hit.transform.gameObject.GetComponentInParent<HexCell>());
+                        DestroyMarkers();
+                        ClickMode.UnitMode = true;
+                        ClickMode.BuildingPlacementMode = false;
+                    }
+                }
+            }
+        }
+    }
+
     void CreateCell(HexCoordinates coords, HexCell celltype)
     {
         Vector3 position = coords.ToWorldSpace();
@@ -160,6 +189,7 @@ public class HexGrid : MonoBehaviour
         GameState.UnitSelected = null;
         GameState.CellsMovement = new List<HexCell>();
         GameState.CellsAttack = new List<HexCell>();
+        GameState.CellsBuilding = new List<HexCell>();
     }
 
     public static void DestroyMarkers() 
@@ -167,5 +197,6 @@ public class HexGrid : MonoBehaviour
         foreach (GameObject marker in GameObject.FindGameObjectsWithTag("MovementMarker")) { Destroy(marker); }
         foreach (GameObject marker in GameObject.FindGameObjectsWithTag("SelectionMarker")) { Destroy(marker); }
         foreach (GameObject marker in GameObject.FindGameObjectsWithTag("AttackMarker")) { Destroy(marker); }
+        foreach (GameObject marker in GameObject.FindGameObjectsWithTag("BuildingMarker")) { Destroy(marker); }
     }
 }

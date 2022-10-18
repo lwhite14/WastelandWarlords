@@ -39,7 +39,7 @@ public class SettlementPanel : MonoBehaviour
         buildablesPanels.SetActive(true);
     }
 
-    public void HideBuildables() 
+    public void HideBuildables()
     {
         buildablesPanels.SetActive(false);
     }

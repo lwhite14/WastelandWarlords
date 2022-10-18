@@ -29,15 +29,13 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame() 
     {
-        GameState.ResetFields();
-        GameStatistics.ResetFields();
+        ResetAllFields();
         SceneManager.LoadScene("Level1");
     }
 
     public void ReturnToMenu() 
     {
-        GameState.ResetFields();
-        GameStatistics.ResetFields();
+        ResetAllFields();
         SceneManager.LoadScene("Menu");
     }
 
@@ -46,4 +44,10 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    void ResetAllFields() 
+    {
+        GameState.ResetFields();
+        GameStatistics.ResetFields();
+        ClickMode.ResetFields();
+    }
 }

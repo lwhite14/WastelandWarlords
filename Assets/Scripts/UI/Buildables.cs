@@ -8,11 +8,11 @@ public class Buildables : MonoBehaviour
 
     public void Granary() 
     {
-        if (GameState.CellSelected.settlement != null) { GameState.CellSelected.settlement.BuildGranary(); }
+        if (GameState.CellSelected.settlement != null) { GameState.CellSelected.settlement.DisplayGranaryMarkers(); }
     }
 
     public void Market() 
     {
-        if (GameState.CellSelected.settlement != null) { GameState.CellSelected.settlement.BuildMarket(); }
+        if (GameState.CellSelected.settlement != null) { GameState.CellSelected.settlement.DisplayMarketMarkers(); }
     }
 }

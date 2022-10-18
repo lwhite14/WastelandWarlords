@@ -6,6 +6,7 @@ public static class GameState
     public static HexCell           CellSelected { get; set; }      = null;
     public static List<HexCell>     CellsMovement { get; set; }     = new List<HexCell>();
     public static List<HexCell>     CellsAttack { get; set; }       = new List<HexCell>();
+    public static List<HexCell>     CellsBuilding { get; set; }     = new List<HexCell>();
     public static Unit              UnitSelected { get; set; }      = null;
     public static List<Unit>        Units { get; set; }             = new List<Unit>();
     public static List<Enemy>       Enemies { get; set; }           = new List<Enemy>();
@@ -17,6 +18,7 @@ public static class GameState
         CellSelected = null;
         CellsMovement = new List<HexCell>();
         CellsAttack = new List<HexCell>();
+        CellsBuilding = new List<HexCell>();
         UnitSelected = null;
         Units = new List<Unit>();
         Enemies = new List<Enemy>();

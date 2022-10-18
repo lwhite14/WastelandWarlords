@@ -18,6 +18,8 @@ public class Settlement : MonoBehaviour
     public int growth { get; set; } = 0;
     public List<SettlementBuilding> buildings { get; set; } = new List<SettlementBuilding>();
 
+    SettlementBuilding buildingToPlace = null;
+
     void Start()
     {
         UpgradeLevel();
@@ -78,29 +80,82 @@ public class Settlement : MonoBehaviour
         return false;
     }
 
-    public void BuildGranary()
+    public void DisplayGranaryMarkers()
     {
-        if (HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].settlementBuilding == null)
+        buildingToPlace = ResourceFactory.Granary;
+        DisplayBuildingMarkers();
+    }
+
+    public void DisplayMarketMarkers() 
+    {
+        buildingToPlace = ResourceFactory.Market;
+        DisplayBuildingMarkers();
+    }
+
+    public void DisplayBuildingMarkers() 
+    {
+        ClickMode.UnitMode = false;
+        ClickMode.BuildingPlacementMode = true;
+        GameState.CellsBuilding = new List<HexCell>();
+
+        HexCell topLeft = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z];
+        HexCell topRight = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z];
+        HexCell bottomLeft = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.BottomLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.BottomLeft.Z];
+        HexCell bottomRight = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.BottomRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.BottomRight.Z];
+        HexCell left = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.Left.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.Left.Z];
+        HexCell right = HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.Right.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.Right.Z];
+
+        if (topLeft.settlementBuilding == null)
         {
-            SettlementBuilding settlementBuilding = Instantiate<SettlementBuilding>(ResourceFactory.Granary);
-            settlementBuilding.transform.SetParent(HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].topTarget);
-            settlementBuilding.transform.localPosition = new Vector3(0, 0, 0);
-            settlementBuilding.settlement = this;
-            HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].settlementBuilding = settlementBuilding;
-            buildings.Add(settlementBuilding);
+            GameState.CellsBuilding.Add(topLeft);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(topLeft.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        if (topRight.settlementBuilding == null)
+        {
+            GameState.CellsBuilding.Add(topRight);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(topRight.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        if (bottomLeft.settlementBuilding == null)
+        {
+            GameState.CellsBuilding.Add(bottomLeft);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(bottomLeft.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        if (bottomRight.settlementBuilding == null)
+        {
+            GameState.CellsBuilding.Add(bottomRight);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(bottomRight.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        if (left.settlementBuilding == null)
+        {
+            GameState.CellsBuilding.Add(left);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(left.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        if (right.settlementBuilding == null)
+        {
+            GameState.CellsBuilding.Add(right);
+            GameObject tempObj = Instantiate<GameObject>(ResourceFactory.BuildingMarker);
+            tempObj.transform.SetParent(right.topTarget.transform);
+            tempObj.transform.localPosition = new Vector3(0, 0, 0);
         }
     }
 
-    public void BuildMarket() 
+    public void PlaceBuilding(HexCell cell) 
     {
-        if (HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].settlementBuilding == null)
-        {
-            SettlementBuilding settlementBuilding = Instantiate<SettlementBuilding>(ResourceFactory.Market);
-            settlementBuilding.transform.SetParent(HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].topTarget);
-            settlementBuilding.transform.localPosition = new Vector3(0, 0, 0);
-            settlementBuilding.settlement = this;
-            HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].settlementBuilding = settlementBuilding;
-            buildings.Add(settlementBuilding);
-        }
+        SettlementBuilding settlementBuilding = Instantiate<SettlementBuilding>(buildingToPlace);
+        settlementBuilding.transform.SetParent(cell.topTarget);
+        settlementBuilding.transform.localPosition = new Vector3(0, 0, 0);
+        settlementBuilding.settlement = this;
+        cell.settlementBuilding = settlementBuilding;
+        buildings.Add(settlementBuilding);
     }
 }
