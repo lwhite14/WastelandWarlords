@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Settlement : MonoBehaviour
 {
-    public static int growthForLevel2 = 40;
-    public static int growthForLevel3 = 80;
+    public static int GrowthForLevel2 = 40;
+    public static int GrowthForLevel3 = 80;
+    public static int BaseMoolah = 400;
+    public static int BaseGrowthPerTurn = 10;
 
-
-    public HexCell cellOn { get; private set; }
-    public string settlementName { get; set; }
-    public int level { get; private set; }
-    public int growth { get; set; } = 0;
-    public int growthPerTurn { get; set; }
     public Transform gfxSlot;
     public float sightRange = 5.0f;
 
+    public HexCell cellOn { get; private set; }
+    public string settlementName { get; set; }
+    public int level { get; private set; } = 1;
+    public int growth { get; set; } = 0;
+
     void Start()
     {
-        level = 1;
-        growthPerTurn = 10;
         UpgradeLevel();
-        FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
+        FogOfWar.Instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
     }
 
     public void SetCell(HexCell newCell)
@@ -43,7 +42,7 @@ public class Settlement : MonoBehaviour
 
     public void EndTurnGrowth() 
     {
-        growth += growthPerTurn;
+        growth += BaseGrowthPerTurn;
         if (ReachedNextLevel()) { UpgradeLevel(); }
     }
 
@@ -59,19 +58,19 @@ public class Settlement : MonoBehaviour
     {
         if (level == 1) 
         {
-            if (growth >= growthForLevel2) 
+            if (growth >= GrowthForLevel2) 
             {
                 level = 2;
-                growth -= growthForLevel2;
+                growth -= GrowthForLevel2;
                 return true;
             }
         }
         if (level == 2)
         {
-            if (growth >= growthForLevel3) 
+            if (growth >= GrowthForLevel3) 
             {
                 level = 3;
-                growth -= growthForLevel3;
+                growth -= GrowthForLevel3;
                 return true;
             }
         }

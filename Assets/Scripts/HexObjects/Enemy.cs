@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
                 hasBeenTrued = true;
                 if (!firstSeen) 
                 {
-                    FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
+                    FogOfWar.Instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
                     firstSeen = true;
                 }
             }
@@ -127,51 +127,51 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator Movement() 
     {
-        Unit unitTopLeft = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.TopLeft.X, cellOn.coordinates.Z + MovementFinder.TopLeft.Z].unit;
-        Unit unitTopRight = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.TopRight.X, cellOn.coordinates.Z + MovementFinder.TopRight.Z].unit;
-        Unit unitBottomLeft = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.BottomLeft.X, cellOn.coordinates.Z + MovementFinder.BottomLeft.Z].unit;
-        Unit unitBottomRight = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.BottomRight.X, cellOn.coordinates.Z + MovementFinder.BottomRight.Z].unit;
-        Unit unitLeft = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.Left.X, cellOn.coordinates.Z + MovementFinder.Left.Z].unit;
-        Unit unitRight = HexGrid.instance.hexCells[cellOn.coordinates.X + MovementFinder.Right.X, cellOn.coordinates.Z + MovementFinder.Right.Z].unit;
+        Unit unitTopLeft = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.TopLeft.X, cellOn.coordinates.Z + MovementFinder.TopLeft.Z].unit;
+        Unit unitTopRight = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.TopRight.X, cellOn.coordinates.Z + MovementFinder.TopRight.Z].unit;
+        Unit unitBottomLeft = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.BottomLeft.X, cellOn.coordinates.Z + MovementFinder.BottomLeft.Z].unit;
+        Unit unitBottomRight = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.BottomRight.X, cellOn.coordinates.Z + MovementFinder.BottomRight.Z].unit;
+        Unit unitLeft = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.Left.X, cellOn.coordinates.Z + MovementFinder.Left.Z].unit;
+        Unit unitRight = HexGrid.Instance.hexCells[cellOn.coordinates.X + MovementFinder.Right.X, cellOn.coordinates.Z + MovementFinder.Right.Z].unit;
         if (unitTopLeft != null) 
         {
             anim.Play("Attack");
-            transform.LookAt(HexGrid.instance.hexCells[unitTopLeft.cellOn.coordinates.X, unitTopLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitTopLeft.cellOn.coordinates.X, unitTopLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitTopLeft.GiveDamage(damage);
         }
         else if (unitTopRight != null)
         {
             anim.Play("Attack");
-            transform.LookAt(HexGrid.instance.hexCells[unitTopRight.cellOn.coordinates.X, unitTopRight.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitTopRight.cellOn.coordinates.X, unitTopRight.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitTopRight.GiveDamage(damage);
         }
         else if (unitBottomLeft != null)
         {
             anim.Play("Attack"); 
-            transform.LookAt(HexGrid.instance.hexCells[unitBottomLeft.cellOn.coordinates.X, unitBottomLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitBottomLeft.cellOn.coordinates.X, unitBottomLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitBottomLeft.GiveDamage(damage);
         }
         else if (unitBottomRight != null)
         {
             anim.Play("Attack");
-            transform.LookAt(HexGrid.instance.hexCells[unitBottomRight.cellOn.coordinates.X, unitBottomRight.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitBottomRight.cellOn.coordinates.X, unitBottomRight.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitBottomRight.GiveDamage(damage);
         }
         else if (unitLeft != null)
         {
             anim.Play("Attack");
-            transform.LookAt(HexGrid.instance.hexCells[unitLeft.cellOn.coordinates.X, unitLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitLeft.cellOn.coordinates.X, unitLeft.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitLeft.GiveDamage(damage);
         }
         else if (unitRight != null)
         {
             anim.Play("Attack");
-            transform.LookAt(HexGrid.instance.hexCells[unitRight.cellOn.coordinates.X, unitRight.cellOn.coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[unitRight.cellOn.coordinates.X, unitRight.cellOn.coordinates.Z].topTarget, Vector3.up);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             unitRight.GiveDamage(damage);
         }

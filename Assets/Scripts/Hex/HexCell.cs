@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HexCell : MonoBehaviour
 {
@@ -25,11 +24,11 @@ public class HexCell : MonoBehaviour
         GameObject selectionMarker = Instantiate<GameObject>(ResourceFactory.SelectionMarker);
         selectionMarker.transform.SetParent(topTarget);
         selectionMarker.transform.localPosition = new Vector3(0, 0, 0);
-        MasterUI.instance.UpdateTerrainPanel(this);
+        MasterUI.Instance.UpdateTerrainPanel(this);
         if (unit != null) { unit.Select(); }
         if (settlement != null) { settlement.Select(); }
         if (enemy != null) { enemy.Select(); }
-        MasterUI.instance.UpdateAllUI();
+        MasterUI.Instance.UpdateAllUI();
     }
 
     public void Unselect() 

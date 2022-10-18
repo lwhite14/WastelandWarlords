@@ -6,8 +6,8 @@ using UnityEngine;
 public class HexCoordinates
 {
     [SerializeField]
-    private int x, z;
-    private float height;
+    int x, z;
+    float height;
 
     public int X
     {

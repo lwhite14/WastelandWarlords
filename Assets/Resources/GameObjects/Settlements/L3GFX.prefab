@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 8209397026032267818}
   - component: {fileID: 5202870121030935063}
   m_Layer: 0
-  m_Name: GFX (1)
+  m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 1377141874952316086}
   - component: {fileID: 5935957117761149167}
   m_Layer: 0
-  m_Name: GFX (3)
+  m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

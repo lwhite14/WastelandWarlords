@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Music : MonoBehaviour
 {
-    public static Music instance = null;
+    public static Music Instance = null;
 
     AudioSource audioSource;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CurrentMap : MonoBehaviour
 {
-    public static CurrentMap instance = null;
+    public static CurrentMap Instance = null;
 
     public Map currentMap;
     public string mapFileLocation;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }

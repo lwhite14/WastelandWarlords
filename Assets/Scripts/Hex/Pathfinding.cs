@@ -35,11 +35,11 @@ namespace HexPathfinding
 
         public static void CreateNodes(List<MovementNode> returnCells, MovementNode rootNode) 
         {
-            if (((rootNode.coordinates + TopRight).X >= 0) && ((rootNode.coordinates + TopRight).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + TopRight).X >= 0) && ((rootNode.coordinates + TopRight).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + TopRight).Z >= 0) && ((rootNode.coordinates + TopRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + TopRight).Z >= 0) && ((rootNode.coordinates + TopRight).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + TopRight).X, (rootNode.coordinates + TopRight).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + TopRight).X, (rootNode.coordinates + TopRight).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -58,11 +58,11 @@ namespace HexPathfinding
                 }
             }
 
-            if (((rootNode.coordinates + TopLeft).X >= 0) && ((rootNode.coordinates + TopLeft).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + TopLeft).X >= 0) && ((rootNode.coordinates + TopLeft).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + TopLeft).Z >= 0) && ((rootNode.coordinates + TopLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + TopLeft).Z >= 0) && ((rootNode.coordinates + TopLeft).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + TopLeft).X, (rootNode.coordinates + TopLeft).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + TopLeft).X, (rootNode.coordinates + TopLeft).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -81,11 +81,11 @@ namespace HexPathfinding
                 }
             }
 
-            if (((rootNode.coordinates + BottomRight).X >= 0) && ((rootNode.coordinates + BottomRight).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + BottomRight).X >= 0) && ((rootNode.coordinates + BottomRight).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + BottomRight).Z >= 0) && ((rootNode.coordinates + BottomRight).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + BottomRight).Z >= 0) && ((rootNode.coordinates + BottomRight).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + BottomRight).X, (rootNode.coordinates + BottomRight).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + BottomRight).X, (rootNode.coordinates + BottomRight).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -104,11 +104,11 @@ namespace HexPathfinding
                 }
             }
 
-            if (((rootNode.coordinates + BottomLeft).X >= 0) && ((rootNode.coordinates + BottomLeft).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + BottomLeft).X >= 0) && ((rootNode.coordinates + BottomLeft).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + BottomLeft).Z >= 0) && ((rootNode.coordinates + BottomLeft).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + BottomLeft).Z >= 0) && ((rootNode.coordinates + BottomLeft).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + BottomLeft).X, (rootNode.coordinates + BottomLeft).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + BottomLeft).X, (rootNode.coordinates + BottomLeft).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -127,11 +127,11 @@ namespace HexPathfinding
                 }
             }
 
-            if (((rootNode.coordinates + Left).X >= 0) && ((rootNode.coordinates + Left).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + Left).X >= 0) && ((rootNode.coordinates + Left).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + Left).Z >= 0) && ((rootNode.coordinates + Left).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + Left).Z >= 0) && ((rootNode.coordinates + Left).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + Left).X, (rootNode.coordinates + Left).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + Left).X, (rootNode.coordinates + Left).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -150,11 +150,11 @@ namespace HexPathfinding
                 }
             }
 
-            if (((rootNode.coordinates + Right).X >= 0) && ((rootNode.coordinates + Right).X <= CurrentMap.instance.currentMap.GetWidth() - 1))
+            if (((rootNode.coordinates + Right).X >= 0) && ((rootNode.coordinates + Right).X <= CurrentMap.Instance.currentMap.GetWidth() - 1))
             {
-                if (((rootNode.coordinates + Right).Z >= 0) && ((rootNode.coordinates + Right).Z <= CurrentMap.instance.currentMap.GetHeight() - 1))
+                if (((rootNode.coordinates + Right).Z >= 0) && ((rootNode.coordinates + Right).Z <= CurrentMap.Instance.currentMap.GetHeight() - 1))
                 {
-                    HexCell cell = HexGrid.instance.hexCells[(rootNode.coordinates + Right).X, (rootNode.coordinates + Right).Z];
+                    HexCell cell = HexGrid.Instance.hexCells[(rootNode.coordinates + Right).X, (rootNode.coordinates + Right).Z];
                     if (cell != null)
                     {
                         if (cell.unit == null)
@@ -185,7 +185,7 @@ namespace HexPathfinding
         {
             this.prevNode = prevNode;
             if (rootNode)   { this.movementPointsLeft = movementPointsPreMove; }
-            else            { this.movementPointsLeft = movementPointsPreMove - HexGrid.instance.hexCells[coordinates.X, coordinates.Z].movementCost; }
+            else            { this.movementPointsLeft = movementPointsPreMove - HexGrid.Instance.hexCells[coordinates.X, coordinates.Z].movementCost; }
             this.coordinates = coordinates;
         }
 

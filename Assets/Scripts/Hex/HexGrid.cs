@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class HexGrid : MonoBehaviour
 {
-    public static HexGrid instance = null;
+    public static HexGrid Instance = null;
 
     public bool canClick { get; set; } = true;
     public HexCell[,] hexCells;
@@ -28,11 +28,11 @@ public class HexGrid : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -40,8 +40,8 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
-        hexCells = new HexCell[CurrentMap.instance.currentMap.GetWidth(), CurrentMap.instance.currentMap.GetHeight()];
-        foreach (HexCellAbstract cell in CurrentMap.instance.currentMap.GetCells())
+        hexCells = new HexCell[CurrentMap.Instance.currentMap.GetWidth(), CurrentMap.Instance.currentMap.GetHeight()];
+        foreach (HexCellAbstract cell in CurrentMap.Instance.currentMap.GetCells())
         {
             if (cell.type == "Water") { CreateCell(cell.coordinates, ResourceFactory.HexCellWater); }
             if (cell.type == "Plains") { CreateCell(cell.coordinates, ResourceFactory.HexCellPlains); }

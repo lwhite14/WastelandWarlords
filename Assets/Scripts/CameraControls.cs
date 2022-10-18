@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class CameraControls : MonoBehaviour
 {
-    public static CameraControls instance = null;
+    public static CameraControls Instance = null;
 
     public float moveSpeed = 10.0f;
     public float scrollSpeed = 10.0f;
@@ -23,11 +23,11 @@ public class CameraControls : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -35,10 +35,10 @@ public class CameraControls : MonoBehaviour
 
     void Start()
     {
-        minCameraX = CurrentMap.instance.currentMap.GetBottomLeftCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.instance.currentMap.GetBottomLeftCoords().Z); 
-        maxCameraX = CurrentMap.instance.currentMap.GetBottomRightCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.instance.currentMap.GetBottomRightCoords().Z);
-        minCameraZ = CurrentMap.instance.currentMap.GetBottomLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
-        maxCameraZ = CurrentMap.instance.currentMap.GetTopLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
+        minCameraX = CurrentMap.Instance.currentMap.GetBottomLeftCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.Instance.currentMap.GetBottomLeftCoords().Z); 
+        maxCameraX = CurrentMap.Instance.currentMap.GetBottomRightCoords().X * (HexMetrics.innerRadius * 2f) + (HexMetrics.innerRadius * CurrentMap.Instance.currentMap.GetBottomRightCoords().Z);
+        minCameraZ = CurrentMap.Instance.currentMap.GetBottomLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
+        maxCameraZ = CurrentMap.Instance.currentMap.GetTopLeftCoords().Z * (HexMetrics.outerRadius * 1.5f);
         //transform.position = new Vector3(minCameraX + ((maxCameraX - minCameraX) / 2), transform.position.y, minCameraZ + ((maxCameraZ - minCameraZ) / 2));
         transform.position = new Vector3(GameState.Units[0].transform.position.x, transform.position.y, GameState.Units[0].transform.position.z);
     }
@@ -48,7 +48,7 @@ public class CameraControls : MonoBehaviour
         float yPos = transform.position.y;
         if (control)
         {
-            yPos -= Controls.instance.ScrollVal * Time.deltaTime * scrollSpeed * yConstant;
+            yPos -= Controls.Instance.ScrollVal * Time.deltaTime * scrollSpeed * yConstant;
         }
         yPos = Mathf.Clamp(yPos, minCameraY, maxCameraY);
 
@@ -56,19 +56,19 @@ public class CameraControls : MonoBehaviour
         float zPos = transform.position.z;
         if (control)
         {
-            if (Controls.instance.UpKey)
+            if (Controls.Instance.UpKey)
             {
                 zPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Controls.instance.DownKey)
+            if (Controls.Instance.DownKey)
             {
                 zPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Controls.instance.LeftKey)
+            if (Controls.Instance.LeftKey)
             {
                 xPos -= moveSpeed * Time.deltaTime * (yPos / yConstant);
             }
-            if (Controls.instance.RightKey)
+            if (Controls.Instance.RightKey)
             {
                 xPos += moveSpeed * Time.deltaTime * (yPos / yConstant);
             }

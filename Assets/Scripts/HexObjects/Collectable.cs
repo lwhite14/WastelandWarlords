@@ -8,7 +8,7 @@ public class Collectable : MonoBehaviour
 
     public void Start()
     {
-        FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), 15.0f);
+        FogOfWar.Instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), 15.0f);
     }
 
     public void SetCell(HexCell newCell)
@@ -26,7 +26,7 @@ public class Collectable : MonoBehaviour
 
     public void PickUp() 
     {
-        if (TutorialManager.instance != null) { if (!TutorialManager.instance.haveBattery) { TutorialManager.instance.haveBattery = true; TutorialManager.instance.CollectedBattery(); } }
+        if (TutorialManager.Instance != null) { if (!TutorialManager.Instance.haveBattery) { TutorialManager.Instance.haveBattery = true; TutorialManager.Instance.CollectedBattery(); } }
         Destroy(gameObject);
     }
 }

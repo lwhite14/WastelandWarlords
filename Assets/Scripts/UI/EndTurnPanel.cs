@@ -11,7 +11,7 @@ public class EndTurnPanel : MonoBehaviour
 
     IEnumerator EndTurn()
     {
-        MasterUI.instance.EndTurnPanel(true);
+        MasterUI.Instance.EndTurnPanel(true);
         HexGrid.DestroyMarkers();
         HexGrid.ResetMarkerCellLists();
         yield return StartCoroutine(EnemyMoves());
@@ -24,13 +24,13 @@ public class EndTurnPanel : MonoBehaviour
         foreach (Settlement settlement in GameState.Settlements)
         {
             settlement.EndTurnGrowth();
+            GameStatistics.Moolah += Settlement.BaseMoolah;
             yield return null;
         }
-        MasterUI.instance.UpdateAllUI();
+        MasterUI.Instance.UpdateAllUI();
         if (GameState.CellSelected != null) { GameState.CellSelected.Select(); }
-        MasterUI.instance.EndTurnPanel(false);
+        MasterUI.Instance.EndTurnPanel(false);
         GameStatistics.TurnNumber++;
-        GameStatistics.Moolah += 1500;
         yield return null;
     }
 

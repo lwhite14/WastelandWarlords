@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FogOfWar : MonoBehaviour
 {
-    public static FogOfWar instance = null;
+    public static FogOfWar Instance = null;
 
     public LayerMask fogLayer;
 
@@ -14,11 +14,11 @@ public class FogOfWar : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
-    public static Controls instance = null;
+    public static Controls Instance = null;
 
     public float ScrollVal { get; set; } = 0.0f;
     public bool LeftKey { get; set; } = false;
@@ -16,11 +16,11 @@ public class Controls : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MasterUI : MonoBehaviour
 {
-    public static MasterUI instance = null;
+    public static MasterUI Instance = null;
 
     public TerrainPanel terrainPanel;
     public CharacterPanel characterPanel;
@@ -15,11 +15,11 @@ public class MasterUI : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }

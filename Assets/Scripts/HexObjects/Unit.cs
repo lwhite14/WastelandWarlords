@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
     public HexCell cellOn { get; private set; }
     public string unitName { get; set; }
 
-    private void Awake()
+    void Awake()
     {
         GFX = transform.GetChild(0).gameObject;
         audioSource = GetComponent<AudioSource>();
@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour
     {
         movementPoints = fullMovementPoints;
         CalcUIState();
-        FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
+        FogOfWar.Instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
     }
 
     public void SetCell(HexCell newCell)
@@ -64,7 +64,7 @@ public class Unit : MonoBehaviour
         PlaySound(1);
 
         MovementNode prevNode = attackCell.topTarget.GetComponentInChildren<HexMarker>().movementNode.prevNode;
-        HexCell cellToMoveTo = HexGrid.instance.hexCells[prevNode.coordinates.X, prevNode.coordinates.Z];
+        HexCell cellToMoveTo = HexGrid.Instance.hexCells[prevNode.coordinates.X, prevNode.coordinates.Z];
 
         cellOn.unit = null;
         cellOn = cellToMoveTo;
@@ -103,15 +103,15 @@ public class Unit : MonoBehaviour
         for (int i = nodes.Count - 1; i >= 0; i--)
         {
             GFX.SetActive(true);
-            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.GetComponentInChildren<Settlement>() != null) { GFX.SetActive(false); }
+            if (HexGrid.Instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.GetComponentInChildren<Settlement>() != null) { GFX.SetActive(false); }
             if (GFX.activeInHierarchy) { anim.SetBool("isRunning", true); }
 
             Vector3 startingPosition = transform.position;
-            Vector3 endPosition = HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.position;
+            Vector3 endPosition = HexGrid.Instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget.position;
             Vector3 newPosition;
 
 
-            transform.LookAt(HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget, Vector3.up);
+            transform.LookAt(HexGrid.Instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].topTarget, Vector3.up);
             float progress = 0.0f;
             while (progress < 1.0f)
             {
@@ -122,11 +122,11 @@ public class Unit : MonoBehaviour
             }
             newPosition = Vector3.Lerp(startingPosition, endPosition, 1.0f);
             transform.position = newPosition;
-            FogOfWar.instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
+            FogOfWar.Instance.CalculateVertexAlphas(transform.position, new Vector3(transform.position.x, transform.position.y + 200.0f, transform.position.z), sightRange);
             GameStatistics.HexesTraversed++;
-            if (HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null)
+            if (HexGrid.Instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable != null)
             {
-                HexGrid.instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();
+                HexGrid.Instance.hexCells[nodes[i].coordinates.X, nodes[i].coordinates.Z].collectable.PickUp();
             }
             yield return null;
         }
@@ -147,17 +147,17 @@ public class Unit : MonoBehaviour
     IEnumerator AttackEnemy(MovementNode toNode, HexCell newCell, Enemy enemy)
     {
         yield return LerpUnit(toNode, newCell);
-        transform.LookAt(HexGrid.instance.hexCells[enemy.cellOn.coordinates.X, enemy.cellOn.coordinates.Z].topTarget, Vector3.up);
+        transform.LookAt(HexGrid.Instance.hexCells[enemy.cellOn.coordinates.X, enemy.cellOn.coordinates.Z].topTarget, Vector3.up);
         anim.Play("Attack");
         enemy.GiveDamage(damage);
-        MasterUI.instance.UpdateAllUI();
+        MasterUI.Instance.UpdateAllUI();
         yield return null;
     }
 
     public void Select()
     {
         PlaySound(0);
-        MasterUI.instance.UpdateUnitPanel(this, null);
+        MasterUI.Instance.UpdateUnitPanel(this, null);
         if (!isMoving)
         {
             GameState.UnitSelected = this;
@@ -166,19 +166,19 @@ public class Unit : MonoBehaviour
             {
                 if (node.coordinates != cellOn.coordinates)
                 {
-                    if (HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].enemy == null)
+                    if (HexGrid.Instance.hexCells[node.coordinates.X, node.coordinates.Z].enemy == null)
                     {
                         GameObject tempMovementMarker = Instantiate<GameObject>(ResourceFactory.MovementMarker);
-                        tempMovementMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
-                        GameState.CellsMovement.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
+                        tempMovementMarker.transform.SetParent(HexGrid.Instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
+                        GameState.CellsMovement.Add(HexGrid.Instance.hexCells[node.coordinates.X, node.coordinates.Z]);
                         tempMovementMarker.transform.localPosition = new Vector3(0, 0.0f, 0);
                         tempMovementMarker.GetComponent<HexMarker>().movementNode = node;
                     }
                     else
                     {
                         GameObject tempAttackMarker = Instantiate<GameObject>(ResourceFactory.AttackMarker);
-                        tempAttackMarker.transform.SetParent(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
-                        GameState.CellsAttack.Add(HexGrid.instance.hexCells[node.coordinates.X, node.coordinates.Z]);
+                        tempAttackMarker.transform.SetParent(HexGrid.Instance.hexCells[node.coordinates.X, node.coordinates.Z].topTarget);
+                        GameState.CellsAttack.Add(HexGrid.Instance.hexCells[node.coordinates.X, node.coordinates.Z]);
                         tempAttackMarker.transform.localPosition = new Vector3(0, 0.0f, 0);
                         tempAttackMarker.GetComponent<HexMarker>().movementNode = node;
                     }
@@ -215,7 +215,7 @@ public class Unit : MonoBehaviour
         PlayDeathSound();
         GameState.Units.Remove(this);
         this.cellOn.unit = null;
-        if (TutorialManager.instance != null) { TutorialManager.instance.UnitDied(); }
+        if (TutorialManager.Instance != null) { TutorialManager.Instance.UnitDied(); }
         Destroy(gameObject);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class TutorialManager : MonoBehaviour
 {
-    public static TutorialManager instance = null;
+    public static TutorialManager Instance = null;
 
     public Text TextBox;
     bool firstEnemySpotted = false;
@@ -21,11 +21,11 @@ public class TutorialManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -96,14 +96,14 @@ public class TutorialManager : MonoBehaviour
     IEnumerator ReturnedWithBattery()
     {
         yield return StartCoroutine(DisplayConversation(new string[] { "Wow well done!", "I really didn't think you would make it home.", "A successful mission. You felled " + GameStatistics.EnemiesFelled.ToString() + " enemies, traversed " + GameStatistics.HexesTraversed.ToString() + " hexes, all in " + GameStatistics.TurnNumber.ToString() + " turns!" }));
-        LevelManager.instance.ReturnToMenu();
+        LevelManager.Instance.ReturnToMenu();
         yield return null;
     }
 
     IEnumerator UnitDiedNotification() 
     {
         yield return StartCoroutine(DisplayConversation(new string[] { "Oh no... Lucian has perished...", "On other levels you will be able to recruit more units, but for now you just have Lucian...", "...or you had Lucian...", "Let's have another go!" }));
-        LevelManager.instance.StartGame();
+        LevelManager.Instance.StartGame();
         yield return null;
     }
 
@@ -122,85 +122,85 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator SpottingFirstEnemy(Enemy enemy) 
     {
-        CameraControls.instance.control = false;
-        HexGrid.instance.canClick = false;
+        CameraControls.Instance.control = false;
+        HexGrid.Instance.canClick = false;
 
-        Vector3 startPosition = CameraControls.instance.transform.position;
-        Vector3 endPosition = new Vector3(enemy.transform.position.x, CameraControls.instance.GetMinCameraY(), enemy.transform.position.z - 20.0f);
+        Vector3 startPosition = CameraControls.Instance.transform.position;
+        Vector3 endPosition = new Vector3(enemy.transform.position.x, CameraControls.Instance.GetMinCameraY(), enemy.transform.position.z - 20.0f);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
         yield return StartCoroutine(DisplayConversation(new string[] {"He's just standing there... menacingly...", "You can attack him, or go around him, but don't get too close before you end your turn..." }));
 
-        startPosition = CameraControls.instance.transform.position;
-        endPosition = new Vector3(CameraControls.instance.transform.position.x, CameraControls.instance.transform.position.y + 20.0f, CameraControls.instance.transform.position.z);
+        startPosition = CameraControls.Instance.transform.position;
+        endPosition = new Vector3(CameraControls.Instance.transform.position.x, CameraControls.Instance.transform.position.y + 20.0f, CameraControls.Instance.transform.position.z);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
 
-        CameraControls.instance.control = true;
-        HexGrid.instance.canClick = true;
+        CameraControls.Instance.control = true;
+        HexGrid.Instance.canClick = true;
         yield return null;
     }
 
     IEnumerator SpottingFirstSettlement(Settlement settlement) 
     {
-        CameraControls.instance.control = false;
-        HexGrid.instance.canClick = false;
+        CameraControls.Instance.control = false;
+        HexGrid.Instance.canClick = false;
 
-        Vector3 startPosition = CameraControls.instance.transform.position;
-        Vector3 endPosition = new Vector3(settlement.transform.position.x, CameraControls.instance.GetMinCameraY(), settlement.transform.position.z - 20.0f);
+        Vector3 startPosition = CameraControls.Instance.transform.position;
+        Vector3 endPosition = new Vector3(settlement.transform.position.x, CameraControls.Instance.GetMinCameraY(), settlement.transform.position.z - 20.0f);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
         yield return StartCoroutine(DisplayConversation(new string[] { "Your home, Grapguard.", "Here you are safe from the monsters who patrol the wasteland... relatively safe..." }));
         
-        startPosition = CameraControls.instance.transform.position;
-        endPosition = new Vector3(CameraControls.instance.transform.position.x, CameraControls.instance.transform.position.y + 20.0f, CameraControls.instance.transform.position.z);
+        startPosition = CameraControls.Instance.transform.position;
+        endPosition = new Vector3(CameraControls.Instance.transform.position.x, CameraControls.Instance.transform.position.y + 20.0f, CameraControls.Instance.transform.position.z);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
 
-        CameraControls.instance.control = true;
-        HexGrid.instance.canClick = true;
+        CameraControls.Instance.control = true;
+        HexGrid.Instance.canClick = true;
         yield return null;
     }
 
     IEnumerator SpottingFirstUnit(Unit unit)
     {
-        CameraControls.instance.control = false;
-        HexGrid.instance.canClick = false;
+        CameraControls.Instance.control = false;
+        HexGrid.Instance.canClick = false;
 
-        Vector3 startPosition = CameraControls.instance.transform.position;
-        Vector3 endPosition = new Vector3(unit.transform.position.x, CameraControls.instance.GetMinCameraY(), unit.transform.position.z - 20.0f);
+        Vector3 startPosition = CameraControls.Instance.transform.position;
+        Vector3 endPosition = new Vector3(unit.transform.position.x, CameraControls.Instance.GetMinCameraY(), unit.transform.position.z - 20.0f);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
         yield return StartCoroutine(DisplayConversation(new string[] { "Your faithful servant, Lucian.", "He will carry out your will, as long as you keep him safe...", "Left-click him to display his movement range, right-click to move him!", "You can get more movement points for Lucian by ending your turn..." }));
 
-        startPosition = CameraControls.instance.transform.position;
-        endPosition = new Vector3(CameraControls.instance.transform.position.x, CameraControls.instance.transform.position.y + 20.0f, CameraControls.instance.transform.position.z);
+        startPosition = CameraControls.Instance.transform.position;
+        endPosition = new Vector3(CameraControls.Instance.transform.position.x, CameraControls.Instance.transform.position.y + 20.0f, CameraControls.Instance.transform.position.z);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
 
-        CameraControls.instance.control = true;
-        HexGrid.instance.canClick = true;
+        CameraControls.Instance.control = true;
+        HexGrid.Instance.canClick = true;
         yield return null;
     }
 
     IEnumerator SpottingBattery(Collectable battery)
     {
-        CameraControls.instance.control = false;
-        HexGrid.instance.canClick = false;
+        CameraControls.Instance.control = false;
+        HexGrid.Instance.canClick = false;
 
-        Vector3 startPosition = CameraControls.instance.transform.position;
-        Vector3 endPosition = new Vector3(battery.transform.position.x, CameraControls.instance.GetMinCameraY(), battery.transform.position.z - 20.0f);
+        Vector3 startPosition = CameraControls.Instance.transform.position;
+        Vector3 endPosition = new Vector3(battery.transform.position.x, CameraControls.Instance.GetMinCameraY(), battery.transform.position.z - 20.0f);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
         yield return StartCoroutine(DisplayConversation(new string[] { "We need some batteries... do you mind popping out to grab some? Thanks." }));
 
-        startPosition = CameraControls.instance.transform.position;
-        endPosition = new Vector3(GameState.Units[0].transform.position.x, CameraControls.instance.transform.position.y + 20.0f, GameState.Units[0].transform.position.z - 20.0f);
+        startPosition = CameraControls.Instance.transform.position;
+        endPosition = new Vector3(GameState.Units[0].transform.position.x, CameraControls.Instance.transform.position.y + 20.0f, GameState.Units[0].transform.position.z - 20.0f);
 
-        yield return LerpToPoint(CameraControls.instance.transform, startPosition, endPosition);
+        yield return LerpToPoint(CameraControls.Instance.transform, startPosition, endPosition);
 
-        CameraControls.instance.control = true;
-        HexGrid.instance.canClick = true;
+        CameraControls.Instance.control = true;
+        HexGrid.Instance.canClick = true;
         yield return null;
     }
 

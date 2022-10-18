@@ -8,7 +8,7 @@
     public static int TurnNumber 
     {
         get { return turnNumber; }
-        set { turnNumber = value; MasterUI.instance.UpdateTopDock(); }
+        set { turnNumber = value; MasterUI.Instance.UpdateTopDock(); }
     }
 
     public static int EnemiesFelled 
@@ -26,7 +26,7 @@
     public static int Moolah 
     {
         get { return moolah; }
-        set { moolah = value; MasterUI.instance.UpdateTopDock(); }
+        set { moolah = value; MasterUI.Instance.UpdateTopDock(); }
     }
 
     public static void ResetFields()
