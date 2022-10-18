@@ -31,4 +31,14 @@ public class SettlementPanel : MonoBehaviour
             image.sprite = ResourceFactory.NoSettlementSprite;
         }
     }
+
+    public void BuildMarket() 
+    {
+        GameState.CellSelected.settlement.BuildMarket();
+    }
+
+    public void BuildGranary() 
+    {
+        GameState.CellSelected.settlement.BuildGranary();
+    }
 }

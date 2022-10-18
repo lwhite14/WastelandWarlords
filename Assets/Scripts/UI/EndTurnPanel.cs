@@ -25,6 +25,10 @@ public class EndTurnPanel : MonoBehaviour
         {
             settlement.EndTurnGrowth();
             GameStatistics.Moolah += Settlement.BaseMoolah;
+            foreach (SettlementBuilding building in settlement.buildings) 
+            {
+                building.EndTurn();
+            }
             yield return null;
         }
         MasterUI.Instance.UpdateAllUI();

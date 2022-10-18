@@ -16,6 +16,7 @@ public class Settlement : MonoBehaviour
     public string settlementName { get; set; }
     public int level { get; private set; } = 1;
     public int growth { get; set; } = 0;
+    public List<SettlementBuilding> buildings { get; set; } = new List<SettlementBuilding>();
 
     void Start()
     {
@@ -75,5 +76,31 @@ public class Settlement : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void BuildGranary()
+    {
+        if (HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].settlementBuilding == null)
+        {
+            SettlementBuilding settlementBuilding = Instantiate<SettlementBuilding>(ResourceFactory.Granary);
+            settlementBuilding.transform.SetParent(HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].topTarget);
+            settlementBuilding.transform.localPosition = new Vector3(0, 0, 0);
+            settlementBuilding.settlement = this;
+            HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopLeft.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopLeft.Z].settlementBuilding = settlementBuilding;
+            buildings.Add(settlementBuilding);
+        }
+    }
+
+    public void BuildMarket() 
+    {
+        if (HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].settlementBuilding == null)
+        {
+            SettlementBuilding settlementBuilding = Instantiate<SettlementBuilding>(ResourceFactory.Market);
+            settlementBuilding.transform.SetParent(HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].topTarget);
+            settlementBuilding.transform.localPosition = new Vector3(0, 0, 0);
+            settlementBuilding.settlement = this;
+            HexGrid.Instance.hexCells[cellOn.coordinates.X + HexPathfinding.MovementFinder.TopRight.X, cellOn.coordinates.Z + HexPathfinding.MovementFinder.TopRight.Z].settlementBuilding = settlementBuilding;
+            buildings.Add(settlementBuilding);
+        }
     }
 }
