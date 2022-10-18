@@ -7,6 +7,7 @@ public class SettlementPanel : MonoBehaviour
 {
     public Text text;
     public Image image;
+    public GameObject buildablesPanels;
     Animator anim;
 
     void Awake() 
@@ -27,18 +28,19 @@ public class SettlementPanel : MonoBehaviour
         else 
         {
             anim.SetBool("Appear", false);
+            HideBuildables();
             text.text = "No Settlement...";
             image.sprite = ResourceFactory.NoSettlementSprite;
         }
     }
 
-    public void BuildMarket() 
+    public void ShowBuildables() 
     {
-        GameState.CellSelected.settlement.BuildMarket();
+        buildablesPanels.SetActive(true);
     }
 
-    public void BuildGranary() 
+    public void HideBuildables() 
     {
-        GameState.CellSelected.settlement.BuildGranary();
+        buildablesPanels.SetActive(false);
     }
 }
